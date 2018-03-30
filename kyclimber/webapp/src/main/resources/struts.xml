@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <package name="default" abstract="true" extends="struts-default">
+        <global-results>
+            <result name="error">jsp/error.jsp</result>
+        </global-results>
+    </package>
+    <package name="public" extends="default">
+        <default-action-ref name="index"/>
+        <action name="index">
+            <result>jsp/index.jsp</result>
+        </action>
+        <action name="home" class="fr.kybox.action.HomeAction" method="doHome">
+            <result name="success">jsp/home.jsp</result>
+        </action>
+        <action name="topo" class="fr.kybox.action.TopoAction" method="doList">
+            <result name="success">jsp/home.jsp</result>
+        </action>
+        <action name="login" class="fr.kybox.action.LoginAction" method="doConnect">
+            <result name="success">jsp/home.jsp</result>
+        </action>
+    </package>
+</struts>
