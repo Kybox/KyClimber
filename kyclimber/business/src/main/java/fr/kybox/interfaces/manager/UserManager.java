@@ -1,5 +1,7 @@
 package fr.kybox.interfaces.manager;
 
+import fr.kybox.bean.user.User;
+
 import java.util.List;
 
 
@@ -9,5 +11,6 @@ import java.util.List;
  */
 public interface UserManager {
 
+    List<User> getUserList();
 
 }

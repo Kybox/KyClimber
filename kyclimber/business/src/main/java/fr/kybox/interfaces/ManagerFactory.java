@@ -1,8 +1,12 @@
 package fr.kybox.interfaces;
 
+import fr.kybox.interfaces.manager.UserManager;
+
 /**
  * @author Kybox
  * @version 1.0
  */
-public class ManagerFactory {
+public interface ManagerFactory {
+
+    UserManager getUserManager();
 }

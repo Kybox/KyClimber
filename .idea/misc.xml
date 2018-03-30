@@ -8,6 +8,7 @@
       <list>
         <option value="$PROJECT_DIR$/kyclimber/pom.xml" />
         <option value="$PROJECT_DIR$/kyclimber/model/pom.xml" />
+        <option value="$PROJECT_DIR$/kyclimber/business/pom.xml" />
       </list>
     </option>
   </component>

@@ -20,5 +20,8 @@
         <action name="login" class="fr.kybox.action.LoginAction" method="doConnect">
             <result name="success">jsp/home.jsp</result>
         </action>
+        <action name="user" class="fr.kybox.action.UserAction" method="doList">
+            <result name="success">jsp/user.jsp</result>
+        </action>
     </package>
 </struts>

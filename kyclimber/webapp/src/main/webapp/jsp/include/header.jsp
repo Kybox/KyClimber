@@ -5,6 +5,7 @@
             <nav>
                 [ <s:a action="home">Accueil</s:a> ] -
                 [ <s:a name="topo">Topo</s:a> ] -
+                [ <s:a action="user">User</s:a> ] -
                 [ <s:a name="login">Connexion</s:a> ]
             </nav>
         </header>
