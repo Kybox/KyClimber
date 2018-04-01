@@ -16,9 +16,9 @@ public class ManagerFactoryImpl implements ManagerFactory {
     @Inject
     private UserManager userManager;
 
+
     @Override
     public UserManager getUserManager() {
-        System.out.println("MFimpl");
        return this.userManager;
     }
 

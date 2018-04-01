@@ -2,10 +2,14 @@ package fr.kybox.impl.manager;
 
 import fr.kybox.bean.user.User;
 import fr.kybox.interfaces.manager.UserManager;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +17,7 @@ import java.util.List;
  * @author Kybox
  * @version 1.0
  */
-@Named
+@Service
 public class UserManagerImpl extends AbstractManager implements UserManager {
 
     @Inject
@@ -24,7 +28,25 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
     @Override
     public List<User> getUserList() {
 
-        System.out.println("List created : " + userList.toString());
+        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class).buildSessionFactory();
+
+        Session session = factory.getCurrentSession();
+
+        List<User> userList;
+
+        try {
+
+            session.beginTransaction();
+
+            userList = session.createQuery("from User").list();
+
+
+            session.getTransaction().commit();
+        }
+        finally {
+            factory.close();
+        }
+
         return userList;
     }
 

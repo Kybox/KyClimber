@@ -2,7 +2,6 @@ package fr.kybox.action;
 
 
 import com.opensymphony.xwork2.ActionSupport;
-import fr.kybox.WebappHelper;
 import fr.kybox.bean.user.User;
 import fr.kybox.interfaces.ManagerFactory;
 
@@ -25,17 +24,8 @@ public class UserAction extends ActionSupport {
 
     public String doList(){
 
-        String result;
+        userList = managerFactory.getUserManager().getUserList();
 
-        try {
-            userList = managerFactory.getUserManager().getUserList();
-            result = ActionSupport.SUCCESS;
-        }
-        catch (NullPointerException e){
-                System.out.println("ERROR USERLIST = NULL");
-                result = ActionSupport.ERROR;
-        }
-
-        return result;
+        return ActionSupport.SUCCESS;
     }
 }
