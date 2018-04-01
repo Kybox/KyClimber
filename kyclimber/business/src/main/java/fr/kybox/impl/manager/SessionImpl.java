@@ -13,10 +13,18 @@ import org.hibernate.cfg.Configuration;
 public class SessionImpl implements SessionManager {
 
     private SessionFactory sessionFactory;
+    private Configuration configuration;
 
     private void setFactory(){
 
-        sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class).buildSessionFactory();
+        configuration = new Configuration().configure("hibernate.cfg.xml");
+        sessionFactory = configuration.buildSessionFactory();
+    }
+
+    public SessionFactory getSessionFactory() {
+
+        if(sessionFactory == null) setFactory();
+        return sessionFactory;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package fr.kybox.interfaces.manager;
 
 import fr.kybox.bean.user.User;
+import fr.kybox.exception.NotFoundException;
 
 import java.util.List;
 
@@ -12,5 +13,9 @@ import java.util.List;
 public interface UserManager {
 
     List<User> getUserList();
+
+    User getUser(String login, String pass) throws NotFoundException;
+
+    void addNewUser(User user);
 
 }
