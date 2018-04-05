@@ -34,15 +34,6 @@
 
         <!-- Topo Action -->
         <action name="topo" class="fr.kybox.action.TopoAction" method="doGetTopo">
-            <param name="regionId"/>
-            <param name="regionList"/>
-            <param name="region"/>
-            <result name="success">jsp/topo.jsp</result>
-        </action>
-        <action name="topo_region" class="fr.kybox.action.TopoAction" method="doGetRegionList">
-            <result name="success">jsp/topo.jsp</result>
-        </action>
-        <action name="topo_site" class="fr.kybox.action.TopoAction" method="doGetSiteList">
             <result name="success">jsp/topo.jsp</result>
         </action>
 

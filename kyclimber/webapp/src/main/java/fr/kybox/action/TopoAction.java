@@ -2,6 +2,7 @@ package fr.kybox.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.bean.topo.Region;
+import fr.kybox.bean.topo.Site;
 import fr.kybox.interfaces.ManagerFactory;
 import org.apache.struts2.components.ActionError;
 import org.apache.struts2.components.ActionMessage;
@@ -20,6 +21,7 @@ public class TopoAction extends ActionSupport {
     private List<Region> regionList;
     private int regionId;
     private Region region;
+    private List<Site> siteList;
 
     // RegionList
     public List<Region> getRegionList() {
@@ -41,6 +43,13 @@ public class TopoAction extends ActionSupport {
         return region;
     }
     public void setRegion(Region region){ this.region = region; }
+
+    // Site
+    public List<Site> getSiteList() {
+        siteList = managerFactory.getTopoManager().getSiteList(getRegionId());
+        return siteList;
+    }
+    public void setSiteList(List<Site> siteList) { this.siteList = siteList; }
 
     public String doGetRegionList(){
 

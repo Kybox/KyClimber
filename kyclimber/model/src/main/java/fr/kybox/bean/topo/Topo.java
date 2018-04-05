@@ -22,5 +22,7 @@ public class Topo {
     @Column(name = "region_id")
     private Integer region;
 
+    public Topo() {}
+
 
 }

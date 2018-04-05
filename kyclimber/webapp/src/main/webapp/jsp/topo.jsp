@@ -22,9 +22,15 @@
         Cliquez sur une région parmi la liste ci-contre afin d'afficher les différents site.
     </s:if>
     <s:else>
-        ID Région sélectionnée : <s:property value="varRegionId"/>
-        <s:set var="varRegion" value="region"/>
-        Nom de la région : <s:property value="#varRegion.name"/>
+        <nav>
+            <s:set var="varRegion" value="region"/>
+            Liste des sites présents dans la région <s:property value="#varRegion.name"/> :
+            <s:iterator value="siteList">
+                <li>
+                    - <s:property value="name"/>
+                </li>
+            </s:iterator>
+        </nav>
     </s:else>
 </section>
 </body>
