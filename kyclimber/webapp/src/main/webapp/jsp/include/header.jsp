@@ -4,7 +4,7 @@
         <header>
             <nav>
                 [ <s:a action="home">Accueil</s:a> ] -
-                [ <s:a name="topo">Topo</s:a> ] -
+                [ <s:a action="topo_region">Topo</s:a> ] -
                 [ <s:a action="user">User</s:a> ] -
                 <s:if test="#session.user">
                     Utilisateur connecté :

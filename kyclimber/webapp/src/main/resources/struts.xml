@@ -32,14 +32,21 @@
             <result name="success" type="redirectAction">login</result>
         </action>
 
+        <!-- Topo Action -->
+        <action name="topo_region" class="fr.kybox.action.TopoAction" method="doGetRegionList">
+            <result name="success">jsp/topo.jsp</result>
+        </action>
+        <action name="topo_list" class="fr.kybox.action.TopoAction" method="execute">
+            <result name="success">jsp/topo.jsp</result>
+        </action>
 
         <action name="home" class="fr.kybox.action.HomeAction" method="doHome">
             <result name="success">jsp/home.jsp</result>
         </action>
 
-        <action name="topo" class="fr.kybox.action.TopoAction" method="doList">
-            <result name="success">jsp/home.jsp</result>
-        </action>
+
+
+
         <action name="user" class="fr.kybox.action.UserAction" method="doList">
             <result name="success">jsp/user.jsp</result>
         </action>

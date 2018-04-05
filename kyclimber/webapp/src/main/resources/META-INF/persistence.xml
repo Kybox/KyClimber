@@ -7,6 +7,7 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>fr.kybox.bean.user.User</class>
+        <class>fr.kybox.bean.topo.Region</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/kyclimber"/>

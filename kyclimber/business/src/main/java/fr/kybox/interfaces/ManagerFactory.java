@@ -1,5 +1,6 @@
 package fr.kybox.interfaces;
 
+import fr.kybox.interfaces.manager.TopoManager;
 import fr.kybox.interfaces.manager.UserManager;
 
 /**
@@ -9,4 +10,5 @@ import fr.kybox.interfaces.manager.UserManager;
 public interface ManagerFactory {
 
     UserManager getUserManager();
+    TopoManager getTopoManager();
 }

@@ -15,5 +15,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/kyclimber</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="kyclimber@localhost" uuid="8e55e5f8-356b-4d65-84a9-98b0e3eedbe5">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/kyclimber</jdbc-url>
+    </data-source>
   </component>
 </project>

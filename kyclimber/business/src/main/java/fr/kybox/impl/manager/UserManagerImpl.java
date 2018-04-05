@@ -5,14 +5,10 @@ import fr.kybox.exception.NotFoundException;
 import fr.kybox.interfaces.manager.UserManager;
 import fr.kybox.util.HibernateUtil;
 import fr.kybox.util.MD5;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
