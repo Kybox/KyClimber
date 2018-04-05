@@ -22,12 +22,18 @@ public class TopoManagerImpl implements TopoManager {
     public List<Region> getRegionList() {
 
         entityManager.getTransaction().begin();
-
         Query query = entityManager.createQuery("select r from Region r");
         List<Region> regionList = query.getResultList();
-
         entityManager.getTransaction().commit();
-
         return regionList;
+    }
+
+    @Override
+    public Region getRegionById(Integer id) {
+
+        entityManager.getTransaction().begin();
+        Region region = entityManager.find(Region.class, id);
+        entityManager.getTransaction().commit();
+        return region;
     }
 }
