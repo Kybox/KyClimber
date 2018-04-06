@@ -4,7 +4,7 @@
 <%@ include file="include/head.jsp" %>
 <body>
 <%@ include file="include/header.jsp" %>
-<h2>Section TOPO</h2>
+<h2>Découvrir un site d'escalade</h2>
 <aside>
     <span id="regionList">Sélectionnez une région :</span>
     <s:iterator value="regionList">
@@ -16,7 +16,7 @@
         </li>
     </s:iterator>
 </aside>
-<section>
+<article>
     <s:set var="varRegionId" value="regionId"/>
     <s:if test="%{#varRegionId==0}">
         Cliquez sur une région parmi la liste ci-contre afin d'afficher les différents site.
@@ -32,6 +32,6 @@
             </s:iterator>
         </nav>
     </s:else>
-</section>
+</article>
 </body>
 </html>
