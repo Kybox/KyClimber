@@ -33,7 +33,7 @@
         </action>
 
         <!-- Topo Action -->
-        <action name="topo" class="fr.kybox.action.TopoAction" method="doGetTopo">
+        <action name="site" class="fr.kybox.action.SiteAction">
             <result name="success">jsp/site.jsp</result>
         </action>
 

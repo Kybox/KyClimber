@@ -2,7 +2,7 @@ package fr.kybox.impl.manager;
 
 import fr.kybox.entities.Region;
 import fr.kybox.entities.Site;
-import fr.kybox.interfaces.manager.TopoManager;
+import fr.kybox.interfaces.manager.SiteManager;
 import fr.kybox.util.HibernateUtil;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * @version 1.0
  */
 @Service
-public class TopoManagerImpl implements TopoManager {
+public class SiteManagerImpl implements SiteManager {
 
     private final EntityManager entityManager = HibernateUtil.getEntityManager();
 
@@ -61,5 +61,24 @@ public class TopoManagerImpl implements TopoManager {
             entityManager.getTransaction().rollback();
         }
         return siteList;
+    }
+
+    @Override
+    public Site getSite(int siteId) {
+
+        Site site = null;
+
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select s from Site s where s.id = :id");
+            query.setParameter("id", siteId);
+            site = (Site) query.getResultList().get(0);
+            entityManager.getTransaction().commit();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+        return site;
     }
 }

@@ -15,7 +15,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><s:a action="home" class="btnNav">Accueil</s:a></li>
-                        <li><s:a action="topo" class="btnNav">Sites</s:a></li>
+                        <li><s:a action="site" class="btnNav">Sites</s:a></li>
                         <li><s:a action="user" class="btnNav">User</s:a></li>
                         <s:if test="#session.user">
                             <li><s:property value="#session.user.firstName"/> connecté</li>

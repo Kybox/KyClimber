@@ -1,7 +1,7 @@
 package fr.kybox.impl;
 
 import fr.kybox.interfaces.ManagerFactory;
-import fr.kybox.interfaces.manager.TopoManager;
+import fr.kybox.interfaces.manager.SiteManager;
 import fr.kybox.interfaces.manager.UserManager;
 
 import javax.inject.Inject;
@@ -18,7 +18,7 @@ public class ManagerFactoryImpl implements ManagerFactory {
     private UserManager userManager;
 
     @Inject
-    private TopoManager topoManager;
+    private SiteManager siteManager;
 
 
     @Override
@@ -27,10 +27,10 @@ public class ManagerFactoryImpl implements ManagerFactory {
     }
 
     @Override
-    public TopoManager getTopoManager() { return this.topoManager; }
+    public SiteManager getSiteManager() { return this.siteManager; }
 
     public void setUserManager(UserManager userManager){
         this.userManager = userManager;
     }
-    public void setTopoManager(TopoManager topoManager){ this.topoManager = topoManager; }
+    public void setSiteManager(SiteManager siteManager){ this.siteManager = siteManager; }
 }

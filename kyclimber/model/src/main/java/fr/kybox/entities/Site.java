@@ -53,6 +53,9 @@ public class Site {
     @Column(name = "map")
     private String map;
 
+    @Column(name = "picture")
+    private String picture;
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -94,4 +97,7 @@ public class Site {
 
     public String getMap() { return map; }
     public void setMap(String map) { this.map = map; }
+
+    public String getPicture() { return picture; }
+    public void setPicture(String picture) { this.picture = picture; }
 }
