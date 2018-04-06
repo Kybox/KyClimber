@@ -1,4 +1,4 @@
-package fr.kybox.bean.user;
+package fr.kybox.entities;
 
 import javax.persistence.*;
 

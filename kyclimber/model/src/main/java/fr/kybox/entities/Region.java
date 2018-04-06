@@ -1,4 +1,4 @@
-package fr.kybox.bean.topo;
+package fr.kybox.entities;
 
 import javax.persistence.*;
 

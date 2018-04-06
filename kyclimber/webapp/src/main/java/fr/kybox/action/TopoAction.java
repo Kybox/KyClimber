@@ -1,11 +1,9 @@
 package fr.kybox.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import fr.kybox.bean.topo.Region;
-import fr.kybox.bean.topo.Site;
+import fr.kybox.entities.Region;
+import fr.kybox.entities.Site;
 import fr.kybox.interfaces.ManagerFactory;
-import org.apache.struts2.components.ActionError;
-import org.apache.struts2.components.ActionMessage;
 
 import javax.inject.Inject;
 import java.util.List;

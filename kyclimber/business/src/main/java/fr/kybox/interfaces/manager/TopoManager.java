@@ -1,7 +1,7 @@
 package fr.kybox.interfaces.manager;
 
-import fr.kybox.bean.topo.Region;
-import fr.kybox.bean.topo.Site;
+import fr.kybox.entities.Region;
+import fr.kybox.entities.Site;
 
 import java.util.List;
 

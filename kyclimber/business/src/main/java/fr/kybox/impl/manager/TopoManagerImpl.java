@@ -1,7 +1,7 @@
 package fr.kybox.impl.manager;
 
-import fr.kybox.bean.topo.Region;
-import fr.kybox.bean.topo.Site;
+import fr.kybox.entities.Region;
+import fr.kybox.entities.Site;
 import fr.kybox.interfaces.manager.TopoManager;
 import fr.kybox.util.HibernateUtil;
 import org.springframework.stereotype.Service;

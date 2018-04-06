@@ -34,7 +34,7 @@
 
         <!-- Topo Action -->
         <action name="topo" class="fr.kybox.action.TopoAction" method="doGetTopo">
-            <result name="success">jsp/topo.jsp</result>
+            <result name="success">jsp/site.jsp</result>
         </action>
 
         <action name="home" class="fr.kybox.action.HomeAction" method="doHome">

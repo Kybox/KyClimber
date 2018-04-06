@@ -2,7 +2,7 @@ package fr.kybox.action;
 
 
 import com.opensymphony.xwork2.ActionSupport;
-import fr.kybox.bean.user.User;
+import fr.kybox.entities.User;
 import fr.kybox.interfaces.ManagerFactory;
 
 import javax.inject.Inject;

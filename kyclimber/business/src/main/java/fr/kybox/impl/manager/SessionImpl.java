@@ -1,6 +1,5 @@
 package fr.kybox.impl.manager;
 
-import fr.kybox.bean.user.User;
 import fr.kybox.interfaces.manager.SessionManager;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

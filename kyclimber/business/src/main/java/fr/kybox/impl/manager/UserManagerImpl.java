@@ -1,6 +1,6 @@
 package fr.kybox.impl.manager;
 
-import fr.kybox.bean.user.User;
+import fr.kybox.entities.User;
 import fr.kybox.exception.NotFoundException;
 import fr.kybox.interfaces.manager.UserManager;
 import fr.kybox.util.HibernateUtil;

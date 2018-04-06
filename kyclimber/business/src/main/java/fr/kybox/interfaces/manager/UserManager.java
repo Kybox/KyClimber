@@ -1,6 +1,6 @@
 package fr.kybox.interfaces.manager;
 
-import fr.kybox.bean.user.User;
+import fr.kybox.entities.User;
 import fr.kybox.exception.NotFoundException;
 
 import java.util.List;

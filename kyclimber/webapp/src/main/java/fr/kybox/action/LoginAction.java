@@ -1,7 +1,7 @@
 package fr.kybox.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import fr.kybox.bean.user.User;
+import fr.kybox.entities.User;
 import fr.kybox.exception.NotFoundException;
 import fr.kybox.interfaces.ManagerFactory;
 import org.apache.commons.lang3.StringUtils;

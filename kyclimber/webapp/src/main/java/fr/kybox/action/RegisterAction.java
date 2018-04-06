@@ -1,10 +1,9 @@
 package fr.kybox.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import fr.kybox.bean.user.User;
+import fr.kybox.entities.User;
 import fr.kybox.interfaces.ManagerFactory;
 import fr.kybox.util.MD5;
-import javassist.NotFoundException;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
