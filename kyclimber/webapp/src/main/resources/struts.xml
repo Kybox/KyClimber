@@ -19,7 +19,7 @@
 
         <!-- Login Action -->
         <action name="login" class="fr.kybox.action.LoginAction" method="doLogin">
-            <result name="input">jsp/login.jsp</result>
+            <result name="input">jsp/auth/login.jsp</result>
             <result name="success" type="redirectAction">index</result>
         </action>
         <action name="logout" class="fr.kybox.action.LoginAction" method="doLogout">
@@ -27,12 +27,12 @@
         </action>
 
         <!-- Register Action -->
-        <action name="register" class="fr.kybox.action.RegisterAction" method="doRegistration">
-            <result name="input">jsp/registration.jsp</result>
-            <result name="success" type="redirectAction">login</result>
+        <action name="signup" class="fr.kybox.action.SignupAction">
+            <result name="input">jsp/auth/signup.jsp</result>
+            <result name="success">jsp/auth/signup.jsp</result>
         </action>
 
-        <!-- Topo Action -->
+        <!-- Site Action -->
         <action name="site" class="fr.kybox.action.SiteAction">
             <result name="success">jsp/site.jsp</result>
         </action>
@@ -40,9 +40,6 @@
         <action name="home" class="fr.kybox.action.HomeAction" method="doHome">
             <result name="success">jsp/home.jsp</result>
         </action>
-
-
-
 
         <action name="user" class="fr.kybox.action.UserAction" method="doList">
             <result name="success">jsp/user.jsp</result>

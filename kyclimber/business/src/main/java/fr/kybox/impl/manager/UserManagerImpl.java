@@ -54,17 +54,16 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
 
     @Override
     public void addNewUser(User user) {
-        /*
-        Session session = HibernateUtil.getSession();
+
         try {
-            session.beginTransaction();
-            session.save(user);
-            session.getTransaction().commit();
+            entityManager.getTransaction().begin();
+            entityManager.merge(user);
+            entityManager.getTransaction().commit();
         }
-        finally {
-            session.close();
+        catch (Exception e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
         }
-        */
     }
 
 }
