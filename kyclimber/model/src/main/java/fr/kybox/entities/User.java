@@ -27,6 +27,9 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "avatar")
+    private String avatar;
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -41,4 +44,7 @@ public class User {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public String getAvatar() { return avatar; }
+    public void setAvatar(String avatar) { this.avatar = avatar; }
 }

@@ -60,6 +60,7 @@ public class SiteManagerImpl implements SiteManager {
             e.printStackTrace();
             entityManager.getTransaction().rollback();
         }
+
         return siteList;
     }
 
@@ -79,6 +80,7 @@ public class SiteManagerImpl implements SiteManager {
             e.printStackTrace();
             entityManager.getTransaction().rollback();
         }
+
         return site;
     }
 }

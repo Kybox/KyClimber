@@ -23,13 +23,7 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="a682e2e0-4b8d-4022-a456-a1ca0d20c33d">
-        <schema name="information_schema" object-types="function, sequence, table, view" />
-        <schema name="pg_toast_temp_1" object-types="function, sequence, table, view" />
-        <schema name="public" object-types="function, sequence, table, view" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="a682e2e0-4b8d-4022-a456-a1ca0d20c33d">

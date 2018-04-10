@@ -1,9 +1,11 @@
 package fr.kybox.action;
 
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.Comment;
 import fr.kybox.entities.Region;
 import fr.kybox.entities.Site;
+import fr.kybox.entities.User;
 import fr.kybox.interfaces.ManagerFactory;
 
 import javax.inject.Inject;
@@ -20,10 +22,12 @@ public class SiteAction extends ActionSupport {
     private List<Region> regionList;
     private int regionId;
     private int siteId;
+    private int userId;
     private Region region;
     private Site site;
     private List<Site> siteList;
     private List<Comment> commentList;
+    private Comment comment;
 
     // RegionList
     public List<Region> getRegionList() {
@@ -41,6 +45,10 @@ public class SiteAction extends ActionSupport {
     // SiteId
     public int getSiteId() { return siteId; }
     public void setSiteId(int siteId) { this.siteId = siteId; }
+
+    // UserId
+    private int getUserId() { return userId; }
+    private void setUserId(int userId) { this.userId = userId; }
 
     // Region
     public Region getRegion() {
@@ -64,12 +72,16 @@ public class SiteAction extends ActionSupport {
     }
     public void setSite(Site site) { this.site = site; }
 
-    // Comment
+    // Comment List
     public List<Comment> getCommentList() {
         commentList = managerFactory.getCommentManager().getComments(getSiteId());
         return commentList;
     }
     public void setCommentList(List<Comment> commentList) { this.commentList = commentList; }
+
+    // Comment
+    public Comment getComment() { return comment; }
+    public void setComment(Comment comment) { this.comment = comment; }
 
     public String doGetRegionList(){
 

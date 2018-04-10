@@ -32,17 +32,28 @@
             <result name="success">jsp/auth/signup.jsp</result>
         </action>
 
+        <!-- User Action -->
+        <action name="user" class="fr.kybox.action.UserAction" method="doList">
+            <result name="success">jsp/user.jsp</result>
+        </action>
+
         <!-- Site Action -->
         <action name="site" class="fr.kybox.action.SiteAction">
             <result name="success">jsp/site.jsp</result>
         </action>
 
+
         <action name="home" class="fr.kybox.action.HomeAction" method="doHome">
             <result name="success">jsp/home.jsp</result>
         </action>
+    </package>
 
-        <action name="user" class="fr.kybox.action.UserAction" method="doList">
-            <result name="success">jsp/user.jsp</result>
+    <!-- Package AJAX -->
+    <package name="ajax" extends="default, json-default">
+        <action name="addNewAjaxComment" class="fr.kybox.action.CommentAction" method="addNewAjaxComment">
+            <result name="success" type="json">
+                <param name="root">commentList</param>
+            </result>
         </action>
     </package>
 </struts>

@@ -1,7 +1,8 @@
 package fr.kybox.entities;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+
 
 /**
  * @author Kybox
@@ -19,7 +20,7 @@ public class Comment {
     @Column(name = "site_id")
     private int siteId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
