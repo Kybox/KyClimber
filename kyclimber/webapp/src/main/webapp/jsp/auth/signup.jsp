@@ -18,16 +18,16 @@
             </s:if>
             <s:form action="signup" theme="simple" id="signupForm">
                 <s:label for="email" theme="simple">Adresse e-mail *</s:label>
-                <s:textfield name="email" type="email" cssClass="form-control" theme="simple" required="true"/>
+                <s:textfield name="email" type="email" cssClass="form-control" theme="simple" required="true" maxlength="60"/>
                 <br>
                 <s:label for="password" theme="simple">Mot de passe *</s:label>
                 <s:textfield name="password" type="password" cssClass="form-control" theme="simple" required="true"/>
                 <br>
                 <s:label for="firstName" theme="simple">Prénom / pseudo *</s:label>
-                <s:textfield name="firstName" cssClass="form-control" theme="simple" required="true"/>
+                <s:textfield name="firstName" cssClass="form-control" theme="simple" required="true" maxlength="30"/>
                 <br>
                 <s:label for="lastName" theme="simple">Nom</s:label>
-                <s:textfield name="lastName" cssClass="form-control" theme="simple"/>
+                <s:textfield name="lastName" cssClass="form-control" theme="simple" maxlength="30"/>
                 <hr/>
                 <s:if test="hasActionErrors()">
                     <div class="alert alert-info" role="alert">

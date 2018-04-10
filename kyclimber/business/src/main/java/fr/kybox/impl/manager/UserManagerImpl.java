@@ -53,6 +53,28 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
     }
 
     @Override
+    public User getUser(int userId) throws NotFoundException {
+
+        User user = null;
+
+        try {
+            List<User> userList;
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select u from User u where id = :id");
+            query.setParameter("id", userId);
+            userList = query.getResultList();
+            if(!userList.isEmpty()) user = userList.get(0);
+            else throw new NotFoundException();
+        }
+        catch (Exception e){
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    @Override
     public void addNewUser(User user) {
 
         try {

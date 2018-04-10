@@ -102,10 +102,9 @@
             <br>
             <h3><span class="label label-info" >Vue satellite</span></h3>
             <br>
-            <div id="map-container-3" class="z-depth-1" style="height: 500px"></div>
+            <div id="map-container-3" class="z-depth-1" style="height: 400px"></div>
             <br>
-            <h3><span class="label label-info" >Commentaires</span></h3>
-            <br>
+            <%@ include file="site_comments.jsp" %>
         </div>
     </div>
 </s:if>

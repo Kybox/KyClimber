@@ -1,6 +1,7 @@
 package fr.kybox.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import fr.kybox.entities.Comment;
 import fr.kybox.entities.Region;
 import fr.kybox.entities.Site;
 import fr.kybox.interfaces.ManagerFactory;
@@ -22,6 +23,7 @@ public class SiteAction extends ActionSupport {
     private Region region;
     private Site site;
     private List<Site> siteList;
+    private List<Comment> commentList;
 
     // RegionList
     public List<Region> getRegionList() {
@@ -61,6 +63,13 @@ public class SiteAction extends ActionSupport {
         return site;
     }
     public void setSite(Site site) { this.site = site; }
+
+    // Comment
+    public List<Comment> getCommentList() {
+        commentList = managerFactory.getCommentManager().getComments(getSiteId());
+        return commentList;
+    }
+    public void setCommentList(List<Comment> commentList) { this.commentList = commentList; }
 
     public String doGetRegionList(){
 

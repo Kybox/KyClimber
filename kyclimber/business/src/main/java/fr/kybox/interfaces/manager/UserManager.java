@@ -15,6 +15,7 @@ public interface UserManager {
     List<User> getUserList();
 
     User getUser(String login, String pass) throws NotFoundException;
+    User getUser(int userId) throws NotFoundException;
 
     void addNewUser(User user);
 
