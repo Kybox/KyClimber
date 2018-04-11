@@ -24,7 +24,6 @@
                 url: "<s:url action="addNewAjaxComment"/>",
                 data: "siteId="+siteId+"&userId="+userId+"&post="+post,
                 dataType: "json",
-                async: true,
                 success: function (data) {
                     for (var key in data){
                         console.log(key, data[key]);

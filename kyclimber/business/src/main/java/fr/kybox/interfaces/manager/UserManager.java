@@ -18,5 +18,6 @@ public interface UserManager {
     User getUser(int userId) throws NotFoundException;
 
     void addNewUser(User user);
+    void updateUser(User user);
 
 }

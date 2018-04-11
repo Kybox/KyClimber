@@ -22,8 +22,9 @@
                         <li><s:a action="site" class="btnNav">Sites</s:a></li>
                         <li><s:a action="site" class="btnNav">Rechercher</s:a></li>
                         <s:if test="#session.user">
-                            <li><s:a action="site" class="btnNav">Mon profil</s:a></li>
-                            <li><s:a action="logout" class="btnNav">
+                            <li><s:a action="profile" class="btnNav">Mon profil</s:a></li>
+                            <li>
+                                <s:a action="logout" class="btnNav">
                                 Déconnexion (<s:property value="#session.user.firstName"/>)
                                 </s:a>
                             </li>

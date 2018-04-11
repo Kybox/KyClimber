@@ -30,6 +30,21 @@ public class User {
     @Column(name = "avatar")
     private String avatar;
 
+    @Column(name = "road")
+    private String road;
+
+    @Column(name = "postal_code")
+    private Integer postalCode;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "tel")
+    private Integer tel;
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -47,4 +62,19 @@ public class User {
 
     public String getAvatar() { return avatar; }
     public void setAvatar(String avatar) { this.avatar = avatar; }
+
+    public String getRoad() { return road; }
+    public void setRoad(String road) { this.road = road; }
+
+    public Integer getPostalCode() { return postalCode; }
+    public void setPostalCode(Integer postalCode) { this.postalCode = postalCode; }
+
+    public String getCity() { return city; }
+    public void setCity(String city) { this.city = city; }
+
+    public String getCountry() { return country; }
+    public void setCountry(String country) { this.country = country; }
+
+    public Integer getTel() { return tel; }
+    public void setTel(Integer tel) { this.tel = tel; }
 }

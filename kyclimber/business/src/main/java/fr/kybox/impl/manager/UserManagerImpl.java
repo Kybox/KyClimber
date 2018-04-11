@@ -79,6 +79,22 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
 
         try {
             entityManager.getTransaction().begin();
+            entityManager.persist(user);
+            entityManager.getTransaction().commit();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+    }
+
+    @Override
+    public void updateUser(User user){
+
+        System.out.println("UPDATE USER");
+
+        try{
+            entityManager.getTransaction().begin();
             entityManager.merge(user);
             entityManager.getTransaction().commit();
         }

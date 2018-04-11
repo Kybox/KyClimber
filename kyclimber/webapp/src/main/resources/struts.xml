@@ -13,7 +13,6 @@
                 <interceptor-ref name="defaultStack"/>
             </interceptor-stack>
         </interceptors>
-        <default-interceptor-ref name="authenticatedStack"/>
 
         <!-- Global results -->
         <global-results>
@@ -52,11 +51,6 @@
             <result name="success">jsp/auth/signup.jsp</result>
         </action>
 
-        <!-- User Action -->
-        <action name="user" class="fr.kybox.action.UserAction" method="doList">
-            <result name="success">jsp/user.jsp</result>
-        </action>
-
         <!-- Site Action -->
         <action name="site" class="fr.kybox.action.SiteAction">
             <result name="success">jsp/site.jsp</result>
@@ -72,8 +66,15 @@
     <package name="private" extends="default, json-default">
 
         <!-- Profile Action -->
-        <action name="profile" class="fr.kybox.action.ProfileAction">
-            <result name="success">jsp/user/profile.jsp</result>
+        <action name="profile" class="fr.kybox.action.UserAction">
+            <interceptor-ref name="authenticatedStack"/>
+            <result name="success">jsp/user/profile/profile.jsp</result>
+        </action>
+        <action name="updateAjaxUserInfos" class="fr.kybox.action.UserAction" method="UpdateAjaxInfos">
+            <interceptor-ref name="authenticatedStack"/>
+            <result name="success" type="json">
+                <param name="root">user</param>
+            </result>
         </action>
 
         <action name="addNewAjaxComment" class="fr.kybox.action.CommentAction" method="addNewAjaxComment">
@@ -82,10 +83,5 @@
                 <param name="root">commentList</param>
             </result>
         </action>
-    </package>
-
-    <!-- Package AJAX -->
-    <package name="ajax" extends="default, json-default">
-
     </package>
 </struts>
