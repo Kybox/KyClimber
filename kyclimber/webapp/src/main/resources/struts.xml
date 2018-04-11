@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
+    <!-- /////////////// -->
     <!-- Package DEFAULT -->
     <package name="default" abstract="true" extends="struts-default">
+
+        <!-- Interceptor Stack -->
+        <interceptors>
+            <interceptor name="auth" class="fr.kybox.interceptor.AuthInterceptor"/>
+            <interceptor-stack name="authenticatedStack">
+                <interceptor-ref name="auth"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="authenticatedStack"/>
+
+        <!-- Global results -->
         <global-results>
             <result name="error">jsp/error.jsp</result>
+            <result name="error-forbidden" type="httpheader">
+                <param name="error">403</param>
+            </result>
         </global-results>
+
     </package>
 
+    <!-- ////////////// -->
     <!-- Package PUBLIC -->
     <package name="public" extends="default">
 
@@ -22,6 +40,8 @@
             <result name="input">jsp/auth/login.jsp</result>
             <result name="success" type="redirectAction">index</result>
         </action>
+
+        <!-- Logout Action -->
         <action name="logout" class="fr.kybox.action.LoginAction" method="doLogout">
             <result type="redirectAction">index</result>
         </action>
@@ -42,18 +62,30 @@
             <result name="success">jsp/site.jsp</result>
         </action>
 
-
         <action name="home" class="fr.kybox.action.HomeAction" method="doHome">
             <result name="success">jsp/home.jsp</result>
         </action>
     </package>
 
-    <!-- Package AJAX -->
-    <package name="ajax" extends="default, json-default">
+    <!-- /////////////// -->
+    <!-- Package PRIVATE -->
+    <package name="private" extends="default, json-default">
+
+        <!-- Profile Action -->
+        <action name="profile" class="fr.kybox.action.ProfileAction">
+            <result name="success">jsp/user/profile.jsp</result>
+        </action>
+
         <action name="addNewAjaxComment" class="fr.kybox.action.CommentAction" method="addNewAjaxComment">
+            <interceptor-ref name="authenticatedStack"/>
             <result name="success" type="json">
                 <param name="root">commentList</param>
             </result>
         </action>
+    </package>
+
+    <!-- Package AJAX -->
+    <package name="ajax" extends="default, json-default">
+
     </package>
 </struts>
