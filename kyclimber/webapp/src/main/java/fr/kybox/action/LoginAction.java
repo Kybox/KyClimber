@@ -5,16 +5,18 @@ import fr.kybox.entities.User;
 import fr.kybox.exception.NotFoundException;
 import fr.kybox.interfaces.ManagerFactory;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
  * @author Kybox
  * @version 1.0
  */
-public class LoginAction extends ActionSupport implements SessionAware {
+public class LoginAction extends ActionSupport implements SessionAware, ServletRequestAware {
 
     private String login;
     private String password;
@@ -22,6 +24,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
     @Inject
     private ManagerFactory managerFactory;
     private Map<String, Object> session;
+    private HttpServletRequest httpServletRequest;
 
     public String getLogin() { return login; }
     public void setLogin(String login) { this.login = login; }
@@ -38,6 +41,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
             User user = null;
             try {
                 user = managerFactory.getUserManager().getUser(login, password);
+                httpServletRequest.changeSessionId();
                 this.session.put("user", user);
                 result = ActionSupport.SUCCESS;
             } catch (NotFoundException e) {
@@ -48,13 +52,17 @@ public class LoginAction extends ActionSupport implements SessionAware {
     }
 
     public String doLogout(){
-
-        this.session.remove("user");
+        httpServletRequest.getSession().invalidate();
         return ActionSupport.SUCCESS;
     }
 
     @Override
     public void setSession(Map<String, Object> session) {
         this.session = session;
+    }
+
+    @Override
+    public void setServletRequest(HttpServletRequest request) {
+        httpServletRequest = request;
     }
 }
