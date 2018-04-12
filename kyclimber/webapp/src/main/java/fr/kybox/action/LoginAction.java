@@ -38,9 +38,8 @@ public class LoginAction extends ActionSupport implements SessionAware, ServletR
 
         if(!StringUtils.isAllEmpty(login, password)) {
 
-            User user = null;
             try {
-                user = managerFactory.getUserManager().getUser(login, password);
+                final User user = managerFactory.getUserManager().getUser(login, password);
                 httpServletRequest.changeSessionId();
                 this.session.put("user", user);
                 result = ActionSupport.SUCCESS;

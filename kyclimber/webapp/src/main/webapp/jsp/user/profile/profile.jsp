@@ -15,7 +15,7 @@
         <ul class="nav nav-tabs">
             <li class="active"><a href="#infos" data-toggle="tab">Informations</a></li>
             <li><a href="#pass" data-toggle="tab">Mot de passe</a></li>
-            <li><a href="#pic" data-toggle="tab">Photo</a></li>
+            <li><a href="#pic" data-toggle="tab">Avatar</a></li>
             <li><a href="#topo" data-toggle="tab">Topos</a></li>
             <li><a href="#com" data-toggle="tab">Commentaires</a></li>
         </ul>
@@ -29,7 +29,8 @@
                 <%@ include file="include/password.jsp" %>
             </div>
             <div class="tab-pane" id="pic">
-                <h3>add clearfix to tab-content (see the css)</h3>
+                <br>
+                <%@ include file="include/picture.jsp" %>
             </div>
             <div class="tab-pane" id="topo">
                 <h3>the css)</h3>

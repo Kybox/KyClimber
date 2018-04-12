@@ -84,6 +84,13 @@
                 <param name="root">user</param>
             </result>
         </action>
+        <!-- Update Ajax Avatar Action-->
+        <action name="updateAjaxUserAvatar" class="fr.kybox.action.UserAction" method="updateAjaxUserAvatar">
+            <interceptor-ref name="authenticatedStack"/>
+            <result name="success" type="json">
+                <param name="root">avatarList</param>
+            </result>
+        </action>
 
         <action name="addNewAjaxComment" class="fr.kybox.action.CommentAction" method="addNewAjaxComment">
             <interceptor-ref name="authenticatedStack"/>

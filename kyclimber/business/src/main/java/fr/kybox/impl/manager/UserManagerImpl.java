@@ -1,5 +1,6 @@
 package fr.kybox.impl.manager;
 
+import fr.kybox.entities.Avatar;
 import fr.kybox.entities.User;
 import fr.kybox.exception.NotFoundException;
 import fr.kybox.interfaces.manager.UserManager;
@@ -27,12 +28,10 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
     @Override
     public List<User> getUserList() {
 
-        List<User> userList;
-
         entityManager.getTransaction().begin();
 
         final TypedQuery<User> query = entityManager.createQuery("select u from User u", User.class);
-        userList = query.getResultList();
+        final List<User> userList = query.getResultList();
 
         entityManager.getTransaction().commit();
 
@@ -48,12 +47,14 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
 
         String query = "from User u where u.email = :login and u.password = :pass";
 
-        final List resultList = entityManager.createQuery(query).setParameter("login", login).setParameter("pass", pass).getResultList();
-        final List<User> userList = resultList;
+        final User user = (User) entityManager.createQuery(query).
+                setParameter("login", login).
+                setParameter("pass", pass).
+                getSingleResult();
 
         entityManager.getTransaction().commit();
-        if(userList.isEmpty()) throw new NotFoundException();
-        else return userList.get(0);
+
+        return user;
     }
 
     @Override
@@ -67,6 +68,7 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
             Query query = entityManager.createQuery("select u from User u where id = :id");
             query.setParameter("id", userId);
             userList = query.getResultList();
+            entityManager.getTransaction().commit();
             if(!userList.isEmpty()) user = userList.get(0);
             else throw new NotFoundException();
         }
@@ -106,6 +108,25 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
             e.printStackTrace();
             entityManager.getTransaction().rollback();
         }
+    }
+
+    @Override
+    public List<Avatar> getAvatarList() {
+
+        List<Avatar> avatarList = null;
+
+        try {
+
+            entityManager.getTransaction().begin();
+            avatarList = entityManager.createQuery("select a from Avatar a", Avatar.class).getResultList();
+            entityManager.getTransaction().commit();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+
+        return avatarList;
     }
 
 }

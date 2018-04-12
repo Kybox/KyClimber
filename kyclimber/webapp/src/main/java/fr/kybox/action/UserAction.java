@@ -1,12 +1,13 @@
 package fr.kybox.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import fr.kybox.entities.Avatar;
 import fr.kybox.entities.User;
 import fr.kybox.interfaces.ManagerFactory;
-import fr.kybox.util.MD5;
 import org.apache.struts2.interceptor.SessionAware;
 
 import javax.inject.Inject;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +32,7 @@ public class UserAction extends ActionSupport implements SessionAware {
     private String oldPass;
     private String newPass1;
     private String newPass2;
+    private List<Avatar> avatarList;
 
     private String result;
 
@@ -72,6 +74,14 @@ public class UserAction extends ActionSupport implements SessionAware {
 
     public String getResult() { return result; }
     public void setResult(String result) { this.result = result; }
+
+    public List<Avatar> getAvatarList(){
+        avatarList = managerFactory.getUserManager().getAvatarList();
+        return avatarList;
+    }
+    public void setAvatarList(List<Avatar> avatarList){
+        this.avatarList = avatarList;
+    }
 
     private void initUser() { setUser((User) session.get("user")); }
 
@@ -119,6 +129,13 @@ public class UserAction extends ActionSupport implements SessionAware {
         else setResult(ActionSupport.ERROR);
 
         return result;
+    }
+
+    public String updateAjaxUserAvatar(){
+
+
+
+        return ActionSupport.SUCCESS;
     }
 
 
