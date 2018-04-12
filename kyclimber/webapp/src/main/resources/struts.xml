@@ -70,7 +70,15 @@
             <interceptor-ref name="authenticatedStack"/>
             <result name="success">jsp/user/profile/profile.jsp</result>
         </action>
-        <action name="updateAjaxUserInfos" class="fr.kybox.action.UserAction" method="UpdateAjaxInfos">
+        <!-- Update Ajax User Infos Action-->
+        <action name="updateAjaxUserInfos" class="fr.kybox.action.UserAction" method="updateAjaxInfos">
+            <interceptor-ref name="authenticatedStack"/>
+            <result name="success" type="json">
+                <param name="root">user</param>
+            </result>
+        </action>
+        <!-- Update Ajax User Password Action-->
+        <action name="updateAjaxUserPassword" class="fr.kybox.action.UserAction" method="updateAjaxUserPassword">
             <interceptor-ref name="authenticatedStack"/>
             <result name="success" type="json">
                 <param name="root">user</param>

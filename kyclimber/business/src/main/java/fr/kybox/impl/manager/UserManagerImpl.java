@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 
@@ -30,7 +31,7 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
 
         entityManager.getTransaction().begin();
 
-        Query query = entityManager.createQuery("select u from User u");
+        final TypedQuery<User> query = entityManager.createQuery("select u from User u", User.class);
         userList = query.getResultList();
 
         entityManager.getTransaction().commit();
@@ -43,10 +44,13 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
 
         pass = MD5.hash(pass);
 
-        List<User> userList;
         entityManager.getTransaction().begin();
+
         String query = "from User u where u.email = :login and u.password = :pass";
-        userList = entityManager.createQuery(query).setParameter("login", login).setParameter("pass", pass).getResultList();
+
+        final List resultList = entityManager.createQuery(query).setParameter("login", login).setParameter("pass", pass).getResultList();
+        final List<User> userList = resultList;
+
         entityManager.getTransaction().commit();
         if(userList.isEmpty()) throw new NotFoundException();
         else return userList.get(0);

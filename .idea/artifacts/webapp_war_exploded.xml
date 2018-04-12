@@ -48,6 +48,13 @@
           </element>
           <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.9.1" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:2.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:2.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.3.14.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.14.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.14.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.12" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
         </element>
       </element>
       <element id="directory" name="META-INF">

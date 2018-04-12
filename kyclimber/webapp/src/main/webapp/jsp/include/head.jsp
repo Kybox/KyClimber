@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<s:set var="rootPath" value="%{pageContext.request.contextPath}"/>
+<s:set var="actionName" value="%{com.opensymphony.xwork2.ActionContext.name}"/>
 <head>
     <meta charset="utf-8">
     <title>KyClimber</title>
@@ -15,4 +18,10 @@
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <s:if test="%{#actionName=='profile'}">
+        <!-- Profile Ajax -->
+        <script src="<s:property value="rootPath"/>/jsp/user/profile/js/ajax.js" type="application/javascript"></script>
+        <script src="<s:property value="rootPath"/>/jsp/user/profile/js/md5.min.js" type="application/javascript"></script>
+    </s:if>
+
 </head>

@@ -3,6 +3,7 @@ package fr.kybox.action;
 import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.User;
 import fr.kybox.interfaces.ManagerFactory;
+import fr.kybox.util.MD5;
 import org.apache.struts2.interceptor.SessionAware;
 
 import javax.inject.Inject;
@@ -12,7 +13,7 @@ import java.util.Map;
  * @author Kybox
  * @version 1.0
  */
-public class UserAction extends ActionSupport implements SessionAware{
+public class UserAction extends ActionSupport implements SessionAware {
 
     @Inject
     private ManagerFactory managerFactory;
@@ -27,6 +28,11 @@ public class UserAction extends ActionSupport implements SessionAware{
     private String city;
     private String country;
     private Integer tel;
+    private String oldPass;
+    private String newPass1;
+    private String newPass2;
+
+    private String result;
 
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
@@ -55,17 +61,28 @@ public class UserAction extends ActionSupport implements SessionAware{
     public Integer getTel() { return tel; }
     public void setTel(Integer tel) { this.tel = tel; }
 
+    public String getOldPass() { return oldPass; }
+    public void setOldPass(String oldPass) { this.oldPass = oldPass; }
+
+    public String getNewPass1() { return newPass1; }
+    public void setNewPass1(String newPass1) { this.newPass1 = newPass1; }
+
+    public String getNewPass2() { return newPass2; }
+    public void setNewPass2(String newPass2) { this.newPass2 = newPass2; }
+
+    public String getResult() { return result; }
+    public void setResult(String result) { this.result = result; }
+
     private void initUser() { setUser((User) session.get("user")); }
 
     @Override
     public String execute(){
 
         initUser();
-
         return ActionSupport.SUCCESS;
     }
 
-    public String UpdateAjaxInfos(){
+    public String updateAjaxInfos(){
 
         if(user == null) initUser();
 
@@ -81,6 +98,27 @@ public class UserAction extends ActionSupport implements SessionAware{
         managerFactory.getUserManager().updateUser(user);
 
         return ActionSupport.SUCCESS;
+    }
+
+    public String updateAjaxUserPassword(){
+
+        if(user == null) initUser();
+
+        if(getOldPass().equals(user.getPassword())){
+
+            if(getNewPass1().equals(getNewPass2())){
+
+                user.setPassword(getNewPass1());
+
+                managerFactory.getUserManager().updateUser(user);
+
+                setResult(ActionSupport.SUCCESS);
+            }
+            else setResult(ActionSupport.ERROR);
+        }
+        else setResult(ActionSupport.ERROR);
+
+        return result;
     }
 
 

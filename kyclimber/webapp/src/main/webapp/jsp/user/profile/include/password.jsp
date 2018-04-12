@@ -5,20 +5,18 @@
         <s:fielderror/>
     </div>
 </s:if>
-<s:form theme="simple" id="passForm">
-    <s:label for="oldPass" theme="simple">Votre mot de passe actuel *</s:label>
-    <s:textfield name="oldPass" type="password" cssClass="form-control" theme="simple" required="true" maxlength="60"/>
-    <br>
-    <s:label for="newPass1" theme="simple">Votre nouveau mot de passe *</s:label>
-    <s:textfield name="newPass1" type="password" cssClass="form-control" theme="simple" required="true" maxlength="60"/>
-    <br>
-    <s:label for="newPass2" theme="simple">Confirmez votre nouveau mot de passe *</s:label>
-    <s:textfield name="newPass2" type="password" cssClass="form-control" theme="simple" required="true" maxlength="60"/>
-    <hr/>
-    <s:if test="hasActionErrors()">
-        <div class="alert alert-info" role="alert">
-            <s:actionerror/>
-        </div>
-    </s:if>
-    <s:submit value="Mettre à jour le mot de passe >>" cssClass="btn btn-primary"/>
-</s:form>
+<s:label for="oldPass" theme="simple" value="Votre mot de passe actuel *"/>
+<s:textfield name="oldPass" id="oldPass" type="password" cssClass="form-control" theme="simple" required="true" maxlength="60"/>
+<br>
+<s:label for="newPass1" theme="simple" value="Votre nouveau mot de passe *"/>
+<s:textfield name="newPass1" id="newPass1" type="password" cssClass="form-control" theme="simple" required="true" maxlength="60"/>
+<br>
+<s:label for="newPass2" theme="simple" value="Confirmez votre nouveau mot de passe *"/>
+<s:textfield name="newPass2" id="newPass2" type="password" cssClass="form-control" theme="simple" required="true" maxlength="60"/>
+<hr/>
+<s:if test="hasActionErrors()">
+    <div class="alert alert-info" role="alert">
+        <s:actionerror/>
+    </div>
+</s:if>
+<input type="button" id="submitComment" class="btn btn-primary" value="Mettre à jour le mot de passe >>" onclick="updateUserPassword()">
