@@ -6,11 +6,11 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-sm-6" id="slider-thumbs">
+            <div class="col-sm-8" id="slider-thumbs">
                 <!-- Bottom switcher of slider -->
                 <ul class="hide-bullets" style="list-style:none;margin-left: -40px;margin-top:20px;">
                     <s:iterator value="avatarList">
-                    <li class="col-sm-3">
+                    <li class="col-sm-2">
                         <s:set var="varId" value="%{id-1}"/>
                         <a class="thumbnail" id="carousel-selector-<s:property value="#varId"/>">
                             <img src="<s:property value="url"/>">
@@ -19,7 +19,7 @@
                     </s:iterator>
                 </ul>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="col-xs-12" id="slider">
                     <!-- Top part of the slider -->
                     <div class="row">
@@ -31,6 +31,7 @@
                                         <s:set var="varUrl" value="url"/>
                                         <s:set var="varId" value="%{id-1}"/>
                                         <s:if test="%{#session.user.avatar==#varUrl}">
+                                            <script type="application/javascript">avatarId=<s:property value="varId"/></script>
                                             <div class="active item" data-slide-number="<s:property value="varId"/>">
                                                 <img src="<s:property value="url"/>" style="width: 100%;">
                                             </div>
@@ -51,7 +52,7 @@
                     <br>
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <button type="submit" class="btn btn-primary center-block">Mettre à jour mon avatar</button>
+                            <button type="submit" class="btn btn-primary center-block" onclick="updateUserAvatar()">Mettre à jour mon avatar</button>
                         </div>
                     </div>
                 </div>
@@ -59,3 +60,4 @@
         </div>
     </div>
 </div>
+<i>Images au format SVG provenant du site Flaticon.com</i>

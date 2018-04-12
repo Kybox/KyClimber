@@ -15,6 +15,7 @@ public interface UserManager {
 
     List<User> getUserList();
     List<Avatar> getAvatarList();
+    String getAvatarUrl(int avatarId);
 
     User getUser(String login, String pass) throws NotFoundException;
     User getUser(int userId) throws NotFoundException;

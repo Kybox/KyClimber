@@ -129,4 +129,28 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
         return avatarList;
     }
 
+    @Override
+    public String getAvatarUrl(int avatarId) {
+
+        String avatarUrl = null;
+
+        try {
+
+            entityManager.getTransaction().begin();
+
+            Query query = entityManager.createQuery("select a.url from Avatar a where id = :id");
+            query.setParameter("id", avatarId);
+
+            avatarUrl = (String) query.getSingleResult();
+
+            entityManager.getTransaction().commit();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+
+        return avatarUrl;
+    }
+
 }

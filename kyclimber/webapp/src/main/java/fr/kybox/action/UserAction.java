@@ -33,6 +33,7 @@ public class UserAction extends ActionSupport implements SessionAware {
     private String newPass1;
     private String newPass2;
     private List<Avatar> avatarList;
+    private int avatarId;
 
     private String result;
 
@@ -82,6 +83,9 @@ public class UserAction extends ActionSupport implements SessionAware {
     public void setAvatarList(List<Avatar> avatarList){
         this.avatarList = avatarList;
     }
+
+    public int getAvatarId(){ return this.avatarId; }
+    public void setAvatarId(int avatarId) { this.avatarId = avatarId; }
 
     private void initUser() { setUser((User) session.get("user")); }
 
@@ -133,7 +137,13 @@ public class UserAction extends ActionSupport implements SessionAware {
 
     public String updateAjaxUserAvatar(){
 
+        if(user == null) initUser();
 
+        String avatarUrl = managerFactory.getUserManager().getAvatarUrl(getAvatarId());
+
+        user.setAvatar(avatarUrl);
+
+        managerFactory.getUserManager().updateUser(user);
 
         return ActionSupport.SUCCESS;
     }

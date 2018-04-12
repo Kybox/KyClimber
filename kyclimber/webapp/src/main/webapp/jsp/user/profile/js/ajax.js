@@ -35,26 +35,46 @@ function updateUserPassword(){
     });
 }
 
+function updateUserAvatar() {
+    avatarId++;
+    $.ajax({
+        type: "POST",
+        url: "updateAjaxUserAvatar.action",
+        data: "avatarId=" + avatarId,
+        dataType: "json",
+        success: function () {
+            openProfilModal();
+        },
+        error: function (data, status, error) {
+            alert("Oups, une erreur s'est produite...");
+        }
+    });
+}
+
 function openProfilModal(){
     $("#updateModal").modal();
 }
 
+// Avatar gallery
+var avatarId;
 jQuery(document).ready(function($) {
 
     //Handles the carousel thumbnails
     $('[id^=carousel-selector-]').click(function () {
         var id_selector = $(this).attr("id");
         try {
-            var id = /-(\d+)$/.exec(id_selector)[1];
-            console.log(id_selector, id);
-            jQuery('#myCarousel').carousel(parseInt(id));
+            avatarId = /-(\d+)$/.exec(id_selector)[1];
+            console.log(id_selector, avatarId);
+            jQuery('#myCarousel').carousel(parseInt(avatarId));
         } catch (e) {
             console.log('Regex failed!', e);
         }
     });
     // When the carousel slides, auto update the text
+    /*
     $('#myCarousel').on('slid.bs.carousel', function (e) {
         var id = $('.item.active').data('slide-number');
         $('#carousel-text').html($('#slide-content-'+id).html());
     });
+    */
 });
