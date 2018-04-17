@@ -2,6 +2,8 @@ package fr.kybox.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.Avatar;
+import fr.kybox.entities.Region;
+import fr.kybox.entities.Topo;
 import fr.kybox.entities.User;
 import fr.kybox.interfaces.ManagerFactory;
 import org.apache.struts2.interceptor.SessionAware;
@@ -34,6 +36,9 @@ public class UserAction extends ActionSupport implements SessionAware {
     private String newPass2;
     private List<Avatar> avatarList;
     private int avatarId;
+    private List<Topo> topoList;
+    private List<Region> regionList;
+    private List<User> userList;
 
     private String result;
 
@@ -86,6 +91,24 @@ public class UserAction extends ActionSupport implements SessionAware {
 
     public int getAvatarId(){ return this.avatarId; }
     public void setAvatarId(int avatarId) { this.avatarId = avatarId; }
+
+    public List<Topo> getTopoList() {
+        topoList = managerFactory.getUserManager().getUserTopoList(getUser());
+        return topoList;
+    }
+    public void setTopoList(List<Topo> topoList) { this.topoList = topoList; }
+
+    public List<Region> getRegionList(){
+        regionList = managerFactory.getSiteManager().getRegionList();
+        return regionList;
+    }
+    public void setRegionList(List<Region> regionList) { this.regionList = regionList; }
+
+    public List<User> getUserList(){
+        userList = managerFactory.getUserManager().getUserList();
+        return userList;
+    }
+    public void setUserList(List<User> userList) { this.userList = userList; }
 
     private void initUser() { setUser((User) session.get("user")); }
 

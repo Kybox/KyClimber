@@ -11,6 +11,7 @@
         <class>fr.kybox.entities.Site</class>
         <class>fr.kybox.entities.Comment</class>
         <class>fr.kybox.entities.Avatar</class>
+        <class>fr.kybox.entities.Topo</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/kyclimber"/>

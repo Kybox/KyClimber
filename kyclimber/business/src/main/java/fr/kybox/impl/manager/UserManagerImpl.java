@@ -1,6 +1,7 @@
 package fr.kybox.impl.manager;
 
 import fr.kybox.entities.Avatar;
+import fr.kybox.entities.Topo;
 import fr.kybox.entities.User;
 import fr.kybox.exception.NotFoundException;
 import fr.kybox.interfaces.manager.UserManager;
@@ -151,6 +152,28 @@ public class UserManagerImpl extends AbstractManager implements UserManager {
         }
 
         return avatarUrl;
+    }
+
+    @Override
+    public List<Topo> getUserTopoList(User user){
+
+        List<Topo> topoList = null;
+        try{
+
+            entityManager.getTransaction().begin();
+
+            final TypedQuery<Topo> query = entityManager.createQuery("select t from Topo t where t.user = :user", Topo.class);
+            query.setParameter("user", user);
+            topoList = query.getResultList();
+
+            entityManager.getTransaction().commit();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+
+        return topoList;
     }
 
 }

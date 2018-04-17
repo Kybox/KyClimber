@@ -33,7 +33,8 @@
                 <%@ include file="include/picture.jsp" %>
             </div>
             <div class="tab-pane" id="topo">
-                <h3>the css)</h3>
+                <br>
+                <%@ include file="include/topos.jsp" %>
             </div>
             <div class="tab-pane" id="com">
                 <h3>Comments</h3>

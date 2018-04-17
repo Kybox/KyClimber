@@ -1,6 +1,7 @@
 package fr.kybox.interfaces.manager;
 
 import fr.kybox.entities.Avatar;
+import fr.kybox.entities.Topo;
 import fr.kybox.entities.User;
 import fr.kybox.exception.NotFoundException;
 
@@ -15,6 +16,7 @@ public interface UserManager {
 
     List<User> getUserList();
     List<Avatar> getAvatarList();
+    List<Topo> getUserTopoList(User user);
     String getAvatarUrl(int avatarId);
 
     User getUser(String login, String pass) throws NotFoundException;

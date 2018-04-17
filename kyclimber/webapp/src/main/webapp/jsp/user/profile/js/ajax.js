@@ -51,15 +51,11 @@ function updateUserAvatar() {
     });
 }
 
-function openProfilModal(){
-    $("#updateModal").modal();
-}
+
 
 // Avatar gallery
 var avatarId;
 jQuery(document).ready(function($) {
-
-    //Handles the carousel thumbnails
     $('[id^=carousel-selector-]').click(function () {
         var id_selector = $(this).attr("id");
         try {
@@ -70,11 +66,58 @@ jQuery(document).ready(function($) {
             console.log('Regex failed!', e);
         }
     });
-    // When the carousel slides, auto update the text
-    /*
-    $('#myCarousel').on('slid.bs.carousel', function (e) {
-        var id = $('.item.active').data('slide-number');
-        $('#carousel-text').html($('#slide-content-'+id).html());
+});
+
+/** Form hide/show **/
+function showTopoForm() {
+    $("#topoForm").show(1000);
+    $("#btnAddTopo").prop("disabled", true);
+}
+function hideTopoForm() {
+    $("#topoForm").hide(1000);
+    $("#btnAddTopo").prop("disabled", false);
+}
+function openProfilModal(){
+    $("#updateModal").modal();
+}
+
+/** When the web page is ready **/
+$(document).ready(function() {
+
+    /** Dropdown actions **/
+    $('#dropUser a').click(function(){
+        $('#lentUserSelected').text($(this).text() + "  ");
     });
-    */
+    $('#dropRegion a').click(function(){
+        $('#regionSelected').text($(this).text() + "  ");
+    });
+
+    /** Radio buttons actions **/
+    $("input[type=radio]").change(function () {
+        var radioVal = $("input[name='editRadioLent']:checked").val();
+        if(radioVal == "lentYes") {
+            $("#btnDropdownUserLent").prop("disabled", false);
+        }
+        else if(radioVal == "lentNo") {
+            $("#btnDropdownUserLent").prop("disabled", true);
+        }
+    });
+
+
+
+
+    // grab all thumbnails and add bootstrap popovers
+    // https://getbootstrap.com/javascript/#popovers
+    $('[data-toggle="popover"]').popover({
+        container: 'body',
+        html: true,
+        placement: 'auto top',
+        trigger: 'hover',
+        animation: true,
+        content: function() {
+            // get the url for the full size img
+            var url = $(this).data('full');
+            return '<img src="' + url + '" width="150px" height="200px">'
+        }
+    });
 });
