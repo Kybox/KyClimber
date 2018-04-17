@@ -1,3 +1,5 @@
+/** INFORMATIONS **/
+
 function updateUserInfos() {
     var email = $("#email").val();
     var firstName = $("#firstName").val();
@@ -20,6 +22,12 @@ function updateUserInfos() {
         }
     });
 }
+
+
+
+
+/** PASSWORD **/
+
 function updateUserPassword(){
     var oldPass = md5($("#oldPass").val());
     var newPass1 = md5($("#newPass1").val());
@@ -35,6 +43,24 @@ function updateUserPassword(){
     });
 }
 
+
+
+
+/*** AVATAR ****/
+
+var avatarId;
+jQuery(document).ready(function($) {
+    $('[id^=carousel-selector-]').click(function () {
+        var id_selector = $(this).attr("id");
+        try {
+            avatarId = /-(\d+)$/.exec(id_selector)[1];
+            console.log(id_selector, avatarId);
+            jQuery('#myCarousel').carousel(parseInt(avatarId));
+        } catch (e) {
+            console.log('Regex failed!', e);
+        }
+    });
+});
 function updateUserAvatar() {
     avatarId++;
     $.ajax({
@@ -53,23 +79,48 @@ function updateUserAvatar() {
 
 
 
-// Avatar gallery
-var avatarId;
-jQuery(document).ready(function($) {
-    $('[id^=carousel-selector-]').click(function () {
-        var id_selector = $(this).attr("id");
-        try {
-            avatarId = /-(\d+)$/.exec(id_selector)[1];
-            console.log(id_selector, avatarId);
-            jQuery('#myCarousel').carousel(parseInt(avatarId));
-        } catch (e) {
-            console.log('Regex failed!', e);
-        }
-    });
-});
 
-/** Form hide/show **/
-function showTopoForm() {
+/*** TOPOS ****/
+
+var promptRegionDropdown = "Liste des r&eacute;gions";
+var promptUserDropdown = "Liste des utilisateurs";
+
+function editTopo(id) {
+    $("#txtName").val($("#name" + id).text());
+    $("#txtDescription").val($("#description" + id).text());
+    $("#txtEdition").val($("#puslisher" + id).text());
+    $("#txtCover").val($("#cover" + id).attr("data-full"));
+    $("#regionSelected").text($("#region" + id).text());
+
+    if($("#available" + id + " span").attr("available") == "true")
+        $("input:radio[name=editRadioAvailable][value=availalbleYes]").prop("checked", true);
+    else $("input:radio[name=editRadioAvailable][value=availalbleNo]").prop("checked", true);
+
+    if($("#lent" + id + " span").attr("lent") == "true"){
+        $("input:radio[name=editRadioLent][value=lentYes]").prop("checked", true);
+        $("#btnDropdownUserLent").prop("disabled", false);
+        $("#lentUserSelected").text($("#userLent").text());
+    }
+    else {
+        $("input:radio[name=editRadioLent][value=lentNo]").prop("checked", true);
+        $("#btnDropdownUserLent").prop("disabled", true);
+    }
+
+    showTopoForm(false);
+}
+function clearTopoForm() {
+    $("#txtName").val("");
+    $("#txtDescription").val("");
+    $("#txtEdition").val("");
+    $("#txtCover").val("");
+    $("#regionSelected").html(promptRegionDropdown);
+    $("input:radio[name=editRadioAvailable][value=availalbleNo]").prop("checked", true);
+    $("input:radio[name=editRadioLent][value=lentNo]").prop("checked", true);
+    $("#btnDropdownUserLent").text(promptUserDropdown);
+    $("#btnDropdownUserLent").prop("disabled", true);
+}
+function showTopoForm(clear) {
+    if(clear) clearTopoForm();
     $("#topoForm").show(1000);
     $("#btnAddTopo").prop("disabled", true);
 }
@@ -80,6 +131,9 @@ function hideTopoForm() {
 function openProfilModal(){
     $("#updateModal").modal();
 }
+
+
+
 
 /** When the web page is ready **/
 $(document).ready(function() {
