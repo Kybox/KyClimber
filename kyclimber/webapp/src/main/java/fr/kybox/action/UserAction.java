@@ -1,14 +1,12 @@
 package fr.kybox.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import fr.kybox.entities.Avatar;
-import fr.kybox.entities.Region;
-import fr.kybox.entities.Topo;
-import fr.kybox.entities.User;
-import fr.kybox.interfaces.ManagerFactory;
+import fr.kybox.entities.*;
+import fr.kybox.impl.services.*;
 import org.apache.struts2.interceptor.SessionAware;
 
 import javax.inject.Inject;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +17,19 @@ import java.util.Map;
 public class UserAction extends ActionSupport implements SessionAware {
 
     @Inject
-    private ManagerFactory managerFactory;
+    private TopoPersistenceService topoService;
+
+    @Inject
+    private RegionPersistenceService regionService;
+
+    @Inject
+    private UserPersistenceService userService;
+
+    @Inject
+    private CommentPersistenceService commentService;
+
+    @Inject
+    private AvatarPersistenceService avatarService;
 
     private Map<String, Object> session;
     private User user;
@@ -27,18 +37,19 @@ public class UserAction extends ActionSupport implements SessionAware {
     private String firstName;
     private String lastName;
     private String road;
-    private Integer postalCode;
+    private String postalCode;
     private String city;
     private String country;
-    private Integer tel;
-    private String oldPass;
-    private String newPass1;
-    private String newPass2;
+
+
     private List<Avatar> avatarList;
-    private int avatarId;
+
     private List<Topo> topoList;
     private List<Region> regionList;
     private List<User> userList;
+
+    private List<Comment> commentList;
+
 
     private String result;
 
@@ -57,8 +68,8 @@ public class UserAction extends ActionSupport implements SessionAware {
     public String getRoad() { return road; }
     public void setRoad(String road) { this.road = road; }
 
-    public Integer getPostalCode() { return postalCode; }
-    public void setPostalCode(Integer postalCode) { this.postalCode = postalCode; }
+    public String getPostalCode() { return postalCode; }
+    public void setPostalCode(String postalCode) { this.postalCode = postalCode; }
 
     public String getCity() { return city; }
     public void setCity(String city) { this.city = city; }
@@ -66,49 +77,46 @@ public class UserAction extends ActionSupport implements SessionAware {
     public String getCountry() { return country; }
     public void setCountry(String country) { this.country = country; }
 
-    public Integer getTel() { return tel; }
-    public void setTel(Integer tel) { this.tel = tel; }
-
-    public String getOldPass() { return oldPass; }
-    public void setOldPass(String oldPass) { this.oldPass = oldPass; }
-
-    public String getNewPass1() { return newPass1; }
-    public void setNewPass1(String newPass1) { this.newPass1 = newPass1; }
-
-    public String getNewPass2() { return newPass2; }
-    public void setNewPass2(String newPass2) { this.newPass2 = newPass2; }
-
     public String getResult() { return result; }
     public void setResult(String result) { this.result = result; }
 
     public List<Avatar> getAvatarList(){
-        avatarList = managerFactory.getUserManager().getAvatarList();
+        avatarList = avatarService.findAll();
+        System.out.println("avatarList size = " + avatarList.size());
+        System.out.println("ARRAY = " + Arrays.toString(avatarList.toArray()));
         return avatarList;
     }
-    public void setAvatarList(List<Avatar> avatarList){
-        this.avatarList = avatarList;
-    }
-
-    public int getAvatarId(){ return this.avatarId; }
-    public void setAvatarId(int avatarId) { this.avatarId = avatarId; }
 
     public List<Topo> getTopoList() {
-        topoList = managerFactory.getUserManager().getUserTopoList(getUser());
+        topoList = topoService.findAll();
+        System.out.println("topoList size = " + topoList.size());
+        System.out.println("ARRAY = " + Arrays.toString(topoList.toArray()));
         return topoList;
     }
     public void setTopoList(List<Topo> topoList) { this.topoList = topoList; }
 
     public List<Region> getRegionList(){
-        regionList = managerFactory.getSiteManager().getRegionList();
+        regionList = regionService.findAll();
+        System.out.println("RegionList size = " + regionList.size());
+        System.out.println("ARRAY = " + Arrays.toString(regionList.toArray()));
         return regionList;
     }
     public void setRegionList(List<Region> regionList) { this.regionList = regionList; }
 
     public List<User> getUserList(){
-        userList = managerFactory.getUserManager().getUserList();
+        userList = userService.findAll();
         return userList;
     }
     public void setUserList(List<User> userList) { this.userList = userList; }
+
+    public List<Comment> getCommentList() {
+        commentList = commentService.findByUser(user);
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
 
     private void initUser() { setUser((User) session.get("user")); }
 
@@ -116,6 +124,7 @@ public class UserAction extends ActionSupport implements SessionAware {
     public String execute(){
 
         initUser();
+
         return ActionSupport.SUCCESS;
     }
 
@@ -130,43 +139,13 @@ public class UserAction extends ActionSupport implements SessionAware {
         user.setPostalCode(getPostalCode());
         user.setCity(getCity());
         user.setCountry(getCountry());
-        user.setTel(getTel());
 
-        managerFactory.getUserManager().updateUser(user);
+        userService.save(user);
 
         return ActionSupport.SUCCESS;
     }
 
-    public String updateAjaxUserPassword(){
-
-        if(user == null) initUser();
-
-        if(getOldPass().equals(user.getPassword())){
-
-            if(getNewPass1().equals(getNewPass2())){
-
-                user.setPassword(getNewPass1());
-
-                managerFactory.getUserManager().updateUser(user);
-
-                setResult(ActionSupport.SUCCESS);
-            }
-            else setResult(ActionSupport.ERROR);
-        }
-        else setResult(ActionSupport.ERROR);
-
-        return result;
-    }
-
-    public String updateAjaxUserAvatar(){
-
-        if(user == null) initUser();
-
-        String avatarUrl = managerFactory.getUserManager().getAvatarUrl(getAvatarId());
-
-        user.setAvatar(avatarUrl);
-
-        managerFactory.getUserManager().updateUser(user);
+    public String updateAjaxUserTopo(){
 
         return ActionSupport.SUCCESS;
     }

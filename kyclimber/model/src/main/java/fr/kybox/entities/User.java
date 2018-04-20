@@ -8,7 +8,16 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name= "users", schema = "public")
-public class User {
+@NamedQueries({
+        @NamedQuery(name = User.FIND_USER_BY_LOGIN, query = "SELECT u FROM User u WHERE u.email = :email AND u.password = :pass"),
+        @NamedQuery(name = User.FIND_USER_AVATAR, query = "SELECT u FROM User u WHERE u = :user"),
+        @NamedQuery(name = User.FIND_ALL_USERS, query = "SELECT u FROM User u")
+})
+public class User extends AbstractEntity {
+
+    public static final String FIND_ALL_USERS = "User.findAllUsers";
+    public static final String FIND_USER_AVATAR = "User.findUserAvatar";
+    public static final String FIND_USER_BY_LOGIN = "User.findUserByLogin";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,23 +36,21 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "avatar")
-    private String avatar;
+    @OneToOne
+    @JoinColumn(name = "avatar_id")
+    private Avatar avatar;
 
     @Column(name = "road")
     private String road;
 
     @Column(name = "postal_code")
-    private Integer postalCode;
+    private String postalCode;
 
     @Column(name = "city")
     private String city;
 
     @Column(name = "country")
     private String country;
-
-    @Column(name = "tel")
-    private Integer tel;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -60,21 +67,18 @@ public class User {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public String getAvatar() { return avatar; }
-    public void setAvatar(String avatar) { this.avatar = avatar; }
+    public Avatar getAvatar() { return avatar; }
+    public void setAvatar(Avatar avatar) { this.avatar = avatar; }
 
     public String getRoad() { return road; }
     public void setRoad(String road) { this.road = road; }
 
-    public Integer getPostalCode() { return postalCode; }
-    public void setPostalCode(Integer postalCode) { this.postalCode = postalCode; }
+    public String getPostalCode() { return postalCode; }
+    public void setPostalCode(String postalCode) { this.postalCode = postalCode; }
 
     public String getCity() { return city; }
     public void setCity(String city) { this.city = city; }
 
     public String getCountry() { return country; }
     public void setCountry(String country) { this.country = country; }
-
-    public Integer getTel() { return tel; }
-    public void setTel(Integer tel) { this.tel = tel; }
 }

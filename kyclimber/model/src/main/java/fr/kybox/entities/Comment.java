@@ -10,15 +10,23 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "comment", schema = "public")
-public class Comment {
+@NamedQueries({
+        @NamedQuery(name = Comment.FIND_BY_USER, query = "SELECT c FROM Comment c WHERE c.user = :user"),
+        @NamedQuery(name = Comment.FIND_BY_SITE, query = "SELECT c FROM Comment c WHERE c.site = :site"),
+})
+public class Comment extends AbstractEntity {
+
+    public static final String FIND_BY_USER = "Comment.findByUser";
+    public static final String FIND_BY_SITE = "Comment.findBySite";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private int id;
 
-    @Column(name = "site_id")
-    private int siteId;
+    @OneToOne
+    @JoinColumn(name = "site_id")
+    private Site site;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -30,11 +38,11 @@ public class Comment {
     @Column(name = "post_date")
     private Date date;
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
-    public int getSiteId() { return siteId; }
-    public void setSiteId(int siteId) { this.siteId = siteId; }
+    public Site getSite() { return site; }
+    public void setSite(Site site) { this.site = site; }
 
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }

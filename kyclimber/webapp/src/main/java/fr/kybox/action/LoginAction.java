@@ -2,8 +2,7 @@ package fr.kybox.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.User;
-import fr.kybox.exception.NotFoundException;
-import fr.kybox.interfaces.ManagerFactory;
+import fr.kybox.impl.services.UserPersistenceService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -18,34 +17,36 @@ import java.util.Map;
  */
 public class LoginAction extends ActionSupport implements SessionAware, ServletRequestAware {
 
+    private String result;
     private String login;
     private String password;
 
     @Inject
-    private ManagerFactory managerFactory;
+    private UserPersistenceService userService;
+
     private Map<String, Object> session;
     private HttpServletRequest httpServletRequest;
 
     public String getLogin() { return login; }
     public void setLogin(String login) { this.login = login; }
-
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+    public String getResult() { return result; }
 
     public String doLogin(){
 
-        String result = ActionSupport.INPUT;
+        result = ActionSupport.INPUT;
 
         if(!StringUtils.isAllEmpty(login, password)) {
 
-            try {
-                final User user = managerFactory.getUserManager().getUser(login, password);
+            final User user = userService.findUserByLogin(login, password);
+
+            if(user != null) {
                 httpServletRequest.changeSessionId();
                 this.session.put("user", user);
                 result = ActionSupport.SUCCESS;
-            } catch (NotFoundException e) {
-                this.addActionError("Identifiant ou mot de passe invalide !");
             }
+            else result = ActionSupport.ERROR;
         }
         return result;
     }

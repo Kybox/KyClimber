@@ -4,10 +4,9 @@ import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.Comment;
 import fr.kybox.entities.User;
 import fr.kybox.exception.NotFoundException;
-import fr.kybox.interfaces.ManagerFactory;
+import fr.kybox.impl.services.CommentPersistenceService;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import java.util.Calendar;
 import java.util.List;
 
@@ -18,7 +17,7 @@ import java.util.List;
 public class CommentAction extends ActionSupport {
 
     @Inject
-    ManagerFactory managerFactory;
+    private CommentPersistenceService commentService;
 
     private int siteId;
     private int userId;
@@ -35,7 +34,8 @@ public class CommentAction extends ActionSupport {
     public void setPost(String post) { this.post = post; }
 
     public List<Comment> getCommentList() {
-        commentList = managerFactory.getCommentManager().getComments(getSiteId());
+        //commentList = commentService.findBySite()
+        //commentList = managerFactory.getCommentManager().getComments(getSiteId());
         return commentList;
     }
     public void setCommentList(List<Comment> commentList) { this.commentList = commentList; }
@@ -47,14 +47,14 @@ public class CommentAction extends ActionSupport {
         User user = getUser(getUserId());
 
         Comment comment = new Comment();
-        comment.setSiteId(getSiteId());
+        comment.setSite(null); /// <---------------------------------TODO
         comment.setUser(user);
         comment.setPost(getPost());
         Calendar calendar = Calendar.getInstance();
         java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
         comment.setDate(date);
 
-        managerFactory.getCommentManager().addNewComment(comment);
+        //managerFactory.getCommentManager().addNewComment(comment);
 
         System.out.println("siteId=" + getSiteId());
         System.out.println("userId=" + getUserId());
@@ -67,8 +67,8 @@ public class CommentAction extends ActionSupport {
     private User getUser(int userId){
 
         User user = null;
-        try { user = managerFactory.getUserManager().getUser(userId); }
-        catch (NotFoundException e) { e.printStackTrace(); }
+        //try { user = managerFactory.getUserManager().getUser(userId); }
+        //catch (NotFoundException e) { e.printStackTrace(); }
         return user;
     }
 }

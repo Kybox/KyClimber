@@ -1,15 +1,12 @@
 package fr.kybox.action;
 
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.User;
-import fr.kybox.interfaces.ManagerFactory;
+import fr.kybox.impl.services.UserPersistenceService;
 import fr.kybox.util.MD5;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author Kybox
@@ -18,7 +15,7 @@ import java.util.regex.Pattern;
 public class SignupAction extends ActionSupport {
 
     @Inject
-    private ManagerFactory managerFactory;
+    private UserPersistenceService userService;
 
     private User user;
     private String email;
@@ -50,7 +47,7 @@ public class SignupAction extends ActionSupport {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setPassword(MD5.hash(password));
-            managerFactory.getUserManager().addNewUser(user);
+            userService.save(user);
 
             result = ActionSupport.SUCCESS;
         }

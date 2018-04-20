@@ -1,7 +1,6 @@
 package fr.kybox.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * @author Kybox
@@ -9,7 +8,14 @@ import java.util.List;
  */
 @Entity
 @Table(name = "topo", schema = "public")
-public class Topo {
+@NamedQueries({
+        @NamedQuery(name = Topo.FIND_ALL_TOPO, query = "SELECT t FROM Topo t"),
+        @NamedQuery(name = Topo.FIND_BY_USER, query = "SELECT t FROM Topo t WHERE t.user = :user")
+})
+public class Topo extends AbstractEntity {
+
+    public static final String FIND_BY_USER = "Topo.findByUser";
+    public static final String FIND_ALL_TOPO = "Topo.findAllTopo";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

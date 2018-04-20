@@ -8,14 +8,18 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "site", schema = "public")
-public class Site {
+@NamedQueries({
+        @NamedQuery(name = Site.FIND_LASTEST_SITES, query = "SELECT s FROM Site s ORDER BY s.id DESC"),
+        @NamedQuery(name = Site.FIND_BY_REGION, query = "SELECT s FROM Site s WHERE s.region = :region")
+})
+public class Site extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    public static final String FIND_LASTEST_SITES = "Site.findLastestSites";
+    public static final String FIND_BY_REGION = "Site.findByRegion";
 
-    @Column(name = "region_id")
-    private Integer regionId;
+    @JoinColumn(name = "region_id")
+    @OneToOne
+    private Region region;
 
     @Column(name = "name")
     private String name;
@@ -56,11 +60,8 @@ public class Site {
     @Column(name = "picture")
     private String picture;
 
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
-
-    public Integer getRegionId() { return regionId; }
-    public void setRegionId(Integer regionId) { this.regionId = regionId; }
+    public Region getRegion() { return region; }
+    public void setRegion(Region region) { this.region = region; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

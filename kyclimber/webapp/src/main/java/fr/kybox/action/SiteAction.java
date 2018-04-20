@@ -1,14 +1,15 @@
 package fr.kybox.action;
 
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.Comment;
 import fr.kybox.entities.Region;
 import fr.kybox.entities.Site;
-import fr.kybox.entities.User;
-import fr.kybox.interfaces.ManagerFactory;
+import fr.kybox.impl.services.CommentPersistenceService;
+import fr.kybox.impl.services.RegionPersistenceService;
+import fr.kybox.impl.services.SitePersistenceService;
 
 import javax.inject.Inject;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,7 +19,14 @@ import java.util.List;
 public class SiteAction extends ActionSupport {
 
     @Inject
-    private ManagerFactory managerFactory;
+    private SitePersistenceService siteService;
+
+    @Inject
+    private RegionPersistenceService regionService;
+
+    @Inject
+    private CommentPersistenceService commentService;
+
     private List<Region> regionList;
     private int regionId;
     private int siteId;
@@ -31,7 +39,10 @@ public class SiteAction extends ActionSupport {
 
     // RegionList
     public List<Region> getRegionList() {
-        regionList = managerFactory.getSiteManager().getRegionList();
+        regionList = regionService.findAll();
+        System.out.println("REGION LIST SIZE = " + regionList.size());
+        System.out.println("ARRAY = " + Arrays.toString(regionList.toArray()));
+        System.out.println("");
         return regionList;
     }
     public void setRegionList(List<Region> regionList){
@@ -53,28 +64,28 @@ public class SiteAction extends ActionSupport {
     // Region
     public Region getRegion() {
         if(regionId != 0)
-            region = managerFactory.getSiteManager().getRegionById(regionId);
+            region = regionService.findById(regionId);
         return region;
     }
     public void setRegion(Region region){ this.region = region; }
 
     // Site List
     public List<Site> getSiteList() {
-        siteList = managerFactory.getSiteManager().getSiteList(getRegionId());
+        siteList = siteService.findByRegion(getRegion());
         return siteList;
     }
     public void setSiteList(List<Site> siteList) { this.siteList = siteList; }
 
     // Site
     public Site getSite() {
-        site = managerFactory.getSiteManager().getSite(getSiteId());
+        site = siteService.findById(getSiteId());
         return site;
     }
     public void setSite(Site site) { this.site = site; }
 
     // Comment List
     public List<Comment> getCommentList() {
-        commentList = managerFactory.getCommentManager().getComments(getSiteId());
+        commentList = commentService.findBySite(getSite());
         return commentList;
     }
     public void setCommentList(List<Comment> commentList) { this.commentList = commentList; }
@@ -85,7 +96,7 @@ public class SiteAction extends ActionSupport {
 
     public String doGetRegionList(){
 
-        regionList = managerFactory.getSiteManager().getRegionList();
+        regionList = regionService.findAll();
 
         System.out.println(regionList.size());
 

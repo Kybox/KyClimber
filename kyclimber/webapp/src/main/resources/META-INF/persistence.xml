@@ -6,12 +6,23 @@
     <persistence-unit name="kyclimber">
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!--
         <class>fr.kybox.entities.User</class>
         <class>fr.kybox.entities.Region</class>
         <class>fr.kybox.entities.Site</class>
         <class>fr.kybox.entities.Comment</class>
         <class>fr.kybox.entities.Avatar</class>
         <class>fr.kybox.entities.Topo</class>
+        -->
+        <class>fr.kybox.entities.AbstractEntity</class>
+        <class>fr.kybox.entities.Site</class>
+        <class>fr.kybox.entities.Region</class>
+        <class>fr.kybox.entities.Comment</class>
+        <class>fr.kybox.entities.User</class>
+        <class>fr.kybox.entities.Avatar</class>
+        <class>fr.kybox.entities.Topo</class>
+
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/kyclimber"/>

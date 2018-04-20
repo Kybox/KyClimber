@@ -30,13 +30,14 @@
 
         <!-- Index Action -->
         <default-action-ref name="index"/>
-        <action name="index">
+        <action name="index" class="fr.kybox.action.HomeAction">
             <result>jsp/index.jsp</result>
         </action>
 
         <!-- Login Action -->
         <action name="login" class="fr.kybox.action.LoginAction" method="doLogin">
             <result name="input">jsp/auth/login.jsp</result>
+            <result name="error">jsp/auth/login.jsp</result>
             <result name="success" type="redirectAction">index</result>
         </action>
 
@@ -70,6 +71,7 @@
             <interceptor-ref name="authenticatedStack"/>
             <result name="success">jsp/user/profile/profile.jsp</result>
         </action>
+
         <!-- Update Ajax User Infos Action-->
         <action name="updateAjaxUserInfos" class="fr.kybox.action.UserAction" method="updateAjaxInfos">
             <interceptor-ref name="authenticatedStack"/>
@@ -77,18 +79,24 @@
                 <param name="root">user</param>
             </result>
         </action>
-        <!-- Update Ajax User Password Action-->
-        <action name="updateAjaxUserPassword" class="fr.kybox.action.UserAction" method="updateAjaxUserPassword">
+
+        <!-- [PASSWORD] - Update Ajax Action -->
+        <action name="updateAjaxUserPassword" class="fr.kybox.action.PasswordAction" method="updateAjaxUserPassword">
             <interceptor-ref name="authenticatedStack"/>
-            <result name="success" type="json">
-                <param name="root">user</param>
-            </result>
+            <result type="json"/>
         </action>
-        <!-- Update Ajax Avatar Action-->
-        <action name="updateAjaxUserAvatar" class="fr.kybox.action.UserAction" method="updateAjaxUserAvatar">
+
+        <!-- [AVATAR] - Update Ajax Action -->
+        <action name="updateAjaxUserAvatar" class="fr.kybox.action.AvatarAction" method="updateAjaxUserAvatar">
+            <interceptor-ref name="authenticatedStack"/>
+            <result name="success" type="json"/>
+        </action>
+
+        <!-- [TOPO] - Update Ajax Action -->
+        <action name="updateAjaxUserTopo" class="fr.kybox.action.TopoAction" method="updateAjaxUserTopo">
             <interceptor-ref name="authenticatedStack"/>
             <result name="success" type="json">
-                <param name="root">avatarList</param>
+                <param name="root">topoList</param>
             </result>
         </action>
 
