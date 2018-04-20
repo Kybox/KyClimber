@@ -20,8 +20,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <s:if test="%{#actionName=='profile'}">
         <!-- Profile Ajax -->
-        <script src="<s:property value="rootPath"/>/jsp/user/profile/js/ajax.js" type="application/javascript"></script>
-        <script src="<s:property value="rootPath"/>/jsp/user/profile/js/md5.min.js" type="application/javascript"></script>
+        <script src="<s:property value="rootPath"/>/js/profil.js" type="application/javascript"></script>
+        <script src="<s:property value="rootPath"/>/js/profil_infos.js" type="application/javascript"></script>
+        <script src="<s:property value="rootPath"/>/js/profil_password.js" type="application/javascript"></script>
+        <script src="<s:property value="rootPath"/>/js/profil_avatar.js" type="application/javascript"></script>
+        <script src="<s:property value="rootPath"/>/js/profil_topo.js" type="application/javascript"></script>
+        <script src="<s:property value="rootPath"/>/js/md5.min.js" type="application/javascript"></script>
+    </s:if>
+    <s:if test="%{#actionName=='login'}">
+        <script src="<s:property value="rootPath"/>/js/md5.min.js" type="application/javascript"></script>
+        <script src="<s:property value="rootPath"/>/js/login.js"></script>
     </s:if>
 
 </head>

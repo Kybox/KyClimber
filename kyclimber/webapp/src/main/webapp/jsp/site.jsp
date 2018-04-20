@@ -9,7 +9,7 @@
     <div class="col-md-3">
         <h3><small>Sélectionnez une région :</small></h3>
         <div class="list-group">
-            <s:iterator value="regionList">
+            <s:iterator value="regionList" var="region">
                 <s:url action="site" var="urlRegion">
                     <s:param name="regionId"><s:property value="id"/></s:param>
                 </s:url>

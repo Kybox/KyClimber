@@ -57,8 +57,8 @@
             <div class="media-left">
                 <a href="#">
                     <img class="media-object"
-                    <s:if test="%{#varUser.avatar!=null}">
-                         src="<s:property value="#varUser.avatar"/>"
+                    <s:if test="user.avatar.url!=null">
+                         src="<s:property value="user.avatar.url"/>"
                     </s:if>
                     <s:else>
                          src="http://0.gravatar.com/avatar/?s=64&d=mm&r=g"

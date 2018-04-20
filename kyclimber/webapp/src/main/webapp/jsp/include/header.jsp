@@ -18,14 +18,35 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><s:a action="index" class="btnNav">Accueil</s:a></li>
-                        <li><s:a action="site" class="btnNav">Sites</s:a></li>
-                        <li><s:a action="site" class="btnNav">Rechercher</s:a></li>
+                        <li>
+                            <s:a action="index" class="btnNav">
+                                <span class="glyphicon glyphicon-home"></span>
+                                Accueil
+                            </s:a>
+                            </li>
+                        <li>
+                            <s:a action="site" class="btnNav">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                 Sites
+                            </s:a>
+                        </li>
+                        <li>
+                            <s:a action="site" class="btnNav">
+                                <span class="glyphicon glyphicon-search"></span>
+                                 Rechercher
+                            </s:a>
+                        </li>
                         <s:if test="#session.user">
-                            <li><s:a action="profile" class="btnNav">Mon profil</s:a></li>
+                            <li>
+                                <s:a action="profile" class="btnNav">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                     Mon profil
+                                </s:a>
+                            </li>
                             <li>
                                 <s:a action="logout" class="btnNav">
-                                Déconnexion (<s:property value="#session.user.firstName"/>)
+                                    <span class="glyphicon glyphicon-log-out"></span>
+                                     Déconnexion (<s:property value="#session.user.firstName"/>)
                                 </s:a>
                             </li>
                         </s:if>
@@ -34,6 +55,7 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                        role="button" aria-haspopup="true" aria-expanded="false" id="dp-auth">
+                                        <span class="glyphicon glyphicon-check"></span>
                                         Authentification
                                         <span class="caret"></span>
                                     </a>

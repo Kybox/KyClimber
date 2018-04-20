@@ -28,10 +28,9 @@
                                 <!-- Carousel items -->
                                 <div class="carousel-inner">
                                     <s:iterator value="avatarList">
-                                        <s:set var="varUrl" value="url"/>
                                         <s:set var="varId" value="%{id-1}"/>
-                                        <s:if test="%{#session.user.avatar==#varUrl}">
-                                            <script type="application/javascript">avatarId=<s:property value="varId"/></script>
+                                        <s:if test="#session.user.avatar.id==id">
+                                            <script type="application/javascript">userAvatarId=<s:property value="varId"/></script>
                                             <div class="active item" data-slide-number="<s:property value="varId"/>">
                                                 <img src="<s:property value="url"/>" style="width: 100%;">
                                             </div>
@@ -52,7 +51,10 @@
                     <br>
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <button type="submit" class="btn btn-primary center-block" onclick="updateUserAvatar()">Mettre à jour mon avatar</button>
+                            <button type="submit" id="btnUpdateUserAvatar" class="btn btn-primary center-block">
+                                <span class="glyphicon glyphicon-floppy-save" style="margin-right:6px;"></span>
+                                Mettre à jour mon avatar
+                            </button>
                         </div>
                     </div>
                 </div>

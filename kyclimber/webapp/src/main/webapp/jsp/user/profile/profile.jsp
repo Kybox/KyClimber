@@ -9,15 +9,43 @@
 <s:set var="varUser" value="user"/>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title"><b><i>Mon profil utilisateur</i></b></h3>
+        <h3 class="panel-title">
+            <span class="glyphicon glyphicon-user"></span>
+            <b><i>Mon profil utilisateur</i></b>
+        </h3>
     </div>
     <div class="panel-body">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#infos" data-toggle="tab">Informations</a></li>
-            <li><a href="#pass" data-toggle="tab">Mot de passe</a></li>
-            <li><a href="#pic" data-toggle="tab">Avatar</a></li>
-            <li><a href="#topo" data-toggle="tab">Topos</a></li>
-            <li><a href="#com" data-toggle="tab">Commentaires</a></li>
+            <li class="active">
+                <a href="#infos" data-toggle="tab">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                    Informations
+                </a>
+            </li>
+            <li>
+                <a href="#pass" data-toggle="tab">
+                    <span class="glyphicon glyphicon-lock"></span>
+                    Mot de passe
+                </a>
+            </li>
+            <li>
+                <a href="#pic" data-toggle="tab">
+                    <span class="glyphicon glyphicon-picture"></span>
+                    Avatar
+                </a>
+            </li>
+            <li>
+                <a href="#topo" data-toggle="tab">
+                    <span class="glyphicon glyphicon-transfer"></span>
+                    Topos
+                </a>
+            </li>
+            <li>
+                <a href="#com" data-toggle="tab">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    Commentaires
+                </a>
+            </li>
         </ul>
         <div class="tab-content ">
             <div class="tab-pane active" id="infos">
@@ -30,14 +58,15 @@
             </div>
             <div class="tab-pane" id="pic">
                 <br>
-                <%@ include file="include/picture.jsp" %>
+                <%@ include file="include/avatar.jsp" %>
             </div>
             <div class="tab-pane" id="topo">
                 <br>
                 <%@ include file="include/topos.jsp" %>
             </div>
             <div class="tab-pane" id="com">
-                <h3>Comments</h3>
+                <br>
+                <%@ include file="include/comments.jsp" %>
             </div>
         </div>
     </div>
@@ -52,6 +81,30 @@
             <div class="modal-body">
                 <div class="alert alert-info" role="alert">
                     <p>Mise à jour effectuée !</p>
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    <span class="glyphicon glyphicon-user" style="margin-right:6px;"></span>
+                    Profil utilisateur
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert">
+                    <p>
+                        <span class="glyphicon glyphicon-alert" style="margin-right:6px;"></span>
+                        <b>Une erreur s'est produite !</b>
+                    </p>
+                    <br>
+                    <span id="modalErrorMsg"></span>
                 </div>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
             </div>
