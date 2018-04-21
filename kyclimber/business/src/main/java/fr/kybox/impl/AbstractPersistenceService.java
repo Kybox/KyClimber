@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TransactionRequiredException;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
@@ -76,5 +77,29 @@ public class AbstractPersistenceService<K, E extends AbstractEntity> implements 
             logger.error("Hibernate error in save(T entity) method !");
         }
         return entityList;
+    }
+
+    @Override
+    public boolean remove(E entity) {
+
+        boolean result = true;
+
+        try{
+            entityManager.getTransaction().begin();
+            entityManager.remove(entity);
+            entityManager.getTransaction().commit();
+        }
+        catch (IllegalArgumentException e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+            result = false;
+        }
+        catch (TransactionRequiredException e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+            result = false;
+        }
+
+        return result;
     }
 }

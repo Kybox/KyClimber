@@ -106,6 +106,12 @@
             <result type="json"/>
         </action>
 
+        <!-- [COMMENT] - Delete Ajax Action -->
+        <action name="deleteAjaxUserComment" class="fr.kybox.action.CommentAction" method="deleteAjaxUserComment">
+            <interceptor-ref name="authenticatedStack"/>
+            <result type="json"/>
+        </action>
+
         <action name="addNewAjaxComment" class="fr.kybox.action.CommentAction" method="addNewAjaxComment">
             <interceptor-ref name="authenticatedStack"/>
             <result name="success" type="json">

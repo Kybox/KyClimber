@@ -17,12 +17,12 @@
                 </thead>
                 <tbody>
                 <s:iterator value="commentList" status="commentObj">
-                    <tr>
-                        <td style="vertical-align:middle;">
+                    <tr id="userCommentTableRow<s:property value="id"/>">
+                        <td id="userCommentDate<s:property value="id"/>" style="vertical-align:middle;">
                             Le <s:date name="date" format="dd/MM/yyyy"/><br>
                             <small>à <s:date name="date" format="hh:mm:ss"/></small>
                         </td>
-                        <td style="vertical-align:middle;">
+                        <td id="userCommentSite<s:property value="id"/>" style="vertical-align:middle;">
                             <a href="site.action?regionId=<s:property value="site.region.id"/>&siteId=<s:property value="site.id"/>">
                                 <s:property value="site.name"/>
                             </a>
@@ -82,6 +82,32 @@
                 </s:iterator>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteUserCommentModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Profil utilisateur</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger text-center" role="alert">
+                    <p>Attention, vous êtes sur le point de <b>supprimer</b> votre commentaire !</p>
+                    <p>Cette action est <b>irreversible</b> !</p>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Rappel du commentaire éligible à la suppression :
+                    </div>
+                    <div class="panel-body" id="commentReminderToDelete"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnModalDeleteComment" commentIdToDelete="" class="btn btn-danger" data-dismiss="modal">Supprimer</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
         </div>
     </div>
 </div>

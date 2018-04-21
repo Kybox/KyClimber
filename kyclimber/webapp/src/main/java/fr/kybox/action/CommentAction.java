@@ -100,4 +100,18 @@ public class CommentAction extends ActionSupport {
 
         return result;
     }
+
+    public String deleteAjaxUserComment(){
+
+        String result = ActionSupport.SUCCESS;
+
+        System.out.println("DELETE COMMENT ID " + getCommentId());
+
+        Comment comment = commentService.findById(getCommentId());
+
+        if(commentService.remove(comment) == false)
+            result = ActionSupport.ERROR;
+
+        return result;
+    }
 }
