@@ -25,6 +25,7 @@
         <script src="<s:property value="rootPath"/>/js/profil_password.js" type="application/javascript"></script>
         <script src="<s:property value="rootPath"/>/js/profil_avatar.js" type="application/javascript"></script>
         <script src="<s:property value="rootPath"/>/js/profil_topo.js" type="application/javascript"></script>
+        <script src="<s:property value="rootPath"/>/js/profil_comments.js" type="application/javascript"></script>
         <script src="<s:property value="rootPath"/>/js/md5.min.js" type="application/javascript"></script>
     </s:if>
     <s:if test="%{#actionName=='login'}">

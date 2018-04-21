@@ -100,6 +100,12 @@
             </result>
         </action>
 
+        <!-- [COMMENT] - Update Ajax Action -->
+        <action name="updateAjaxUserComment" class="fr.kybox.action.CommentAction" method="updateAjaxUserComment">
+            <interceptor-ref name="authenticatedStack"/>
+            <result type="json"/>
+        </action>
+
         <action name="addNewAjaxComment" class="fr.kybox.action.CommentAction" method="addNewAjaxComment">
             <interceptor-ref name="authenticatedStack"/>
             <result name="success" type="json">

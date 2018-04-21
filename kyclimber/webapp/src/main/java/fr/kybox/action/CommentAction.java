@@ -7,6 +7,8 @@ import fr.kybox.exception.NotFoundException;
 import fr.kybox.impl.services.CommentPersistenceService;
 
 import javax.inject.Inject;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.List;
 
@@ -24,6 +26,10 @@ public class CommentAction extends ActionSupport {
     private String post;
     private List<Comment> commentList;
 
+    // Update profil
+    private String comment;
+    private int commentId;
+
     public int getSiteId() { return siteId; }
     public void setSiteId(int siteId) { this.siteId = siteId; }
 
@@ -32,6 +38,14 @@ public class CommentAction extends ActionSupport {
 
     public String getPost() { return post; }
     public void setPost(String post) { this.post = post; }
+
+    public String getComment() { return comment; }
+    public void setComment(String comment) { this.comment = comment; }
+    public int getCommentId() { return commentId; }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
+    }
 
     public List<Comment> getCommentList() {
         //commentList = commentService.findBySite()
@@ -50,9 +64,7 @@ public class CommentAction extends ActionSupport {
         comment.setSite(null); /// <---------------------------------TODO
         comment.setUser(user);
         comment.setPost(getPost());
-        Calendar calendar = Calendar.getInstance();
-        java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
-        comment.setDate(date);
+        comment.setDate(Timestamp.from(Instant.now()));
 
         //managerFactory.getCommentManager().addNewComment(comment);
 
@@ -70,5 +82,22 @@ public class CommentAction extends ActionSupport {
         //try { user = managerFactory.getUserManager().getUser(userId); }
         //catch (NotFoundException e) { e.printStackTrace(); }
         return user;
+    }
+
+    public String updateAjaxUserComment(){
+
+        String result = ActionSupport.SUCCESS;
+
+        try {
+            Comment comment = commentService.findById(getCommentId());
+            comment.setPost(getComment());
+            commentService.save(comment);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            result = ActionSupport.ERROR;
+        }
+
+        return result;
     }
 }

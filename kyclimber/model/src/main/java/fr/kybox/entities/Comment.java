@@ -2,6 +2,7 @@ package fr.kybox.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 
 /**
@@ -36,7 +37,7 @@ public class Comment extends AbstractEntity {
     private String post;
 
     @Column(name = "post_date")
-    private Date date;
+    private Timestamp date;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -50,8 +51,8 @@ public class Comment extends AbstractEntity {
     public String getPost() { return post; }
     public void setPost(String post) { this.post = post; }
 
-    public Date getDate() { return date; }
-    public void setDate(Date date) { this.date = date; }
+    public Timestamp getDate() { return date; }
+    public void setDate(Timestamp date) { this.date = date; }
 
 
 }
