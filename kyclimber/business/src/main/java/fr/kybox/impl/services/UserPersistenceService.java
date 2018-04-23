@@ -12,6 +12,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
@@ -63,6 +67,30 @@ public class UserPersistenceService extends AbstractPersistenceService<Integer, 
             entityManager.getTransaction().rollback();
             logger.error("Hibernate error in save(T entity) method !");
         }
+        return entityList;
+    }
+
+
+    public List<User> findUserByKeyword(String keyword){
+
+        List<User> entityList = null;
+        keyword = "%" + keyword + "%";
+        System.out.println("Search pattern = " + keyword);
+
+        try{
+            entityManager.getTransaction().begin();
+            final List resultList = entityManager.createNamedQuery(User.FIND_USER_BY_KEYWORD)
+                    .setParameter("keyword", keyword)
+                    .getResultList();
+            entityList = resultList;
+            entityManager.getTransaction().commit();
+        }
+        catch (NoResultException e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+            logger.error("No result exception !");
+        }
+
         return entityList;
     }
 }

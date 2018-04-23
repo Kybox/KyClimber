@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name= "users", schema = "public")
 @NamedQueries({
+        @NamedQuery(name = User.FIND_USER_BY_KEYWORD, query = "SELECT u FROM User u WHERE UPPER(u.firstName) LIKE UPPER(:keyword)"),
         @NamedQuery(name = User.FIND_USER_BY_LOGIN, query = "SELECT u FROM User u WHERE u.email = :email AND u.password = :pass"),
         @NamedQuery(name = User.FIND_USER_AVATAR, query = "SELECT u FROM User u WHERE u = :user"),
         @NamedQuery(name = User.FIND_ALL_USERS, query = "SELECT u FROM User u")
@@ -18,6 +19,7 @@ public class User extends AbstractEntity {
     public static final String FIND_ALL_USERS = "User.findAllUsers";
     public static final String FIND_USER_AVATAR = "User.findUserAvatar";
     public static final String FIND_USER_BY_LOGIN = "User.findUserByLogin";
+    public static final String FIND_USER_BY_KEYWORD = "User.findUserByKeyword";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

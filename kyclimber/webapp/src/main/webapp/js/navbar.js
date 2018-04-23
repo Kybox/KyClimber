@@ -7,11 +7,11 @@ $(document).ready(function() {
 
         // Empty search
         if(searchData == ""){
-            $("#inputNavSearch").attr("placeholder", "Ecrire une recherche !")
+            $("#inputNavSearch").attr("placeholder", "Ecrire une recherche !");
         }
         // Real search
         else {
-            window.location.href = "search.action?userQuery=" + searchData;
+            window.location.href = "search.action?keywords=" + searchData;
         }
     });
 });

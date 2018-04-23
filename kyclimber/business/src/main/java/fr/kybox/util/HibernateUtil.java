@@ -5,10 +5,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 
-/**
- * @author Deepak Kumar
- * Web: http://www.roseindia.net
- */
 public class HibernateUtil {
 
     private static final String PERSISTENCE_UNIT = "kyclimber";
