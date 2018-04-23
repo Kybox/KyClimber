@@ -30,6 +30,12 @@
                                  Sites
                             </s:a>
                         </li>
+                        <li>
+                            <s:a action="search" class="btnNav">
+                                <span class="glyphicon glyphicon-search"></span>
+                                Recherche
+                            </s:a>
+                        </li>
                         <s:if test="#session.user">
                             <li>
                                 <s:a action="profile" class="btnNav">
@@ -71,18 +77,6 @@
                                 </li>
                             </ul>
                         </s:else>
-                    </ul>
-                    <ul class="nav navbar-nav pull-right" style="margin-top:8px;margin-right:8px;">
-                        <li>
-                            <div class="input-group">
-                                <input type="text" id="inputNavSearch" class="form-control" placeholder="Rechercher...">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" id="btnNavSearch">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                </span>
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </nav>

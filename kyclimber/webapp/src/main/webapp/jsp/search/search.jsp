@@ -31,11 +31,6 @@
                             Rechercher un utilisateur :
                             <input type="radio" name="selectedSearchOption" value="Rechercher un utilisateur">
                         </label>
-                        <!--
-                        <label class="form-control">Rechercher un site d'escalade : <input type="checkbox" name="siteChecked" value="true"></label>
-                        <label class="form-control">Rechercher un topo : <input type="checkbox" name="topoChecked" value="true"></label>
-                        <label class="form-control">Rechercher un utilisateur : <input type="checkbox" name="userChecked" value="true"></label>
-                        -->
                     </div>
                     <div class="col-md-4 text-center">
                         <br>
@@ -85,9 +80,36 @@
                 </div>
             </s:if>
             <s:else>
-                Aucun résultat trouvé, merci de réitérer votre recherche...
+                <p>Aucun utilisateur trouvé, merci de réitérer votre recherche avec un autre mot-clé</p>
             </s:else>
         </s:if>
+        <s:elseif test="sitesSearchedList!=null">
+            <s:if test="sitesSearchedList.size>0">
+                <div class="row">
+                    <s:iterator value="sitesSearchedList">
+                        <div class="col-md-2">
+                            <div class="thumbnail">
+                                <img src="<s:property value="picture"/> " alt="image">
+                                <div class="caption text-center">
+                                    <h3><s:property value="name"/><br>
+                                    <small><s:property value="region.name"/></small></h3>
+                                    <p>
+                                        <a href="site.action?regionId=<s:property value="region.id"/>&siteId=<s:property value="id"/>"
+                                           class="btn btn-primary" role="button">
+                                            <span class="glyphicon glyphicon-flag"></span>
+                                            Accéder
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </s:iterator>
+                </div>
+            </s:if>
+            <s:else>
+                <p>Aucun site d'escalade trouvé, merci de réitérer votre recherche avec un autre mot-clé</p>
+            </s:else>
+        </s:elseif>
     </div>
 </div>
 </body>

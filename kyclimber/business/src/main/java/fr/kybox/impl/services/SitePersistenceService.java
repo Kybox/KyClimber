@@ -57,4 +57,27 @@ public class SitePersistenceService extends AbstractPersistenceService<Integer, 
 
         return siteList;
     }
+
+    public List<Site> findSiteByKeyword(String keyword){
+
+        keyword = "%" + keyword + "%";
+        List<Site> entityList = null;
+
+        try{
+
+            entityManager.getTransaction().begin();
+            final List resultList = entityManager.createNamedQuery(Site.FIND_BY_KEYWORD)
+                    .setParameter("keyword", keyword)
+                    .getResultList();
+
+            entityList = resultList;
+            entityManager.getTransaction().commit();
+        }
+        catch (NoResultException e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+
+        return entityList;
+    }
 }
