@@ -54,11 +54,12 @@
 
         <!-- Site Action -->
         <action name="site" class="fr.kybox.action.SiteAction">
-            <result name="success">jsp/site.jsp</result>
+            <result name="success">jsp/site/site.jsp</result>
         </action>
 
-        <action name="home" class="fr.kybox.action.HomeAction" method="doHome">
-            <result name="success">jsp/home.jsp</result>
+        <!-- Search Action -->
+        <action name="search" class="fr.kybox.action.SearchAction">
+            <result name="success">jsp/search/search.jsp</result>
         </action>
     </package>
 

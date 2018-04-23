@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
-<%@ include file="include/head.jsp" %>
+<%@ include file="../include/head.jsp" %>
 <body>
-<%@ include file="include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <h3>Découvrir un site d'escalade</h3>
 <aside>
     <div class="col-md-3">
@@ -35,12 +35,12 @@
                     </div>
                 </s:if>
                 <s:else>
-                    <%@ include file="include/site/site_dropdown.jsp"%>
+                    <%@ include file="include/site_dropdown.jsp"%>
                 </s:else>
             </div>
         </nav>
         <!-- Site view -->
-        <%@ include file="include/site/site_details.jsp"%>
+        <%@ include file="include/site_details.jsp"%>
     </div>
 </article>
 </body>

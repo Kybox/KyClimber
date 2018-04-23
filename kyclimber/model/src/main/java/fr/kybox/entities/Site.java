@@ -1,12 +1,22 @@
 package fr.kybox.entities;
 
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Index;
+
 import javax.persistence.*;
 
 /**
  * @author Kybox
  * @version 1.0
+ *
+ * Notes :
+ *
+ * - Hibernate Search :
+ *      The @Field annotation includes the Index.YES, Analyze.YES, and Store.NO properties by default.
+ *      So it's not necessary to indicate them but I put them to remember them.
  */
 @Entity
+@Indexed
 @Table(name = "site", schema = "public")
 @NamedQueries({
         @NamedQuery(name = Site.FIND_LASTEST_SITES, query = "SELECT s FROM Site s ORDER BY s.id DESC"),
@@ -21,12 +31,15 @@ public class Site extends AbstractEntity {
     @OneToOne
     private Region region;
 
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "name")
     private String name;
 
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "department")
     private String department;
 
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "type")
     private String type;
 
@@ -39,18 +52,28 @@ public class Site extends AbstractEntity {
     @Column(name = "route")
     private String route;
 
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "quotation")
     private String quotation;
 
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "description")
     private String description;
 
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "type_description")
     private String typeDescription;
 
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "access")
     private String access;
 
+    /**
+     * Indexing of associated entities
+     * The @IndexedEmbedded annotation is used to index associated entities,
+     * like those normally defined via @ManyToMany, @OneToOne, @ManyToOne, @Embedded and @ElementCollection.
+     */
+    @IndexedEmbedded
     @Column(name = "topo")
     private String topo;
 

@@ -1,12 +1,22 @@
 package fr.kybox.entities;
 
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Index;
+
 import javax.persistence.*;
 
 /**
  * @author Kybox
  * @version 1.0
+ *
+ * Notes :
+ *
+ * - Hibernate Search :
+ *      The @Field annotation includes the Index.YES, Analyze.YES, and Store.NO properties by default.
+ *      So it's not necessary to indicate them but I put them to remember them.
  */
 @Entity
+@Indexed
 @Table(name = "topo", schema = "public")
 @NamedQueries({
         @NamedQuery(name = Topo.FIND_ALL_TOPO, query = "SELECT t FROM Topo t"),
@@ -22,12 +32,15 @@ public class Topo extends AbstractEntity {
     @Column(name = "id")
     private Integer id;
 
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "name")
     private String name;
 
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "description")
     private String description;
 
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "publisher")
     private String publisher;
 
