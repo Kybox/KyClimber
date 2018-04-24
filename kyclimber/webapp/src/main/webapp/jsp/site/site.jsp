@@ -9,13 +9,14 @@
     <div class="col-md-3">
         <h3><small>Sélectionnez une région :</small></h3>
         <div class="list-group">
-            <s:iterator value="regionList" var="region">
+            <s:iterator value="mapRegionList">
                 <s:url action="site" var="urlRegion">
-                    <s:param name="regionId"><s:property value="id"/></s:param>
+                    <s:param name="regionId"><s:property value="key"/></s:param>
                 </s:url>
                 <s:a href="%{urlRegion}">
                     <button type="button" class="list-group-item">
-                        <s:property value="name"/>
+                        <s:property value="value[0]"/>
+                        <span class="badge"><s:property value="value[1]"/></span>
                     </button>
                 </s:a>
             </s:iterator>

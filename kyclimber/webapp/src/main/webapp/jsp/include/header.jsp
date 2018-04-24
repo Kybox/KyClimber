@@ -31,6 +31,12 @@
                             </s:a>
                         </li>
                         <li>
+                            <s:a action="site" class="btnNav">
+                                <span class="glyphicon glyphicon-book"></span>
+                                Topos
+                            </s:a>
+                        </li>
+                        <li>
                             <s:a action="search" class="btnNav">
                                 <span class="glyphicon glyphicon-search"></span>
                                 Recherche

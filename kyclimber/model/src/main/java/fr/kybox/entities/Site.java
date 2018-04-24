@@ -22,10 +22,9 @@ import javax.persistence.*;
         @NamedQuery(name = Site.FIND_BY_REGION, query = "SELECT s FROM Site s WHERE s.region = :region"),
         @NamedQuery(name = Site.FIND_BY_KEYWORD,
                 query = "SELECT s FROM Site s WHERE UPPER(s.name) LIKE UPPER(:keyword) " +
-                        "OR UPPER(s.department) LIKE UPPER(:keyword) " +
-                        "OR UPPER(s.description) LIKE UPPER(:keyword) " +
-                        "OR UPPER(s.typeDescription) LIKE UPPER(:keyword) "+
-                        "OR UPPER(s.access) LIKE UPPER(:keyword) ")
+                        "OR UPPER(s.type) LIKE UPPER(:keyword) " +
+                        "OR UPPER(s.quotation) LIKE UPPER(:keyword) " +
+                        "OR UPPER(s.region.name) LIKE UPPER(:keyword)")
 })
 public class Site extends AbstractEntity {
 

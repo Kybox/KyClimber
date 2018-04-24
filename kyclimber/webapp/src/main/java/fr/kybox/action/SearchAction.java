@@ -57,7 +57,7 @@ public class SearchAction extends ActionSupport {
 
         if(selectedSearchOption != null){
 
-            System.out.println("SELECTED OPTION = " + selectedSearchOption);
+            System.out.println("========== > SELECTED OPTION = " + selectedSearchOption);
 
             switch (selectedSearchOption){
                 case USER_CHECKED:

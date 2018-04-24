@@ -9,8 +9,7 @@ import fr.kybox.impl.services.RegionPersistenceService;
 import fr.kybox.impl.services.SitePersistenceService;
 
 import javax.inject.Inject;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Kybox
@@ -28,6 +27,9 @@ public class SiteAction extends ActionSupport {
     private CommentPersistenceService commentService;
 
     private List<Region> regionList;
+
+    private Map<Integer, List<String>> mapRegionList;
+
     private int regionId;
     private int siteId;
     private int userId;
@@ -39,7 +41,8 @@ public class SiteAction extends ActionSupport {
 
     // RegionList
     public List<Region> getRegionList() {
-        regionList = regionService.findAll();
+        regionList = this.regionList;
+        //regionList = regionService.findAll();
         System.out.println("REGION LIST SIZE = " + regionList.size());
         System.out.println("ARRAY = " + Arrays.toString(regionList.toArray()));
         System.out.println("");
@@ -68,6 +71,29 @@ public class SiteAction extends ActionSupport {
         return region;
     }
     public void setRegion(Region region){ this.region = region; }
+
+
+    public Map<Integer, List<String>> getMapRegionList() {
+
+        mapRegionList = new HashMap<>();
+        regionList = regionService.findAllRegionsAvailable();
+
+        for(Region region : regionList){
+
+            Integer count = regionService.countRegion(region.getId());
+            List<String> dataList = new ArrayList<>();
+            dataList.add(region.getName());
+            dataList.add(count.toString());
+            mapRegionList.put(region.getId(), dataList);
+        }
+
+        System.out.println("MAP SIZE = " + mapRegionList.size());
+        return mapRegionList;
+    }
+
+    public void setMapRegionList(Map<Integer, List<String>> mapRegionList) {
+        this.mapRegionList = mapRegionList;
+    }
 
     // Site List
     public List<Site> getSiteList() {

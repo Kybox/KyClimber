@@ -5,6 +5,9 @@
 <%@ include file="../include/head.jsp" %>
 <body>
 <%@ include file="../include/header.jsp" %>
+<script type="application/javascript">
+    var selectedPreviousOption = "<s:property value="selectedSearchOption"/>";
+</script>
 <br>
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -21,15 +24,15 @@
                     <div class="col-md-4 text-right">
                         <label class="form-control">
                             Rechercher un site d'escalade :
-                            <input type="radio" name="selectedSearchOption" value="Rechercher un site d'escalade" checked>
+                            <input type="radio" name="selectedSearchOption" id="searchOption1" value="Rechercher un site d'escalade" checked="true">
                         </label>
                         <label class="form-control">
                             Rechercher un topo :
-                            <input type="radio" name="selectedSearchOption" value="Rechercher un topo">
+                            <input type="radio" name="selectedSearchOption" id="searchOption2" value="Rechercher un topo" checked="false">
                         </label>
                         <label class="form-control">
                             Rechercher un utilisateur :
-                            <input type="radio" name="selectedSearchOption" value="Rechercher un utilisateur">
+                            <input type="radio" name="selectedSearchOption" id="searchOption3" value="Rechercher un utilisateur" checked="false">
                         </label>
                     </div>
                     <div class="col-md-4 text-center">
@@ -87,21 +90,31 @@
             <s:if test="sitesSearchedList.size>0">
                 <div class="row">
                     <s:iterator value="sitesSearchedList">
-                        <div class="col-md-2">
-                            <div class="thumbnail">
-                                <img src="<s:property value="picture"/> " alt="image">
-                                <div class="caption text-center">
-                                    <h3><s:property value="name"/><br>
-                                    <small><s:property value="region.name"/></small></h3>
-                                    <p>
-                                        <a href="site.action?regionId=<s:property value="region.id"/>&siteId=<s:property value="id"/>"
-                                           class="btn btn-primary" role="button">
-                                            <span class="glyphicon glyphicon-flag"></span>
-                                            Accéder
-                                        </a>
-                                    </p>
+                        <div class="col-md-3">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <img src="<s:property value="picture"/> " alt="image" style="height:140px;width:248px;">
+                                    </div>
+                                    <div class="panel-body text-center">
+                                        <b><s:property value="name"/></b>
+                                        <br>
+                                        <s:property value="region.name"/>
+                                        <p>
+                                            Type : <s:property value="type"/>
+                                            <br>
+                                            Cotation : <s:property value="quotation"/>
+                                        </p>
+                                        <div>
+                                            <a href="site.action?regionId=<s:property value="region.id"/>&siteId=<s:property value="id"/>"
+                                               class="btn btn-primary" role="button">
+                                                <span class="glyphicon glyphicon-flag"></span>
+                                                Accéder
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+
                         </div>
                     </s:iterator>
                 </div>
