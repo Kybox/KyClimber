@@ -16,7 +16,7 @@
                         <s:param name="siteId"><s:property value="id"/></s:param>
                     </s:url>
                     <li>
-                        <s:a href="%{urlSite}"><s:property value="name"/></s:a>
+                        <s:a href="%{urlSite}"><s:property value="name"/> (<s:property value="department"/>)</s:a>
                     </li>
                 </s:iterator>
             </ul>

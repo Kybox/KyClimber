@@ -16,7 +16,7 @@
                 <s:a href="%{urlRegion}">
                     <button type="button" class="list-group-item">
                         <s:property value="value[0]"/>
-                        <span class="badge"><s:property value="value[1]"/></span>
+                        <span class="badge alert-info"><s:property value="value[1]"/></span>
                     </button>
                 </s:a>
             </s:iterator>
