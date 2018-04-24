@@ -31,7 +31,7 @@
                             </s:a>
                         </li>
                         <li>
-                            <s:a action="site" class="btnNav">
+                            <s:a action="topo" class="btnNav">
                                 <span class="glyphicon glyphicon-book"></span>
                                 Topos
                             </s:a>

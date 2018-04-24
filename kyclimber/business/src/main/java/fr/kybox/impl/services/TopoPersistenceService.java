@@ -1,8 +1,6 @@
 package fr.kybox.impl.services;
 
-import fr.kybox.entities.Avatar;
-import fr.kybox.entities.Topo;
-import fr.kybox.entities.User;
+import fr.kybox.entities.*;
 import fr.kybox.impl.AbstractPersistenceService;
 import fr.kybox.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 /**
@@ -60,5 +59,24 @@ public class TopoPersistenceService extends AbstractPersistenceService<Integer, 
             logger.error("Topo - Hibernate error findAll method !");
         }
         return entityList;
+    }
+
+    public List<Topo> findBySite(Site site){
+
+        List resultList = null;
+
+        try{
+
+            entityManager.getTransaction().begin();
+            resultList = entityManager.createNamedQuery(Topo.FIND_BY_SITE)
+                    .setParameter("site", site)
+                    .getResultList();
+            entityManager.getTransaction().commit();
+        }
+        catch (NoResultException e){
+            entityManager.getTransaction().rollback();
+        }
+
+        return resultList;
     }
 }

@@ -62,6 +62,16 @@ public class TopoAction extends ActionSupport {
     }
     public void setTopoList(List<Topo> topoList) { this.topoList = topoList; }
 
+    @Override
+    public String execute(){
+
+        return ActionSupport.SUCCESS;
+    }
+
+    /**
+     * Ajax update topo in user profil
+     * @return String (success/error)
+     */
     public String updateAjaxUserTopo(){
 
         System.out.println("TopoId = " + getTopoId());
@@ -85,7 +95,7 @@ public class TopoAction extends ActionSupport {
         topo.setDescription(getTopoDescription());
         topo.setPublisher(getTopoPublisher());
         topo.setCover(getTopoCover());
-        topo.setRegion(regionService.findById(getTopoRegionId()));
+        //topo.setRegion(regionService.findById(getTopoRegionId()));
         topo.setAvailable(isTopoAvailable());
         if(isTopoLent()) topo.setLentToUser(userService.findById(getTopoUserLentId()));
         else topo.setLentToUser(null);

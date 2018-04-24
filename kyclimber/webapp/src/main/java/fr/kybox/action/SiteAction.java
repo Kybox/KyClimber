@@ -4,9 +4,11 @@ import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.Comment;
 import fr.kybox.entities.Region;
 import fr.kybox.entities.Site;
+import fr.kybox.entities.Topo;
 import fr.kybox.impl.services.CommentPersistenceService;
 import fr.kybox.impl.services.RegionPersistenceService;
 import fr.kybox.impl.services.SitePersistenceService;
+import fr.kybox.impl.services.TopoPersistenceService;
 
 import javax.inject.Inject;
 import java.util.*;
@@ -17,17 +19,13 @@ import java.util.*;
  */
 public class SiteAction extends ActionSupport {
 
-    @Inject
-    private SitePersistenceService siteService;
+    @Inject private SitePersistenceService siteService;
+    @Inject private RegionPersistenceService regionService;
+    @Inject private CommentPersistenceService commentService;
+    @Inject private TopoPersistenceService topoService;
 
-    @Inject
-    private RegionPersistenceService regionService;
-
-    @Inject
-    private CommentPersistenceService commentService;
-
+    private List<Topo> topoList;
     private List<Region> regionList;
-
     private Map<Integer, List<String>> mapRegionList;
 
     private int regionId;
@@ -40,17 +38,7 @@ public class SiteAction extends ActionSupport {
     private Comment comment;
 
     // RegionList
-    public List<Region> getRegionList() {
-        regionList = this.regionList;
-        //regionList = regionService.findAll();
-        System.out.println("REGION LIST SIZE = " + regionList.size());
-        System.out.println("ARRAY = " + Arrays.toString(regionList.toArray()));
-        System.out.println("");
-        return regionList;
-    }
-    public void setRegionList(List<Region> regionList){
-        this.regionList = regionList;
-    }
+    public List<Region> getRegionList() { return regionList; }
 
     // RegionId
     public Integer getRegionId() { return regionId; }
@@ -72,7 +60,6 @@ public class SiteAction extends ActionSupport {
     }
     public void setRegion(Region region){ this.region = region; }
 
-
     public Map<Integer, List<String>> getMapRegionList() {
 
         mapRegionList = new HashMap<>();
@@ -87,12 +74,7 @@ public class SiteAction extends ActionSupport {
             mapRegionList.put(region.getId(), dataList);
         }
 
-        System.out.println("MAP SIZE = " + mapRegionList.size());
         return mapRegionList;
-    }
-
-    public void setMapRegionList(Map<Integer, List<String>> mapRegionList) {
-        this.mapRegionList = mapRegionList;
     }
 
     // Site List
@@ -108,6 +90,13 @@ public class SiteAction extends ActionSupport {
         return site;
     }
     public void setSite(Site site) { this.site = site; }
+
+
+    // TOPO
+    public List<Topo> getTopoList() {
+        topoList = topoService.findBySite(getSite());
+        return topoList;
+    }
 
     // Comment List
     public List<Comment> getCommentList() {

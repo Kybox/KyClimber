@@ -20,12 +20,14 @@ import javax.persistence.*;
 @Table(name = "topo", schema = "public")
 @NamedQueries({
         @NamedQuery(name = Topo.FIND_ALL_TOPO, query = "SELECT t FROM Topo t"),
-        @NamedQuery(name = Topo.FIND_BY_USER, query = "SELECT t FROM Topo t WHERE t.user = :user")
+        @NamedQuery(name = Topo.FIND_BY_USER, query = "SELECT t FROM Topo t WHERE t.user = :user"),
+        @NamedQuery(name = Topo.FIND_BY_SITE, query = "SELECT t FROM Topo t WHERE t.site = :site")
 })
 public class Topo extends AbstractEntity {
 
     public static final String FIND_BY_USER = "Topo.findByUser";
     public static final String FIND_ALL_TOPO = "Topo.findAllTopo";
+    public static final String FIND_BY_SITE = "Topo.findBySite";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,8 +61,8 @@ public class Topo extends AbstractEntity {
     private User user;
 
     @OneToOne
-    @JoinColumn(name = "region_id")
-    private Region region;
+    @JoinColumn(name = "site_id")
+    private Site site;
 
     @OneToOne
     @JoinColumn(name = "borrowed_from")
@@ -90,8 +92,8 @@ public class Topo extends AbstractEntity {
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
 
-    public Region getRegion() { return region; }
-    public void setRegion(Region region) { this.region = region; }
+    public Site getSite() { return site; }
+    public void setSite(Site site) { this.site = site; }
 
     public User getBorrowedFromUser() { return borrowedFromUser; }
     public void setBorrowedFromUser(User borrowedFromUser) { this.borrowedFromUser = borrowedFromUser; }

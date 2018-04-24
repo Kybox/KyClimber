@@ -96,10 +96,41 @@
             <br>
             <h3><span class="label label-info" >Topos</span></h3>
             <br>
-            <s:property value="#varSite.topo"/>
-            <br>
+            <s:if test="topoList!=null&&topoList.size>0">
+                <table class="table table-hover">
+                <thead>
+                <th>Nom</th>
+                <th>Edition</th>
+                <th class="text-center">Disponible</th>
+                <th class="text-center">Propriétaire</th>
+                </thead>
+                <tbody>
+                <s:iterator value="topoList">
+                    <tr>
+                        <td style="vertical-align: middle;"><s:property value="name"/></td>
+                        <td style="vertical-align: middle;"><s:property value="publisher"/></td>
+                        <td class="text-center" style="vertical-align: middle;">
+                            <s:if test="available==true">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </s:if>
+                            <s:else>
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </s:else>
+                        </td>
+                        <td class="text-center" style="vertical-align: middle;">
+                            <a href="mailto:<s:property value="user.email"/>">
+                                <button class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-envelope" style="margin-right:6px;"></span>
+                                    <s:property value="user.firstName"/>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                </s:iterator>
+                </tbody>
+                </table>
+            </s:if>
             <s:set var="varMap" value="#varSite.map"/>
-            <br>
             <h3><span class="label label-info" >Vue satellite</span></h3>
             <br>
             <div id="map-container-3" class="z-depth-1" style="height: 400px"></div>
