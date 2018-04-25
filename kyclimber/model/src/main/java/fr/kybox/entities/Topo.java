@@ -21,13 +21,15 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = Topo.FIND_ALL_TOPO, query = "SELECT t FROM Topo t"),
         @NamedQuery(name = Topo.FIND_BY_USER, query = "SELECT t FROM Topo t WHERE t.user = :user"),
-        @NamedQuery(name = Topo.FIND_BY_SITE, query = "SELECT t FROM Topo t WHERE t.site = :site")
+        @NamedQuery(name = Topo.FIND_BY_SITE, query = "SELECT t FROM Topo t WHERE t.site = :site"),
+        @NamedQuery(name = Topo.FIND_BY_REGION, query = "SELECT t FROM Topo t WHERE t.region = :region")
 })
 public class Topo extends AbstractEntity {
 
     public static final String FIND_BY_USER = "Topo.findByUser";
     public static final String FIND_ALL_TOPO = "Topo.findAllTopo";
     public static final String FIND_BY_SITE = "Topo.findBySite";
+    public static final String FIND_BY_REGION = "Topo.findByRegion";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -63,6 +65,10 @@ public class Topo extends AbstractEntity {
     @OneToOne
     @JoinColumn(name = "site_id")
     private Site site;
+
+    @OneToOne
+    @JoinColumn(name = "region_id")
+    private Region region;
 
     @OneToOne
     @JoinColumn(name = "borrowed_from")

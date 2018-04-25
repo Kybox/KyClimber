@@ -79,4 +79,27 @@ public class TopoPersistenceService extends AbstractPersistenceService<Integer, 
 
         return resultList;
     }
+
+    public List<Topo> findByRegion(Region region){
+
+        List resultList = null;
+
+        try{
+
+            entityManager.getTransaction().begin();
+
+            resultList = entityManager.createNamedQuery(Topo.FIND_BY_REGION)
+                    .setParameter("region", region)
+                    .getResultList();
+
+            entityManager.getTransaction().commit();
+
+        }
+        catch (NoResultException e){
+
+            entityManager.getTransaction().rollback();
+        }
+
+        return resultList;
+    }
 }

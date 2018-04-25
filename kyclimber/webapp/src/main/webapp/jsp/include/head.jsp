@@ -22,8 +22,8 @@
     <!-- Global JS Files -->
     <script src="<s:property value="rootPath"/>/js/navbar.js" type="application/javascript"></script>
 
-    <!-- [PROFILE] -->
     <s:if test="%{#actionName=='profile'}">
+        <!-- [PROFILE] -->
         <script src="<s:property value="rootPath"/>/js/profil.js" type="application/javascript"></script>
         <script src="<s:property value="rootPath"/>/js/profil_infos.js" type="application/javascript"></script>
         <script src="<s:property value="rootPath"/>/js/profil_password.js" type="application/javascript"></script>
@@ -33,15 +33,20 @@
         <script src="<s:property value="rootPath"/>/js/md5.min.js" type="application/javascript"></script>
     </s:if>
 
-    <!-- [LOGIN] -->
     <s:elseif test="%{#actionName=='login'}">
+        <!-- [LOGIN] -->
         <script src="<s:property value="rootPath"/>/js/md5.min.js" type="application/javascript"></script>
         <script src="<s:property value="rootPath"/>/js/login.js"></script>
     </s:elseif>
 
-    <!-- [SEARCH] -->
     <s:elseif test="%{#actionName=='search'}">
+        <!-- [SEARCH] -->
         <script src="<s:property value="rootPath"/>/js/search.js" type="application/javascript"></script>
+    </s:elseif>
+
+    <s:elseif test="%{#actionName=='topo'}">
+        <!-- [TOPO] -->
+        <script src="<s:property value="rootPath"/>/js/topo.js" type="application/javascript"></script>
     </s:elseif>
 
 </head>
