@@ -5,6 +5,7 @@ import fr.kybox.entities.Region;
 import fr.kybox.entities.Topo;
 import fr.kybox.impl.services.RegionPersistenceService;
 import fr.kybox.impl.services.TopoPersistenceService;
+import org.apache.struts2.interceptor.SessionAware;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class TopoAction extends ActionSupport {
     @Inject TopoPersistenceService topoService;
 
     private Topo topo;
+    private Map session;
     private Integer topoId;
     private Map<Region, List<Topo>> topoMap;
 

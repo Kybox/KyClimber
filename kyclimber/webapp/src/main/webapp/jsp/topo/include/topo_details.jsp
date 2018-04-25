@@ -6,28 +6,32 @@
     </div>
     <div class="panel-body">
         <div class="row">
-        <aside class="col-sm-3">
-            <div>
-                <img src="" alt="" id="topoDetailsCover" style="background-color:#000;width:170px;height:200px;">
+            <aside class="col-sm-3">
+                <div>
+                    <img src="" alt="cover" id="topoDetailsCover" class="img-responsive">
+                </div>
+            </aside>
+            <div class="col-sm-9">
+                <div><h4 id="topoDetailsName"></h4></div>
+                <div><h5 id="topoDetailsPublisher"></h5></div>
+                <div>
+                    Concerne le site d'escalade :
+                    <a href="#" id="topoDetailsSite"></a>
+                </div>
+                <br>
+                <div id="topoDetailsDescription"></div>
+                <s:if test="#session.user">
+                    <br>
+                    <div class="panel panel-default text-center">
+                        <div class="panel-body">
+                            <button class="btn btn-primary">
+                                <span class="glyphicon glyphicon-envelope" style="margin-right:6px;"></span>
+                                Réserver le topo en contactant le propriétaire
+                            </button>
+                        </div>
+                    </div>
+                </s:if>
             </div>
-            <div>
-                <ul class="list-group text-center">
-                    <li class="list-group-item">Diponible :</li>
-                    <li class="list-group-item">
-                        <button class="btn btn-primary" id="topoDetailsBtnEmail">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                            <span id="topoDetailsUserEmail" style="margin-left:6px;"></span>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </aside>
-        <div class="col-sm-9">
-            <div><h4 id="topoDetailsName"></h4></div>
-            <div><h5 id="topoDetailsPublisher"></h5></div>
-            <div id="topoDetailsSite"></div><br>
-            <div id="topoDetailsDescription"></div>
-        </div>
         </div>
     </div>
 </div>

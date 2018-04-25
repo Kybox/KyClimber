@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $("a").click(function (e) {
+    $("a[topoid]").click(function (e) {
         e.preventDefault();
         if($(this).attr("topoid") != null)
             getAjaxTopoDetails($(this).attr("topoid"));
@@ -29,15 +29,18 @@ function displayTopo(data) {
     // Panel title
     $("#topoDetailsTitle").text(jsonTopo.name);
     // Aside
+    $("#topoDetailsCover").hide();
     $("#topoDetailsCover").attr("src", jsonTopo.cover);
     $("#topoDetailsUserEmail").text(jsonTopo.user.firstName);
     // Details
     $("#topoDetailsName").text(jsonTopo.name);
     $("#topoDetailsPublisher").text("Edition : " + jsonTopo.publisher);
-    $("#topoDetailsSite").text("Concerne le site d'escalade : " + jsonTopo.site.name);
+    $("#topoDetailsSite").text(jsonTopo.site.name);
+    $("#topoDetailsSite").attr("href", "site.action?regionId=" + jsonTopo.site.region.id + "&siteId=" + jsonTopo.site.id);
     $("#topoDetailsDescription").text(jsonTopo.description);
 
 
     // Show
     $("#topoDetails").fadeIn(500);
+    $("#topoDetailsCover").fadeIn(1000);
 }
