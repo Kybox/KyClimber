@@ -27,7 +27,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="a682e2e0-4b8d-4022-a456-a1ca0d20c33d">
-      <console name="KyClimber" type="STANDARD"><![CDATA[CREATE TYPE user_level AS ENUM ('admin', 'user');]]></console>
+      <console name="KyClimber" type="STANDARD" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">

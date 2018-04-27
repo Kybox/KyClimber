@@ -65,7 +65,7 @@ public class UserPersistenceService extends AbstractPersistenceService<Integer, 
         catch (Exception e){
             e.printStackTrace();
             entityManager.getTransaction().rollback();
-            logger.error("Hibernate error in save(T entity) method !");
+            logger.error("Hibernate error in merge(T entity) method !");
         }
         return entityList;
     }

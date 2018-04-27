@@ -5,7 +5,9 @@
 <%@ include file="include/head.jsp" %>
 <body>
 <%@include file="include/header.jsp" %>
-<h2>Bienvenue sur l'application web</h2>
+<div class="alert alert-info">
+    <span class="glyphicon glyphicon-home" style="margin-right:10px;"></span><b>ACCUEIL</b>
+</div>
 <div class="row">
     <div class="col-md-6">
         <div class="panel panel-default">
@@ -46,9 +48,48 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+                <br>
+                <i>Texte et images : grimper.com</i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span class="glyphicon glyphicon-fire"></span>
+                    Derniers topos ajoutés
+                </h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <s:iterator value="topoList">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-2 text-center">
+                                    <a href="topo.action?topoId=<s:property value='id'/>">
+                                        <img src="<s:property value="cover"/>" alt="cover"
+                                        style="width:46px;height:60px;">
+                                    </a>
+                                </div>
+                                <div class="col-xs-10">
+                                    <a href="topo.action?topoId=<s:property value='id'/>">
+                                        <b><s:property value="name"/></b><br>
+                                    </a>
+                                    Site d'escalade :
+                                    <a href="site.action?regionId=<s:property value="site.region.id"/>&siteId=<s:property value="site.id"/>">
+                                        <s:property value="site.name"/>
+                                    </a><br>
+                                    Région : <s:property value="site.region.name"/>
+                                </div>
+                            </div>
+                        </li>
+                    </s:iterator>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+<hr>
 </body>
 </html>

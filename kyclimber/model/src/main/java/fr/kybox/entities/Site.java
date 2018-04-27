@@ -18,6 +18,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "site", schema = "public")
 @NamedQueries({
+        @NamedQuery(name = Site.FIND_ALL_SITES, query = "SELECT s FROM Site s"),
         @NamedQuery(name = Site.FIND_LASTEST_SITES, query = "SELECT s FROM Site s ORDER BY s.id DESC"),
         @NamedQuery(name = Site.FIND_BY_REGION, query = "SELECT s FROM Site s WHERE s.region = :region"),
         @NamedQuery(name = Site.FIND_BY_KEYWORD,
@@ -31,6 +32,7 @@ public class Site extends AbstractEntity {
     public static final String FIND_LASTEST_SITES = "Site.findLastestSites";
     public static final String FIND_BY_REGION = "Site.findByRegion";
     public static final String FIND_BY_KEYWORD = "Site.findByKeyword";
+    public static final String FIND_ALL_SITES = "Site.findAllSites";
 
     @JoinColumn(name = "region_id")
     @OneToOne

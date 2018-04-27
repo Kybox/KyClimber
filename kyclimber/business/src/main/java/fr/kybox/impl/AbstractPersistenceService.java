@@ -21,13 +21,7 @@ public class AbstractPersistenceService<K, E extends AbstractEntity> implements 
 
     protected Class<E> entityClass;
 
-    //@PersistenceContext
-    //protected EntityManager entityManager;
-    //@PersistenceContext
     protected final EntityManager entityManager = HibernateUtil.getEntityManager();
-
-    //@PersistenceContext(unitName = "kyclimber", type = PersistenceContextType.EXTENDED)
-    //private EntityManager entityManager;
 
     private static final Logger logger = LogManager.getLogger(AbstractPersistenceService.class);
 
@@ -43,8 +37,8 @@ public class AbstractPersistenceService<K, E extends AbstractEntity> implements 
     }
 
     @Override
-    public E save(E entity) {
-        logger.trace("Hibernate > save(E entity)");
+    public E merge(E entity) {
+        logger.trace("Hibernate > merge(E entity)");
         try{
             entityManager.getTransaction().begin();
             entityManager.merge(entity);
@@ -53,7 +47,23 @@ public class AbstractPersistenceService<K, E extends AbstractEntity> implements 
         catch (Exception e){
             e.printStackTrace();
             entityManager.getTransaction().rollback();
-            logger.error("Hibernate error in save(T entity) method !");
+            logger.error("Hibernate error in merge(T entity) method !");
+        }
+        return entity;
+    }
+
+    @Override
+    public E persist(E entity) {
+        logger.trace("Hibernate > persist(E entity)");
+        try{
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+            logger.error("Hibernate error in persis(T entity) method !");
         }
         return entity;
     }
@@ -74,7 +84,7 @@ public class AbstractPersistenceService<K, E extends AbstractEntity> implements 
         catch (Exception e){
             e.printStackTrace();
             entityManager.getTransaction().rollback();
-            logger.error("Hibernate error in save(T entity) method !");
+            logger.error("Hibernate error in List<E>findAll() method !");
         }
         return entityList;
     }
@@ -89,12 +99,7 @@ public class AbstractPersistenceService<K, E extends AbstractEntity> implements 
             entityManager.remove(entity);
             entityManager.getTransaction().commit();
         }
-        catch (IllegalArgumentException e){
-            e.printStackTrace();
-            entityManager.getTransaction().rollback();
-            result = false;
-        }
-        catch (TransactionRequiredException e){
+        catch (IllegalArgumentException | TransactionRequiredException e){
             e.printStackTrace();
             entityManager.getTransaction().rollback();
             result = false;

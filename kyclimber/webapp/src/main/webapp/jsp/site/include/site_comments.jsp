@@ -8,47 +8,29 @@
             <h4 class="panel-title">Ajouter un commentaire :</h4>
         </div>
         <div class="panel-body">
-            <textarea id="comment" name="comment" class="form-control" rows="5"></textarea>
-            <br>
-            <input type="button" id="submitComment" class="btn btn-primary" value="Envoyer le commentaire >>" onclick="addNewComment()">
+            <form id="formAddNewComment">
+                <input type="hidden" name="siteId" value="<s:property value="site.id"/>">
+                <textarea id="comment" name="comment" class="form-control" rows="5" required></textarea>
+                <br>
+                <button type="submit" class="btn btn-primary">
+                    Envoyer le commentaire
+                    <span class="glyphicon glyphicon-floppy-save" style="margin-left:6px;"></span>
+                </button>
+            </form>
         </div>
-        <div class="panel-footer">Après l'envoi du commentaire, vous pourrez toujours modifier.</div>
+        <div class="panel-footer">
+            <div class="well inline-headers" style="margin:0px;">
+                <h3 style="display: inline-block;vertical-align:baseline;margin:0px;">
+                    <span class="glyphicon glyphicon-info-sign" style="margin-right:6px;"></span>
+                </h3>
+                <h4 style="display: inline-block;vertical-align:baseline;margin:0px;">
+                    <small>
+                        <i>Après l'envoi du commentaire, vous pourrez toujours le modifier en étant authentifié.</i>
+                    </small>
+                </h4>
+            </div>
+        </div>
     </div>
-    <script type="application/javascript">
-        function addNewComment() {
-            var siteId = <s:property value="#varSiteId"/>;
-            var userId = <s:property value="#session.user.id"/>;
-            var post = $("#comment").val();
-            $.ajax({
-                type: "POST",
-                url: "<s:url action="addNewAjaxComment"/>",
-                data: "siteId="+siteId+"&userId="+userId+"&post="+post,
-                dataType: "json",
-                success: function (data) {
-                    for (var key in data){
-                        console.log(key, data[key]);
-                    }
-                    var $divCom = jQuery("#comments");
-                    var $com = '<div class="media" id="newCom">' +
-                        '<div class="media-left">' +
-                        '<a href="#">' +
-                        '<img class="media-object" src="http://0.gravatar.com/avatar/?s=64&d=mm&r=g"' +
-                        'alt="Image" height="64" width="64"></a>' +
-                        '</div>' +
-                        '<div class="media-body">' +
-                        '<h4 class="media-heading">' +
-                        data[0].user.firstName + ' a écrit le ' + data[0].date +
-                        '</h4>' +
-                        '<p>' + data[0].post + '</p>' +
-                        '</div>' +
-                        '</div>' +
-                        '<br>';
-                    $divCom.prepend($com);
-                    $('#newCom').fadeOut(1).fadeIn("slow");
-                }
-            });
-        }
-    </script>
 </s:if>
 <div id="comments">
     <s:iterator value="commentList">
@@ -67,16 +49,51 @@
                          height="64" width="64">
                 </a>
             </div>
-            <div class="media-body">
+            <div class="media-body" style="vertical-align: middle">
                 <h4 class="media-heading">
                     <s:property value="#varUser.firstName"/>
                     a écrit le
-                    <s:property value="date"/>
+                    <s:date name="date" format="dd/MM/yyyy"/> à <s:date name="date" format="HH:mm:ss" timezone = "GMT+02:00"/>
                     <s:if test="%{#session.user.id==#varUser.id}">
-                        (modifier)
+                        <button class="btn btn-default" style="margin-left:10px;"
+                                data-toggle="tooltip" title="Editer"
+                                id="btnEditComment<s:property value="id"/>"
+                                editcommentid="<s:property value="id"/>">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
                     </s:if>
                 </h4>
-                <p><s:property value="post"/></p>
+                <div style="vertical-align:middle;">
+                    <p id="postContent<s:property value="id"/>">
+                        <s:property value="post"/>
+                    </p>
+                    <s:if test="#session.user&&#session.user.id==user.id">
+                        <form id="editComment<s:property value="id"/>" commentid="<s:property value="id"/>" hidden>
+                            <div class="input-group">
+                                <input type="text"
+                                       id="userEditCommentInput<s:property value="id"/>"
+                                       name="userEditCommentInput"
+                                       class="form-control" placeholder="" required>
+                                <span class="input-group-btn" style="vertical-align:middle;">
+                                    <button type="button"
+                                            cancelEditComment="<s:property value="id"/>"
+                                            class="btn btn-primary"
+                                            data-toggle="tooltip"
+                                            title="Annuler">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                    <button type="submit"
+                                            saveEditComment="<s:property value="id"/>"
+                                            class="btn btn-primary"
+                                            data-toggle="tooltip"
+                                            title="Enregistrer">
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </s:if>
+                </div>
             </div>
         </div>
         <br>

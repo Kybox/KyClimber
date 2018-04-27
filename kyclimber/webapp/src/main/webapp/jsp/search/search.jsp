@@ -5,10 +5,13 @@
 <%@ include file="../include/head.jsp" %>
 <body>
 <%@ include file="../include/header.jsp" %>
-<script type="application/javascript">
+<div class="alert alert-info">
+    <span class="glyphicon glyphicon-search" style="margin-right:10px;"></span>
+    <b>EFFECTUER UNE RECHERCHE</b>
+</div>
+<script type="text/javascript">
     var selectedPreviousOption = "<s:property value="selectedSearchOption"/>";
 </script>
-<br>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title text-center">RECHERCHE</h3>

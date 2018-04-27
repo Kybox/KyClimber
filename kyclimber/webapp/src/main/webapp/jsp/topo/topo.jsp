@@ -4,7 +4,10 @@
 <%@ include file="../include/head.jsp" %>
 <body>
 <%@ include file="../include/header.jsp" %>
-<h4>Liste des topos enregistrés</h4>
+<div class="alert alert-info">
+    <span class="glyphicon glyphicon-book" style="margin-right:10px;"></span>
+    <b>LISTE DES TOPOS</b>
+</div>
 <div class="col-md-12">
     <aside class="col-md-4">
         <h3><small>Sélectionnez une région puis un topo</small></h3>

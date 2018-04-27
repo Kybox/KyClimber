@@ -102,4 +102,18 @@ public class TopoPersistenceService extends AbstractPersistenceService<Integer, 
 
         return resultList;
     }
+
+    public List<Topo> findLastestTopo(int maxResults) {
+        List resultList = null;
+        try{
+
+            entityManager.getTransaction().begin();
+            resultList = entityManager.createNamedQuery(Topo.FIND_LASTEST_TOPOS)
+                    .setMaxResults(maxResults)
+                    .getResultList();
+            entityManager.getTransaction().commit();
+        }
+        catch (NoResultException e){ entityManager.getTransaction().rollback(); }
+        return resultList;
+    }
 }

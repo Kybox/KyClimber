@@ -65,7 +65,7 @@
         <action name="topo" class="fr.kybox.action.TopoAction">
             <result name="success">jsp/topo/topo.jsp</result>
         </action>
-        <action name="topoAjax" class="fr.kybox.action.TopoAction" method="getTopoAjax">
+        <action name="topoAjax" class="fr.kybox.action.TopoAction">
             <result type="json"/>
         </action>
     </package>
@@ -74,53 +74,50 @@
     <!-- Package PRIVATE -->
     <package name="private" extends="default">
 
-        <!-- Profile Action -->
-        <action name="profile" class="fr.kybox.action.UserAction">
+        <!-- [PROFILE] Action -->
+        <action name="profile" class="fr.kybox.action.manager.ProfilManagerAction">
             <interceptor-ref name="authenticatedStack"/>
             <result name="success">jsp/user/profile/profile.jsp</result>
         </action>
 
-        <!-- Update Ajax User Infos Action-->
-        <action name="updateAjaxUserInfos" class="fr.kybox.action.UserAction" method="updateAjaxInfos">
+        <!-- [INFOS] - Update Ajax Action-->
+        <action name="updateAjaxUserInfos" class="fr.kybox.action.manager.UserManagerAction">
             <interceptor-ref name="authenticatedStack"/>
-            <result name="success" type="json">
-                <param name="root">user</param>
-            </result>
+            <result name="success" type="json"/>
         </action>
 
         <!-- [PASSWORD] - Update Ajax Action -->
-        <action name="updateAjaxUserPassword" class="fr.kybox.action.PasswordAction" method="updateAjaxUserPassword">
+        <action name="updateAjaxUserPassword" class="fr.kybox.action.manager.PasswordManagerAction">
             <interceptor-ref name="authenticatedStack"/>
             <result type="json"/>
         </action>
 
         <!-- [AVATAR] - Update Ajax Action -->
-        <action name="updateAjaxUserAvatar" class="fr.kybox.action.AvatarAction" method="updateAjaxUserAvatar">
+        <action name="updateAjaxUserAvatar" class="fr.kybox.action.manager.AvatarManagerAction">
             <interceptor-ref name="authenticatedStack"/>
             <result name="success" type="json"/>
         </action>
 
         <!-- [TOPO] - Update Ajax Action -->
-        <action name="updateAjaxUserTopo" class="fr.kybox.action.manager.TopoManagerAction" method="updateAjaxUserTopo">
+        <action name="updateAjaxUserTopo" class="fr.kybox.action.manager.TopoManagerAction">
             <interceptor-ref name="authenticatedStack"/>
-            <result name="success" type="json">
-                <param name="root">topoList</param>
-            </result>
+            <result name="success" type="json"/>
         </action>
 
         <!-- [COMMENT] - Update Ajax Action -->
-        <action name="updateAjaxUserComment" class="fr.kybox.action.CommentAction" method="updateAjaxUserComment">
+        <action name="updateAjaxUserComment" class="fr.kybox.action.manager.CommentManagerAction" method="updateAjaxUserComment">
             <interceptor-ref name="authenticatedStack"/>
             <result type="json"/>
         </action>
 
         <!-- [COMMENT] - Delete Ajax Action -->
-        <action name="deleteAjaxUserComment" class="fr.kybox.action.CommentAction" method="deleteAjaxUserComment">
+        <action name="deleteAjaxUserComment" class="fr.kybox.action.manager.CommentManagerAction" method="deleteAjaxUserComment">
             <interceptor-ref name="authenticatedStack"/>
             <result type="json"/>
         </action>
 
-        <action name="addNewAjaxComment" class="fr.kybox.action.CommentAction" method="addNewAjaxComment">
+        <!-- [COMMENT] - Add New Ajax Action -->
+        <action name="addNewAjaxComment" class="fr.kybox.action.manager.CommentManagerAction" method="addNewAjaxComment">
             <interceptor-ref name="authenticatedStack"/>
             <result name="success" type="json">
                 <param name="root">commentList</param>

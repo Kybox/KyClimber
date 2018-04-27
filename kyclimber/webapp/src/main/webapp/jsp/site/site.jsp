@@ -1,10 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html>
 <html>
 <%@ include file="../include/head.jsp" %>
 <body>
 <%@ include file="../include/header.jsp" %>
-<h3>Découvrir un site d'escalade</h3>
+<div class="alert alert-info">
+    <span class="glyphicon glyphicon-map-marker" style="margin-right:10px;"></span>
+    <b>DECOUVRIR UN SITE D'ESCALADE</b>
+</div>
+<h3></h3>
 <aside>
     <div class="col-md-3">
         <h3><small>Sélectionnez une région :</small></h3>

@@ -8,19 +8,13 @@ import javax.persistence.*;
 /**
  * @author Kybox
  * @version 1.0
- *
- * Notes :
- *
- * - Hibernate Search :
- *      The @Field annotation includes the Index.YES, Analyze.YES, and Store.NO properties by default.
- *      So it's not necessary to indicate them but I put them to remember them.
  */
 @Entity
-@Indexed
 @Table(name = "topo", schema = "public")
 @NamedQueries({
         @NamedQuery(name = Topo.FIND_ALL_TOPO, query = "SELECT t FROM Topo t"),
         @NamedQuery(name = Topo.FIND_BY_USER, query = "SELECT t FROM Topo t WHERE t.user = :user"),
+        @NamedQuery(name = Topo.FIND_LASTEST_TOPOS, query = "SELECT t FROM Topo t ORDER BY t.id DESC"),
         @NamedQuery(name = Topo.FIND_BY_SITE, query = "SELECT t FROM Topo t WHERE t.site = :site"),
         @NamedQuery(name = Topo.FIND_BY_REGION, query = "SELECT t FROM Topo t WHERE t.region = :region")
 })
@@ -30,21 +24,20 @@ public class Topo extends AbstractEntity {
     public static final String FIND_ALL_TOPO = "Topo.findAllTopo";
     public static final String FIND_BY_SITE = "Topo.findBySite";
     public static final String FIND_BY_REGION = "Topo.findByRegion";
+    public static final String FIND_LASTEST_TOPOS = "Topo.findLastestSites";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "topo_id_seq", sequenceName = "topo_id_seq")
+    @Column(nullable = false)
     private Integer id;
 
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "name")
     private String name;
 
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "description")
     private String description;
 
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name = "publisher")
     private String publisher;
 

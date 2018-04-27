@@ -3,7 +3,11 @@ package fr.kybox.action;
 import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.Region;
 import fr.kybox.entities.Site;
+import fr.kybox.entities.Topo;
 import fr.kybox.impl.services.SitePersistenceService;
+import fr.kybox.impl.services.TopoPersistenceService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -14,24 +18,19 @@ import java.util.List;
  */
 public class HomeAction extends ActionSupport {
 
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
     @Inject
     private SitePersistenceService siteService;
 
-    private List<Site> siteList;
-    private Region region;
+    @Inject
+    private TopoPersistenceService topoService;
 
-    public List<Site> getSiteList() { siteList = siteService.findLastestSites(4); return siteList; }
-    public void setSiteList(List<Site> siteList) { this.siteList = siteList; }
-
-    public Region getRegion() { return region; }
-    public void setRegion(Region region) { this.region = region; }
-
-    public String execute(){
-
-        return ActionSupport.SUCCESS;
+    public List<Site> getSiteList() {
+        return siteService.findLastestSites(4);
     }
 
-    public String doHome(){
-        return ActionSupport.SUCCESS;
+    public List<Topo> getTopoList(){
+        return topoService.findLastestTopo(4);
     }
 }

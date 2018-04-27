@@ -28,10 +28,6 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
 
-            <!-- Hibernate Search Library -->
-            <property name="hibernate.search.default.directory_provider" value="filesystem"/>
-            <property name="hibernate.search.default.indexBase" value="/target/indexes"/>
-
         </properties>
 
     </persistence-unit>

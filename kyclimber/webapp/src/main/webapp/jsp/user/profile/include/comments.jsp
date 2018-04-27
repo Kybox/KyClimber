@@ -36,7 +36,7 @@
                             <div id="userComment<s:property value="id"/>">
                                 <s:property value="post"/>
                             </div>
-                            <form id="formUserEditComment<s:property value="id"/>" hidden>
+                            <form id="formUserEditComment<s:property value="id"/>" hidden style="vertical-align:middle;">
                                 <div class="input-group">
                                     <input type="text"
                                            id="userEditCommentInput<s:property value="id"/>"

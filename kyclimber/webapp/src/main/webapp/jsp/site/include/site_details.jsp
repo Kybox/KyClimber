@@ -102,7 +102,7 @@
                 <th>Nom</th>
                 <th>Edition</th>
                 <th class="text-center">Disponible</th>
-                <th class="text-center">Propriétaire</th>
+                <th class="text-center">Lien</th>
                 </thead>
                 <tbody>
                 <s:iterator value="topoList">
@@ -118,10 +118,9 @@
                             </s:else>
                         </td>
                         <td class="text-center" style="vertical-align: middle;">
-                            <a href="mailto:<s:property value="user.email"/>">
+                            <a href="topo.action?topoId=<s:property value="id"/>">
                                 <button class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-envelope" style="margin-right:6px;"></span>
-                                    <s:property value="user.firstName"/>
+                                    <span class="glyphicon glyphicon-open"></span>
                                 </button>
                             </a>
                         </td>

@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Table(name = "comment", schema = "public")
 @NamedQueries({
         @NamedQuery(name = Comment.FIND_BY_USER, query = "SELECT c FROM Comment c WHERE c.user = :user"),
-        @NamedQuery(name = Comment.FIND_BY_SITE, query = "SELECT c FROM Comment c WHERE c.site = :site"),
+        @NamedQuery(name = Comment.FIND_BY_SITE, query = "SELECT c FROM Comment c WHERE c.site = :site ORDER BY c.date DESC"),
 })
 public class Comment extends AbstractEntity {
 

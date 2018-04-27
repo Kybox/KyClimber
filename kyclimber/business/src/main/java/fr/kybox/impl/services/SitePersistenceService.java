@@ -40,6 +40,22 @@ public class SitePersistenceService extends AbstractPersistenceService<Integer, 
         return siteList;
     }
 
+    public List<Site> findAllSites(){
+
+        List resultList = null;
+
+        try{
+
+            entityManager.getTransaction().begin();
+            resultList = entityManager.createNamedQuery(Site.FIND_ALL_SITES).getResultList();
+            entityManager.getTransaction().commit();
+        }
+        catch (NoResultException e){
+            entityManager.getTransaction().rollback();
+        }
+        return resultList;
+    }
+
     public List<Site> findByRegion(Region region){
 
         List<Site> siteList = null;

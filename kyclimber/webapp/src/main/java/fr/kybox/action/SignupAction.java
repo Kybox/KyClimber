@@ -47,7 +47,7 @@ public class SignupAction extends ActionSupport {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setPassword(MD5.hash(password));
-            userService.save(user);
+            userService.merge(user);
 
             result = ActionSupport.SUCCESS;
         }

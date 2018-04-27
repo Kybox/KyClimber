@@ -1,10 +1,19 @@
 $(document).ready(function() {
 
+    let currentURL = new URL(window.location.href);
+    let searchParams = new URLSearchParams(currentURL.search);
+    var topoId = searchParams.get("topoId");
+
+    if(topoId != null){
+        showSelectedTopo();
+    }
+
+
     $("a[topoid]").click(function (e) {
         e.preventDefault();
         if($(this).attr("topoid") != null)
             getAjaxTopoDetails($(this).attr("topoid"));
-    })
+    });
 });
 
 function getAjaxTopoDetails(topoId) {
@@ -40,7 +49,10 @@ function displayTopo(data) {
     $("#topoDetailsDescription").text(jsonTopo.description);
 
 
-    // Show
+    showSelectedTopo();
+}
+
+function showSelectedTopo() {
     $("#topoDetails").fadeIn(500);
     $("#topoDetailsCover").fadeIn(1000);
 }

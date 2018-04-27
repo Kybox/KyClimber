@@ -1,4 +1,4 @@
-package fr.kybox.action;
+package fr.kybox.action.manager;
 
 import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.Avatar;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Kybox
  * @version 1.0
  */
-public class AvatarAction extends ActionSupport implements SessionAware {
+public class AvatarManagerAction extends ActionSupport implements SessionAware {
 
     @Inject
     private AvatarPersistenceService avatarService;
@@ -28,7 +28,8 @@ public class AvatarAction extends ActionSupport implements SessionAware {
     public int getUserAvatarId() { return userAvatarId; }
     public void setUserAvatarId(int userAvatarId) { this.userAvatarId = userAvatarId; }
 
-    public String updateAjaxUserAvatar(){
+    @Override
+    public String execute(){
 
         String result = ActionSupport.SUCCESS;
 
@@ -41,7 +42,7 @@ public class AvatarAction extends ActionSupport implements SessionAware {
             if(avatar != null){
 
                 user.setAvatar(avatar);
-                userService.save(user);
+                userService.merge(user);
 
             }
             else result = ActionSupport.ERROR;
