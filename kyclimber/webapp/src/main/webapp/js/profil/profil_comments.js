@@ -60,6 +60,7 @@ function removeInputEditComment(id) {
 
 /** Save the updated comment **/
 function saveUpdatedComment(id) {
+    alert("id = " + id);
     var comment = $("#userEditCommentInput" + id).val();
     var data = "commentId=" + id + "&comment=" + comment;
     $.ajax({

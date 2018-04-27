@@ -45,7 +45,9 @@ public class CommentManagerAction extends ActionSupport implements SessionAware 
     public void setSiteId(Integer siteId) { this.siteId = siteId; }
 
     public List<Comment> getCommentList() {
-        return commentService.findBySite(siteService.findById(getSiteId()));
+        if(getSiteId()!=null)
+            return commentService.findBySite(siteService.findById(getSiteId()));
+        else return null;
     }
 
     public String addNewAjaxComment(){
