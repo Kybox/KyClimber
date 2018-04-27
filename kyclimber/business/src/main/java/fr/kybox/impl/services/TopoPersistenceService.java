@@ -116,4 +116,21 @@ public class TopoPersistenceService extends AbstractPersistenceService<Integer, 
         catch (NoResultException e){ entityManager.getTransaction().rollback(); }
         return resultList;
     }
+
+    public List<Topo> findByKeywords(String keywords){
+
+        try{
+
+            entityManager.getTransaction().begin();
+            final List resultList = entityManager.createNamedQuery(Topo.FIND_BY_KEYWORDS)
+                    .setParameter("keywords", "%" + keywords + "%")
+                    .getResultList();
+            entityManager.getTransaction().commit();
+            return resultList;
+        }
+        catch (NoResultException e){
+            entityManager.getTransaction().rollback();
+            return null;
+        }
+    }
 }

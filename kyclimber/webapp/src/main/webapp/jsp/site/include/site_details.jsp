@@ -99,10 +99,12 @@
             <s:if test="topoList!=null&&topoList.size>0">
                 <table class="table table-hover">
                 <thead>
-                <th>Nom</th>
-                <th>Edition</th>
-                <th class="text-center">Disponible</th>
-                <th class="text-center">Lien</th>
+                <tr>
+                    <th>Nom</th>
+                    <th>Edition</th>
+                    <th class="text-center">Disponible</th>
+                    <th class="text-center">Lien</th>
+                </tr>
                 </thead>
                 <tbody>
                 <s:iterator value="topoList">

@@ -16,7 +16,12 @@ import javax.persistence.*;
         @NamedQuery(name = Topo.FIND_BY_USER, query = "SELECT t FROM Topo t WHERE t.user = :user"),
         @NamedQuery(name = Topo.FIND_LASTEST_TOPOS, query = "SELECT t FROM Topo t ORDER BY t.id DESC"),
         @NamedQuery(name = Topo.FIND_BY_SITE, query = "SELECT t FROM Topo t WHERE t.site = :site"),
-        @NamedQuery(name = Topo.FIND_BY_REGION, query = "SELECT t FROM Topo t WHERE t.region = :region")
+        @NamedQuery(name = Topo.FIND_BY_REGION, query = "SELECT t FROM Topo t WHERE t.region = :region"),
+        @NamedQuery(name = Topo.FIND_BY_KEYWORDS, query = "SELECT t FROM Topo t WHERE " +
+                "UPPER(t.name) LIKE UPPER(:keywords)" +
+                "OR UPPER(t.description) LIKE UPPER(:keywords)" +
+                "OR UPPER(t.region.name) LIKE UPPER(:keywords)" +
+                "OR UPPER(t.site.name) LIKE UPPER(:keywords) ")
 })
 public class Topo extends AbstractEntity {
 
@@ -25,6 +30,7 @@ public class Topo extends AbstractEntity {
     public static final String FIND_BY_SITE = "Topo.findBySite";
     public static final String FIND_BY_REGION = "Topo.findByRegion";
     public static final String FIND_LASTEST_TOPOS = "Topo.findLastestSites";
+    public static final String FIND_BY_KEYWORDS = "Topo.findByKeywords";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

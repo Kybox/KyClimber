@@ -2,8 +2,10 @@ package fr.kybox.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.Site;
+import fr.kybox.entities.Topo;
 import fr.kybox.entities.User;
 import fr.kybox.impl.services.SitePersistenceService;
+import fr.kybox.impl.services.TopoPersistenceService;
 import fr.kybox.impl.services.UserPersistenceService;
 
 import javax.inject.Inject;
@@ -20,8 +22,14 @@ public class SearchAction extends ActionSupport {
     private final String USER_CHECKED = "Rechercher un utilisateur";
     private final String SITE_CHECKED = "Rechercher un site d'escalade";
 
-    @Inject UserPersistenceService userService;
-    @Inject SitePersistenceService siteService;
+    @Inject
+    private UserPersistenceService userService;
+
+    @Inject
+    private SitePersistenceService siteService;
+
+    @Inject
+    private TopoPersistenceService topoService;
 
     // Attributs
     private String keywords;
@@ -29,6 +37,7 @@ public class SearchAction extends ActionSupport {
     private List<String> searchOptions;
     private List<User> usersSearchedList;
     private List<Site> sitesSearchedList;
+    private List<Topo> toposSearchedList;
 
     // Getters / Setters
     public String getKeywords() { return keywords; }
@@ -38,10 +47,10 @@ public class SearchAction extends ActionSupport {
     public String getDefaultOptionValue(){ return SITE_CHECKED; }
     public String getSelectedSearchOption() { return selectedSearchOption; }
     public void setSelectedSearchOption(String selectedSearchOption) { this.selectedSearchOption = selectedSearchOption; }
-    public List<Site> getSitesSearchedList() { return sitesSearchedList; }
-    public void setSitesSearchedList(List<Site> sitesSearchedList) { this.sitesSearchedList = sitesSearchedList; }
 
+    public List<Site> getSitesSearchedList() { return sitesSearchedList; }
     public List<User> getUsersSearchedList() { return usersSearchedList; }
+    public List<Topo> getToposSearchedList() { return toposSearchedList; }
 
     public SearchAction(){
 
@@ -57,20 +66,13 @@ public class SearchAction extends ActionSupport {
 
         if(selectedSearchOption != null){
 
-            System.out.println("========== > SELECTED OPTION = " + selectedSearchOption);
-
             switch (selectedSearchOption){
                 case USER_CHECKED:
                     usersSearchedList = userService.findUserByKeyword(getKeywords());
-                    if(usersSearchedList != null) {
-                        System.out.println("Userlist not null - Size :" + usersSearchedList.size());
-                        for (User user : usersSearchedList)
-                            System.out.println("User : " + user.getFirstName());
-                    }
                     break;
 
                 case TOPO_CHECKED:
-
+                    toposSearchedList = topoService.findByKeywords(getKeywords());
                     break;
 
                 case SITE_CHECKED:
@@ -78,7 +80,6 @@ public class SearchAction extends ActionSupport {
                     break;
             }
         }
-
 
         return ActionSupport.SUCCESS;
     }
