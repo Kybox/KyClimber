@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
-    <!-- /////////////// -->
-    <!-- Package DEFAULT -->
+    <!-- [DEFAULT] Package -->
     <package name="default" abstract="true" extends="struts-default, json-default">
 
         <!-- Interceptor Stack -->
@@ -17,9 +16,7 @@
         <!-- Global results -->
         <global-results>
             <result name="error">jsp/error.jsp</result>
-            <result name="error-forbidden" type="httpheader">
-                <param name="error">403</param>
-            </result>
+            <result name="error-forbidden">jsp/error/403.jsp</result>
         </global-results>
 
     </package>
