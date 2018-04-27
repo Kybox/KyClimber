@@ -21,5 +21,5 @@
     </div>
 </s:if>
 <s:else>
-    <p>Aucun utilisateur trouvé, merci de réitérer votre recherche avec un autre mot-clé</p>
+    <p class="alert alert-danger">Aucun utilisateur trouvé, merci de réitérer votre recherche avec un autre mot-clé</p>
 </s:else>

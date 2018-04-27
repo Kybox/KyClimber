@@ -32,5 +32,5 @@
     </div>
 </s:if>
 <s:else>
-    <p>Aucun site d'escalade trouvé, merci de réitérer votre recherche avec un autre mot-clé</p>
+    <p class="alert alert-danger">Aucun site d'escalade trouvé, merci de réitérer votre recherche avec un autre mot-clé</p>
 </s:else>

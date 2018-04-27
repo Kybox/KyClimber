@@ -44,5 +44,5 @@
     </table>
 </s:if>
 <s:else>
-    <p>Aucun topo trouvé, merci de réitérer votre recherche avec un autre mot-clé</p>
+    <p class="alert alert-danger">Aucun topo trouvé, merci de réitérer votre recherche avec un autre mot-clé.</p>
 </s:else>
