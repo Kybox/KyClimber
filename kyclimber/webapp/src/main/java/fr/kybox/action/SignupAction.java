@@ -1,6 +1,7 @@
 package fr.kybox.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import fr.kybox.entities.Level;
 import fr.kybox.entities.User;
 import fr.kybox.impl.services.UserPersistenceService;
 import fr.kybox.util.MD5;
@@ -43,10 +44,11 @@ public class SignupAction extends ActionSupport {
 
         if(!StringUtils.isAllEmpty(email, password, firstName)) {
             user = new User();
-            user.setEmail(email);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setPassword(MD5.hash(password));
+            user.setEmail(getEmail());
+            user.setFirstName(getFirstName());
+            user.setLastName(getLastName());
+            user.setPassword(MD5.hash(getPassword()));
+            user.setLevel(userService.getDefaultLevel(Level.DEFAULT));
             userService.merge(user);
 
             result = ActionSupport.SUCCESS;

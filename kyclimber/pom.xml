@@ -89,10 +89,11 @@
                 <version>1.0.0.Final</version>
             </dependency>
             <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-search-orm</artifactId>
-                <version>5.9.1.Final</version>
+                <groupId>com.vladmihalcea</groupId>
+                <artifactId>hibernate-types-52</artifactId>
+                <version>2.2.0</version>
             </dependency>
+
 
             <!-- JSR-250 -->
             <dependency>

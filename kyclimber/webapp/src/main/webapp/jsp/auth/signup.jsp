@@ -16,26 +16,29 @@
                     <s:fielderror/>
                 </div>
             </s:if>
-            <s:form action="signup" theme="simple" id="signupForm">
-                <s:label for="email" theme="simple">Adresse e-mail *</s:label>
-                <s:textfield name="email" type="email" cssClass="form-control" theme="simple" required="true" maxlength="60"/>
+            <form id="signupForm" method="post">
+                <label for="email">Adresse e-mail *</label>
+                <input type="email" id="email" name="email" class="form-control" maxlength="60" required>
                 <br>
-                <s:label for="password" theme="simple">Mot de passe *</s:label>
-                <s:textfield name="password" type="password" cssClass="form-control" theme="simple" required="true"/>
+                <label for="password">Mot de passe *</label>
+                <input type="password" id="password" name="password" class="form-control" required>
                 <br>
-                <s:label for="firstName" theme="simple">Prénom / pseudo *</s:label>
-                <s:textfield name="firstName" cssClass="form-control" theme="simple" required="true" maxlength="30"/>
+                <label for="firstName">Prénom / pseudo *</label>
+                <input type="text" id="firstName" name="firstName" class="form-control" maxlength="30" required>
                 <br>
-                <s:label for="lastName" theme="simple">Nom</s:label>
-                <s:textfield name="lastName" cssClass="form-control" theme="simple" maxlength="30"/>
-                <hr/>
+                <label for="lastName">Nom</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" maxlength="30">
+                <hr>
                 <s:if test="hasActionErrors()">
                     <div class="alert alert-info" role="alert">
                         <s:actionerror/>
                     </div>
                 </s:if>
-                <s:submit value="Création du compte utilisateur" cssClass="btn btn-primary"/>
-            </s:form>
+                <button type="submit" class="btn btn-primary" id="btnSubmitSignupForm">
+                    <span class="glyphicon glyphicon-user"></span>
+                    Création du compte utilisateur
+                </button>
+            </form>
         </div>
     </div>
     <s:set var="varResult" value="result"/>

@@ -37,7 +37,13 @@
     <s:elseif test="%{#actionName=='login'}">
         <!-- [LOGIN] -->
         <script src="<s:property value="rootPath"/>/js/md5.min.js" type="text/javascript"></script>
-        <script src="<s:property value="rootPath"/>/js/login.js"></script>
+        <script src="<s:property value="rootPath"/>/js/login.js" type="text/javascript"></script>
+    </s:elseif>
+
+    <s:elseif test="%{#actionName=='signup'}">
+        <!-- [SIGNUP] -->
+        <script src="<s:property value="rootPath"/>/js/md5.min.js" type="text/javascript"></script>
+        <script src="<s:property value="rootPath"/>/js/signup.js" type="text/javascript"></script>
     </s:elseif>
 
     <s:elseif test="%{#actionName=='search'}">

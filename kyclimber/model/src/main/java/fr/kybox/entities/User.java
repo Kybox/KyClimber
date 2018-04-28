@@ -54,6 +54,10 @@ public class User extends AbstractEntity {
     @Column(name = "country")
     private String country;
 
+    @OneToOne
+    @JoinColumn(name = "level_id")
+    private Level level;
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -83,4 +87,7 @@ public class User extends AbstractEntity {
 
     public String getCountry() { return country; }
     public void setCountry(String country) { this.country = country; }
+
+    public Level getLevel() { return level; }
+    public void setLevel(Level level) { this.level = level; }
 }

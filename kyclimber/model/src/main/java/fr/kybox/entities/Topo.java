@@ -1,7 +1,5 @@
 package fr.kybox.entities;
 
-import org.hibernate.search.annotations.*;
-import org.hibernate.search.annotations.Index;
 
 import javax.persistence.*;
 

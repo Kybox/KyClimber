@@ -1,6 +1,7 @@
 package fr.kybox.impl.services;
 
 import fr.kybox.entities.Avatar;
+import fr.kybox.entities.Level;
 import fr.kybox.entities.User;
 import fr.kybox.impl.AbstractPersistenceService;
 import fr.kybox.util.HibernateUtil;
@@ -26,7 +27,7 @@ import java.util.List;
 public class UserPersistenceService extends AbstractPersistenceService<Integer, User> {
 
     //private final EntityManager entityManager = HibernateUtil.getEntityManager();
-    private static final Logger logger = LogManager.getLogger(UserPersistenceService.class);
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     public User findUserByLogin(String pEmail, String pPass){
 
@@ -92,5 +93,24 @@ public class UserPersistenceService extends AbstractPersistenceService<Integer, 
         }
 
         return entityList;
+    }
+
+    public Level getDefaultLevel(String pLevel){
+
+        Level level = null;
+
+        try{
+
+            entityManager.getTransaction().begin();
+            level = (Level) entityManager.createNamedQuery(Level.GET_LEVEL)
+                    .setParameter("level", pLevel)
+                    .getSingleResult();
+            entityManager.getTransaction().commit();
+        }
+        catch (NoResultException e){
+            logger.warn("Default level not found !");
+        }
+
+        return level;
     }
 }

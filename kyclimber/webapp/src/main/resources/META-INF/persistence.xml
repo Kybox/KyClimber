@@ -16,6 +16,7 @@
         <class>fr.kybox.entities.User</class>
         <class>fr.kybox.entities.Avatar</class>
         <class>fr.kybox.entities.Topo</class>
+        <class>fr.kybox.entities.Level</class>
 
         <properties>
 
