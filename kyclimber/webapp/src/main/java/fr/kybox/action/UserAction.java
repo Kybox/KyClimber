@@ -59,7 +59,7 @@ public class UserAction extends ActionSupport implements SessionAware {
 
 
     public List<Topo> getTopoList() {
-        topoList = topoService.findAll();
+        topoList = topoService.findAllTopos();
         System.out.println("topoList size = " + topoList.size());
         System.out.println("ARRAY = " + Arrays.toString(topoList.toArray()));
         return topoList;
@@ -75,7 +75,7 @@ public class UserAction extends ActionSupport implements SessionAware {
     public void setRegionList(List<Region> regionList) { this.regionList = regionList; }
 
     public List<User> getUserList(){
-        userList = userService.findAll();
+        userList = userService.findAllUsers();
         return userList;
     }
     public void setUserList(List<User> userList) { this.userList = userList; }

@@ -7,11 +7,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TransactionRequiredException;
+import javax.persistence.*;
 import java.lang.reflect.ParameterizedType;
-import java.util.List;
 
 /**
  * @author Kybox
@@ -20,91 +17,110 @@ import java.util.List;
 public class AbstractPersistenceService<K, E extends AbstractEntity> implements PersistenceService<K, E> {
 
     protected Class<E> entityClass;
-
+    private final Logger log = LogManager.getLogger(this.getClass());
     protected final EntityManager entityManager = HibernateUtil.getEntityManager();
-
-    private static final Logger logger = LogManager.getLogger(AbstractPersistenceService.class);
 
     @PostConstruct
     public void init() {
+
+        if(log.isDebugEnabled()) log.debug("METHOD : init");
+
         ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
+
         this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[1];
     }
 
     @Override
     public E findById(K id) {
-        return entityManager.find(entityClass, id);
+
+        if(log.isDebugEnabled()) log.debug("METHOD : findById(" + id + ")");
+
+        E entity = null;
+
+        try{
+            entityManager.getTransaction().begin();
+            entity = entityManager.find(entityClass, id);
+            entityManager.getTransaction().commit();
+        }
+        catch (IllegalArgumentException e){
+            entityManager.getTransaction().rollback();
+            log.error("IllegalArgumentException");
+            log.error(e);
+        }
+
+        return entity;
     }
 
     @Override
     public E merge(E entity) {
-        logger.trace("Hibernate > merge(E entity)");
+
+        if(log.isDebugEnabled()) log.debug("METHOD : merge(" + entity + ")");
+
         try{
             entityManager.getTransaction().begin();
             entityManager.merge(entity);
             entityManager.getTransaction().commit();
         }
-        catch (Exception e){
-            e.printStackTrace();
+        catch (IllegalArgumentException e){
             entityManager.getTransaction().rollback();
-            logger.error("Hibernate error in merge(T entity) method !");
+            log.error("IllegalArgumentException");
+            log.error(e);
         }
+        catch (TransactionRequiredException e){
+            entityManager.getTransaction().rollback();
+            log.error("TransactionRequiredException");
+            log.error(e);
+        }
+
         return entity;
     }
 
     @Override
-    public E persist(E entity) {
-        logger.trace("Hibernate > persist(E entity)");
+    public void persist(E entity) {
+
+        if(log.isDebugEnabled()) log.debug("METHOD : persist(" + entity + ")");
+
         try{
             entityManager.getTransaction().begin();
             entityManager.persist(entity);
             entityManager.getTransaction().commit();
         }
-        catch (Exception e){
-            e.printStackTrace();
+        catch (EntityExistsException e){
             entityManager.getTransaction().rollback();
-            logger.error("Hibernate error in persis(T entity) method !");
+            log.error("EntityExistsException");
+            log.error(e);
         }
-        return entity;
-    }
-
-
-    @Override
-    public List<E> findAll(){
-
-        List<E> entityList = null;
-
-        logger.trace("Hibernate > List<E> findAll()");
-        try{
-            entityManager.getTransaction().begin();
-            final List resultList = entityManager.createNamedQuery(AbstractEntity.FIND_ALL).getResultList();
-            entityList = resultList;
-            entityManager.getTransaction().commit();
-        }
-        catch (Exception e){
-            e.printStackTrace();
+        catch (IllegalArgumentException e){
             entityManager.getTransaction().rollback();
-            logger.error("Hibernate error in List<E>findAll() method !");
+            log.error("IllegalArgumentException");
+            log.error(e);
         }
-        return entityList;
+        catch (TransactionRequiredException e){
+            entityManager.getTransaction().rollback();
+            log.error("TransactionRequiredException");
+            log.error(e);
+        }
     }
 
     @Override
-    public boolean remove(E entity) {
+    public void remove(E entity) {
 
-        boolean result = true;
+        if(log.isDebugEnabled()) log.debug("METHOD : remove(" + entity + ")");
 
         try{
             entityManager.getTransaction().begin();
             entityManager.remove(entity);
             entityManager.getTransaction().commit();
         }
-        catch (IllegalArgumentException | TransactionRequiredException e){
-            e.printStackTrace();
+        catch (IllegalArgumentException e){
             entityManager.getTransaction().rollback();
-            result = false;
+            log.error("IllegalArgumentException");
+            log.error(e);
         }
-
-        return result;
+        catch (TransactionRequiredException e){
+            entityManager.getTransaction().rollback();
+            log.error("TransactionRequiredException");
+            log.error(e);
+        }
     }
 }

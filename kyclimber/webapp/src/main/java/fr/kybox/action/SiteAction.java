@@ -111,7 +111,7 @@ public class SiteAction extends ActionSupport {
 
     public String doGetRegionList(){
 
-        regionList = regionService.findAll();
+        regionList = regionService.findAllRegions();
 
         System.out.println(regionList.size());
 

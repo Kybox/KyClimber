@@ -42,6 +42,30 @@ public class RegionPersistenceService extends AbstractPersistenceService<Integer
         return resultList;
     }
 
+    public List<Region> findAllRegions(){
+
+        List<Region> resultList = null;
+
+        try{
+
+            entityManager.getTransaction().begin();
+            final List regionList = entityManager.createNamedQuery(Region.FIND_ALL_REGIONS)
+                    .getResultList();
+            resultList = regionList;
+            entityManager.getTransaction().commit();
+
+        }
+        catch (NoResultException e){
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultList;
+    }
+
     public Integer countRegion(Integer id){
 
         Integer result = null;

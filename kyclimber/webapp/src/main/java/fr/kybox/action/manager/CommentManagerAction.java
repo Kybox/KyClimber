@@ -90,10 +90,9 @@ public class CommentManagerAction extends ActionSupport implements SessionAware 
 
     public String deleteAjaxUserComment(){
 
-        String result = ActionSupport.SUCCESS;
         Comment comment = commentService.findById(getCommentId());
-        if(!commentService.remove(comment)) result = ActionSupport.ERROR;
-        return result;
+        commentService.remove(comment);
+        return ActionSupport.SUCCESS;
     }
 
     @Override

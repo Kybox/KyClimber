@@ -23,7 +23,7 @@ public class AvatarPersistenceService extends AbstractPersistenceService <Intege
 
         List<Avatar> entityList = null;
 
-        logger.trace("Hibernate > List<E> findAll()");
+        logger.trace("Hibernate > List<E> findAllUsers()");
         try{
             entityManager.getTransaction().begin();
             final List resultList = entityManager.createNamedQuery(Avatar.FIND_ALL_AVATAR).getResultList();

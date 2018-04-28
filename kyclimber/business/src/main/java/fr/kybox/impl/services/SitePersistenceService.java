@@ -3,43 +3,122 @@ package fr.kybox.impl.services;
 import fr.kybox.entities.Region;
 import fr.kybox.entities.Site;
 import fr.kybox.impl.AbstractPersistenceService;
-import fr.kybox.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
+
+import javax.persistence.PersistenceException;
 import java.util.List;
 
 /**
  * @author Kybox
  * @version 1.0
  */
+
+/**
+ * Provides the necessary methods for finding and persisting topo entities
+ */
 @Service
 public class SitePersistenceService extends AbstractPersistenceService<Integer, Site> {
 
-    private static final Logger logger = LogManager.getLogger(SitePersistenceService.class);
+    // Logger object
+    private static final Logger log = LogManager.getLogger(SitePersistenceService.class);
 
+    /**
+     * Search for lastest site-type entities of the specified max results.
+     * @param maxResults Integer for the max results
+     * @return The found Site entities instance list or null if none has been found.
+     */
     public List<Site> findLastestSites(int maxResults) {
 
-        List<Site> siteList = null;
+        if(log.isDebugEnabled()) log.debug("METHOD : findLastestSites(" + maxResults + ")");
+
+        List resultList = null;
+
         try{
 
             entityManager.getTransaction().begin();
-            final List resultList = entityManager.createNamedQuery(Site.FIND_LASTEST_SITES)
+
+            resultList = entityManager.createNamedQuery(Site.FIND_LASTEST_SITES)
                     .setMaxResults(maxResults)
                     .getResultList();
-            siteList = resultList;
+
             entityManager.getTransaction().commit();
         }
-        catch (NoResultException e){ entityManager.getTransaction().rollback(); }
-        return siteList;
+        catch(PersistenceException | IllegalArgumentException e){
+
+            entityManager.getTransaction().rollback();
+            log.error(e);
+        }
+
+        return resultList;
     }
 
+    /**
+     * Search for a site-type entities of the specified site.
+     * If the entity instance is contained in the persistence context, it is returned from there.
+     * @param region Region entity
+     * @return The found Site entities instance list or null if none has been found.
+     */
+    public List<Site> findByRegion(Region region){
+
+        if(log.isDebugEnabled()) log.debug("METHOD : findByRegion(" + region + ")");
+
+        List resultList = null;
+
+        try{
+
+            entityManager.getTransaction().begin();
+
+            resultList = entityManager.createNamedQuery(Site.FIND_BY_REGION)
+                    .setParameter("region", region)
+                    .getResultList();
+
+            entityManager.getTransaction().commit();
+        }
+        catch(PersistenceException | IllegalArgumentException e){
+
+            entityManager.getTransaction().rollback();
+            log.error(e);
+        }
+
+        return resultList;
+    }
+
+    /**
+     * Search for a site-type entities of the specified keywords.
+     * @param keywords The keywords contained in the entity
+     * @return The found Site entities instance list or null if none has been found
+     */
+    public List<Site> findSiteByKeyword(String keywords){
+
+        if(log.isDebugEnabled()) log.debug("METHOD : findSiteByKeyword(" + keywords + ")");
+
+        keywords = "%" + keywords + "%";
+
+        List resultList = null;
+
+        try{
+
+            entityManager.getTransaction().begin();
+
+            resultList = entityManager.createNamedQuery(Site.FIND_BY_KEYWORD)
+                    .setParameter("keyword", keywords)
+                    .getResultList();
+
+            entityManager.getTransaction().commit();
+        }
+        catch(PersistenceException | IllegalArgumentException e){
+
+            entityManager.getTransaction().rollback();
+            log.error(e);
+        }
+
+        return resultList;
+    }
+
+    /*
     public List<Site> findAllSites(){
 
         List resultList = null;
@@ -55,45 +134,5 @@ public class SitePersistenceService extends AbstractPersistenceService<Integer, 
         }
         return resultList;
     }
-
-    public List<Site> findByRegion(Region region){
-
-        List<Site> siteList = null;
-
-        try{
-
-            entityManager.getTransaction().begin();
-            final List resultList = entityManager.createNamedQuery(Site.FIND_BY_REGION)
-                    .setParameter("region", region)
-                    .getResultList();
-            siteList = resultList;
-            entityManager.getTransaction().commit();
-        }
-        catch (NoResultException e){ entityManager.getTransaction().rollback(); }
-
-        return siteList;
-    }
-
-    public List<Site> findSiteByKeyword(String keyword){
-
-        keyword = "%" + keyword + "%";
-        List<Site> entityList = null;
-
-        try{
-
-            entityManager.getTransaction().begin();
-            final List resultList = entityManager.createNamedQuery(Site.FIND_BY_KEYWORD)
-                    .setParameter("keyword", keyword)
-                    .getResultList();
-
-            entityList = resultList;
-            entityManager.getTransaction().commit();
-        }
-        catch (NoResultException e){
-            e.printStackTrace();
-            entityManager.getTransaction().rollback();
-        }
-
-        return entityList;
-    }
+    */
 }

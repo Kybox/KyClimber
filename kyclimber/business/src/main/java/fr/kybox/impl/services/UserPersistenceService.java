@@ -1,35 +1,39 @@
 package fr.kybox.impl.services;
 
-import fr.kybox.entities.Avatar;
 import fr.kybox.entities.Level;
 import fr.kybox.entities.User;
 import fr.kybox.impl.AbstractPersistenceService;
-import fr.kybox.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * @author Kybox
  * @version 1.0
  */
+
+/**
+ * Provides the necessary methods for finding and persisting user entities
+ */
 @Service
 public class UserPersistenceService extends AbstractPersistenceService<Integer, User> {
 
-    //private final EntityManager entityManager = HibernateUtil.getEntityManager();
-    private final Logger logger = LogManager.getLogger(this.getClass());
+    // Logger object
+    private final Logger log = LogManager.getLogger(this.getClass());
 
-    public User findUserByLogin(String pEmail, String pPass){
+    /**
+     * Search for a user-type entity of the specified email and password.
+     * If the entity instance is contained in the persistence context, it is returned from there.
+     * @param email User email
+     * @param password  User password
+     * @return The found User entity instance or null if the entity does not exist.
+     */
+    public User findUserByLogin(String email, String password){
+
+        if(log.isDebugEnabled()) log.debug("METHOD : findUserByLogin(" + email + ", " + password + ")");
 
         User user = null;
 
@@ -38,79 +42,105 @@ public class UserPersistenceService extends AbstractPersistenceService<Integer, 
             entityManager.getTransaction().begin();
 
             user = (User) entityManager.createNamedQuery(User.FIND_USER_BY_LOGIN)
-                    .setParameter("email", pEmail)
-                    .setParameter("pass", pPass)
+                    .setParameter("email", email)
+                    .setParameter("pass", password)
                     .getSingleResult();
 
             entityManager.getTransaction().commit();
         }
-        catch (NoResultException e){
+        catch(PersistenceException | IllegalArgumentException e){
+
             entityManager.getTransaction().rollback();
+            log.error(e);
         }
 
         return user;
     }
 
-    @Override
-    public List<User> findAll(){
+    /**
+     * Search for all user-type entites
+     * @return The found User entities instance list or null if none has been found
+     */
+    public List<User> findAllUsers(){
 
-        List<User> entityList = null;
+        if(log.isDebugEnabled()) log.debug("METHOD : findAllUsers()");
 
-        logger.trace("Hibernate > List<E> findAll()");
+        List entityList = null;
+
         try{
+
             entityManager.getTransaction().begin();
-            final List resultList = entityManager.createNamedQuery(User.FIND_ALL_USERS).getResultList();
-            entityList = resultList;
+
+            entityList = entityManager.createNamedQuery(User.FIND_ALL_USERS).getResultList();
+
             entityManager.getTransaction().commit();
         }
-        catch (Exception e){
-            e.printStackTrace();
+        catch(PersistenceException | IllegalArgumentException e){
+
             entityManager.getTransaction().rollback();
-            logger.error("Hibernate error in merge(T entity) method !");
+            log.error(e);
         }
+
         return entityList;
     }
 
+    /**
+     * Search for a user-type entities of the specified keywords.
+     * @param keywords The keywords contained in the entity
+     * @return The found User entities instance list or null if none has been found
+     */
+    public List<User> findUserByKeyword(String keywords){
 
-    public List<User> findUserByKeyword(String keyword){
+        if(log.isDebugEnabled()) log.debug("METHOD : findUserByKeyword(" + keywords + ")");
 
-        List<User> entityList = null;
-        keyword = "%" + keyword + "%";
-        System.out.println("Search pattern = " + keyword);
+        List entityList = null;
+        keywords = "%" + keywords + "%";
 
         try{
             entityManager.getTransaction().begin();
-            final List resultList = entityManager.createNamedQuery(User.FIND_USER_BY_KEYWORD)
-                    .setParameter("keyword", keyword)
+
+            entityList = entityManager.createNamedQuery(User.FIND_USER_BY_KEYWORD)
+                    .setParameter("keyword", keywords)
                     .getResultList();
-            entityList = resultList;
+
             entityManager.getTransaction().commit();
         }
-        catch (NoResultException e){
-            e.printStackTrace();
+        catch(PersistenceException | IllegalArgumentException e){
+
             entityManager.getTransaction().rollback();
-            logger.error("No result exception !");
+            log.error(e);
         }
 
         return entityList;
     }
 
-    public Level getDefaultLevel(String pLevel){
+    /**
+     * Search for a level-type entity of the specified level
+     * @param level The desired user level
+     * @return The found Level entity instance list or null if none has been found
+     */
+    public Level getUserLevel(String level){
 
-        Level level = null;
+        if(log.isDebugEnabled()) log.debug("METHOD : getUserLevel()");
+
+        Level entity = null;
 
         try{
 
             entityManager.getTransaction().begin();
-            level = (Level) entityManager.createNamedQuery(Level.GET_LEVEL)
-                    .setParameter("level", pLevel)
+
+            entity = (Level) entityManager.createNamedQuery(Level.GET_LEVEL)
+                    .setParameter("level", level)
                     .getSingleResult();
+
             entityManager.getTransaction().commit();
         }
-        catch (NoResultException e){
-            logger.warn("Default level not found !");
+        catch(PersistenceException | IllegalArgumentException e){
+
+            entityManager.getTransaction().rollback();
+            log.error(e);
         }
 
-        return level;
+        return entity;
     }
 }

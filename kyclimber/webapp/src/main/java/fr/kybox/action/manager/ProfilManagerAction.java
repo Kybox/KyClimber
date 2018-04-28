@@ -28,8 +28,8 @@ public class ProfilManagerAction extends ActionSupport implements SessionAware {
     public User getUser() { return user; }
     private void setUser(User user) { this.user = user; }
 
-    public List<User> getUserList() { return userService.findAll(); }
-    public List<Topo> getTopoList() { return topoService.findAll(); }
+    public List<User> getUserList() { return userService.findAllUsers(); }
+    public List<Topo> getTopoList() { return topoService.findAllTopos(); }
     public List<Site> getSiteList() { return siteService.findAll(); }
     public List<Avatar> getAvatarList(){ return avatarService.findAll(); }
     public List<Comment> getCommentList() { return commentService.findByUser(getUser()); }
