@@ -3,6 +3,7 @@ package fr.kybox.action;
 import com.opensymphony.xwork2.ActionSupport;
 import fr.kybox.entities.User;
 import fr.kybox.impl.services.UserPersistenceService;
+import fr.kybox.util.MD5;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -39,7 +40,7 @@ public class LoginAction extends ActionSupport implements SessionAware, ServletR
 
         if(!StringUtils.isAllEmpty(login, password)) {
 
-            final User user = userService.findUserByLogin(login, password);
+            final User user = userService.findUserByLogin(login, MD5.hash(password));
 
             if(user != null) {
                 httpServletRequest.changeSessionId();
