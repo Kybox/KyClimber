@@ -15,7 +15,9 @@ Projet 6 : Site communautaire autour de l'escalade
 ## Persistence
 
 - **Hibernate 5.2** (JPA 2.1)
-- **PostgreSQL 9.6**
+- **PostgreSQL 9.6**  
+
+La modification des informations de connection à la base de données doivent être réalisée dans le fichier de configuration XML nommé "persistence.xml" (kyclimber/webapp/src/main/resources/META-INF/persistence.xml)
 
 ## Description
 
