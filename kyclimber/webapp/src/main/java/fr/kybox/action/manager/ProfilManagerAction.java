@@ -31,7 +31,7 @@ public class ProfilManagerAction extends ActionSupport implements SessionAware {
     public List<User> getUserList() { return userService.findAllUsers(); }
     public List<Topo> getTopoList() { return topoService.findAllTopos(); }
     public List<Site> getSiteList() { return siteService.findAll(); }
-    public List<Avatar> getAvatarList(){ return avatarService.findAll(); }
+    public List<Avatar> getAvatarList(){ return avatarService.findAllAvatar(); }
     public List<Comment> getCommentList() { return commentService.findByUser(getUser()); }
 
     @Override

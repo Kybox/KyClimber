@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 /**
- * Provides the necessary methods for finding and persisting topo entities
+ * Provides the necessary methods for finding and persisting Site entities
  */
 @Service
 public class SitePersistenceService extends AbstractPersistenceService<Integer, Site> {

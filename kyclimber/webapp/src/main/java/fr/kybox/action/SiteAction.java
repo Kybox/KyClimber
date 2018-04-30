@@ -67,7 +67,7 @@ public class SiteAction extends ActionSupport {
 
         for(Region region : regionList){
 
-            Integer count = regionService.countRegion(region.getId());
+            Integer count = regionService.countSitesByRegions(region.getId());
             List<String> dataList = new ArrayList<>();
             dataList.add(region.getName());
             dataList.add(count.toString());
