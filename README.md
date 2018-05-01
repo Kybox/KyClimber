@@ -16,6 +16,8 @@ Projet 6 : Site communautaire autour de l'escalade
 - **Spring Framework 4.3**
 - **Hibernate 5.2** (JPA 2.1)
 - **Log4j 2.10.0**
+- **Bootstrap 3.3.7**
+- **JQuery 3.3.1** (AJAX)
 
 ## Persistence
 
