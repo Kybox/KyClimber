@@ -5,19 +5,23 @@ Projet 6 : Site communautaire autour de l'escalade
 
 ## Architecture
 
-- **MAVEN** (multi-modules)
+- **MAVEN** (multi-modules) :  
+   * [ business ] : Couche métier (services de persistence)  
+   * [ model ] : Entités (beans)  
+   * [ webapp ] : Application web
 
-## Frameworks
+## Frameworks et API
 
 - **Apache STRUTS 2.5**
 - **Spring Framework 4.3**
+- **Hibernate 5.2** (JPA 2.1)
+- **Log4j 2.10.0**
 
 ## Persistence
 
-- **Hibernate 5.2** (JPA 2.1)
-- **PostgreSQL 9.6**  
+- **PostgreSQL 9.6**  (Driver 42.2.2)
 
-La modification des informations de connection à la base de données doivent être réalisée dans le fichier de configuration XML nommé "persistence.xml" (kyclimber/webapp/src/main/resources/META-INF/persistence.xml)
+La modification des informations de connection à la base de données doit être réalisée dans le fichier de configuration XML nommé "persistence.xml" (kyclimber/webapp/src/main/resources/META-INF/persistence.xml)
 
 ## Description
 
@@ -28,3 +32,9 @@ Un profil utilisateur est également proposé avec la possibilité de :
 - sélectionner un avatar (affiché avec les commentaires)
 - gérer l'ajout, la suppression et l'échange d'un topo
 - modifier ou supprimer un commentaire
+
+## Contact (Yan)
+
+- E-mail : [nslr@riseup.net](mailto:nslr@riseup.net)
+- Twitter : [https://twitter.com/FiendKyBox](https://twitter.com/FiendKyBox)
+- Linkedin : [https://www.linkedin.com/in/kybox](https://www.linkedin.com/in/kybox)
