@@ -20,11 +20,6 @@ public class Comment extends AbstractEntity {
     public static final String FIND_BY_USER = "Comment.findByUser";
     public static final String FIND_BY_SITE = "Comment.findBySite";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private int id;
-
     @OneToOne
     @JoinColumn(name = "site_id")
     private Site site;

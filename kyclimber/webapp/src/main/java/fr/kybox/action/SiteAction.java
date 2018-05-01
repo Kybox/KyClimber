@@ -9,6 +9,8 @@ import fr.kybox.impl.services.CommentPersistenceService;
 import fr.kybox.impl.services.RegionPersistenceService;
 import fr.kybox.impl.services.SitePersistenceService;
 import fr.kybox.impl.services.TopoPersistenceService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import java.util.*;
@@ -17,53 +19,54 @@ import java.util.*;
  * @author Kybox
  * @version 1.0
  */
+
+/**
+ * Struts2 - SiteAction class
+ * Displays the menu of regions and climbing sites
+ */
 public class SiteAction extends ActionSupport {
 
+    /** Logger object **/
+    private final static Logger log = LogManager.getLogger(SiteAction.class);
+
+    /** Injected services **/
     @Inject private SitePersistenceService siteService;
     @Inject private RegionPersistenceService regionService;
     @Inject private CommentPersistenceService commentService;
     @Inject private TopoPersistenceService topoService;
 
-    private List<Topo> topoList;
-    private List<Region> regionList;
-    private Map<Integer, List<String>> mapRegionList;
-
+    /** Attributes **/
     private int regionId;
     private int siteId;
-    private int userId;
     private Region region;
-    private Site site;
-    private List<Site> siteList;
-    private List<Comment> commentList;
-    private Comment comment;
 
-    // RegionList
-    public List<Region> getRegionList() { return regionList; }
-
-    // RegionId
+    /** Getters **/
+    public List<Comment> getCommentList() { return commentService.findBySite(getSite()); }
+    public List<Site> getSiteList() { return siteService.findByRegion(getRegion()); }
+    public List<Topo> getTopoList() { return topoService.findBySite(getSite()); }
+    public Site getSite() { return siteService.findById(getSiteId()); }
     public Integer getRegionId() { return regionId; }
-    public void setRegionId(Integer regionId) { this.regionId = regionId; }
-
-    // SiteId
     public int getSiteId() { return siteId; }
-    public void setSiteId(int siteId) { this.siteId = siteId; }
-
-    // UserId
-    private int getUserId() { return userId; }
-    private void setUserId(int userId) { this.userId = userId; }
-
-    // Region
     public Region getRegion() {
         if(regionId != 0)
             region = regionService.findById(regionId);
         return region;
     }
-    public void setRegion(Region region){ this.region = region; }
 
+    /** Setters **/
+    public void setRegionId(Integer regionId) { this.regionId = regionId; }
+    public void setSiteId(int siteId) { this.siteId = siteId; }
+
+    /**
+     * Get the list of available sites by region
+     * @return HashMap with region id for key and sites names and number for value
+     */
     public Map<Integer, List<String>> getMapRegionList() {
 
-        mapRegionList = new HashMap<>();
-        regionList = regionService.findAllRegionsAvailable();
+        if(log.isDebugEnabled()) log.debug("METHOD : getMapRegionList()");
+
+        Map<Integer, List<String>> mapRegionList = new HashMap<>();
+        List<Region> regionList = regionService.findAllRegionsAvailable();
 
         for(Region region : regionList){
 
@@ -75,46 +78,5 @@ public class SiteAction extends ActionSupport {
         }
 
         return mapRegionList;
-    }
-
-    // Site List
-    public List<Site> getSiteList() {
-        siteList = siteService.findByRegion(getRegion());
-        return siteList;
-    }
-    public void setSiteList(List<Site> siteList) { this.siteList = siteList; }
-
-    // Site
-    public Site getSite() {
-        site = siteService.findById(getSiteId());
-        return site;
-    }
-    public void setSite(Site site) { this.site = site; }
-
-
-    // TOPO
-    public List<Topo> getTopoList() {
-        topoList = topoService.findBySite(getSite());
-        return topoList;
-    }
-
-    // Comment List
-    public List<Comment> getCommentList() {
-        commentList = commentService.findBySite(getSite());
-        return commentList;
-    }
-    public void setCommentList(List<Comment> commentList) { this.commentList = commentList; }
-
-    // Comment
-    public Comment getComment() { return comment; }
-    public void setComment(Comment comment) { this.comment = comment; }
-
-    public String doGetRegionList(){
-
-        regionList = regionService.findAllRegions();
-
-        System.out.println(regionList.size());
-
-        return ActionSupport.SUCCESS;
     }
 }

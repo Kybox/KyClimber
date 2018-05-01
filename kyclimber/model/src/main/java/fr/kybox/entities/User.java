@@ -1,10 +1,17 @@
 package fr.kybox.entities;
 
 import javax.persistence.*;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 
 /**
  * @author Kybox
  * @version 1.0
+ */
+
+/**
+ * The User entity class
  */
 @Entity
 @Table(name= "users", schema = "public")
@@ -20,11 +27,6 @@ public class User extends AbstractEntity {
     public static final String FIND_USER_AVATAR = "User.findUserAvatar";
     public static final String FIND_USER_BY_LOGIN = "User.findUserByLogin";
     public static final String FIND_USER_BY_KEYWORD = "User.findUserByKeyword";
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;

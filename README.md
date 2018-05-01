@@ -21,7 +21,7 @@ La modification des informations de connection à la base de données doivent ê
 
 ## Description
 
-L'application propose la consultation de différents sites d'escalade classés par régions (France uniquement) avec une indexation de topos (enregistrés par des utilisateurs) et la possibilité de laisser des commentaires (après authentification).
+L'application propose la consultation de différents sites d'escalade classés par régions (France uniquement) avec une indexation de topos (enregistrés par des utilisateurs), la possibilité de laisser des commentaires (après authentification) et de réaliser une recherche multi-critères.
 
 Un profil utilisateur est également proposé avec la possibilité de :
 - renseigner des informations de localisation (pour l'échange de topos)

@@ -118,21 +118,31 @@ public class SitePersistenceService extends AbstractPersistenceService<Integer, 
         return resultList;
     }
 
-    /*
+    /**
+     * Search for all site-type entites
+     * @return The found Site entities instance list or null if none has been found
+     */
     public List<Site> findAllSites(){
+
+        if(log.isDebugEnabled()) log.debug("METHOD : findAllSites()");
 
         List resultList = null;
 
         try{
 
             entityManager.getTransaction().begin();
+
             resultList = entityManager.createNamedQuery(Site.FIND_ALL_SITES).getResultList();
+
             entityManager.getTransaction().commit();
         }
-        catch (NoResultException e){
+        catch(PersistenceException | IllegalArgumentException e){
+
             entityManager.getTransaction().rollback();
+            log.error(e);
         }
+
         return resultList;
     }
-    */
+
 }

@@ -16,11 +16,6 @@ public class Avatar extends AbstractEntity {
 
     public static final String FIND_ALL_AVATAR = "Avatar.findAllAvatar";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private Integer id;
-
     @Column(name = "url")
     private String url;
 

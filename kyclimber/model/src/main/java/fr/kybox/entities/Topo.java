@@ -30,12 +30,6 @@ public class Topo extends AbstractEntity {
     public static final String FIND_LASTEST_TOPOS = "Topo.findLastestSites";
     public static final String FIND_BY_KEYWORDS = "Topo.findByKeywords";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "topo_id_seq", sequenceName = "topo_id_seq")
-    @Column(nullable = false)
-    private Integer id;
-
     @Column(name = "name")
     private String name;
 

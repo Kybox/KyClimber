@@ -67,8 +67,7 @@
         </action>
     </package>
 
-    <!-- /////////////// -->
-    <!-- Package PRIVATE -->
+    <!-- [PRIVATE] Package -->
     <package name="private" extends="default">
 
         <!-- [PROFILE] Action -->
