@@ -35,6 +35,12 @@ Un profil utilisateur est également proposé avec la possibilité de :
 - gérer l'ajout, la suppression et l'échange d'un topo
 - modifier ou supprimer un commentaire
 
+## Démarrage
+
+Un profil utilisateur de tests (niveau admin) est déjà créé en base de données.  
+Identificant : lou@lou.fr  
+Mot de passe : lou
+
 ## Contact (Yan)
 
 - E-mail : [nslr@riseup.net](mailto:nslr@riseup.net)
