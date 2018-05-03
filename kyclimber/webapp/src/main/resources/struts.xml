@@ -97,7 +97,7 @@
         <!-- [TOPO] - Update Ajax Action -->
         <action name="updateAjaxUserTopo" class="fr.kybox.action.manager.TopoManagerAction">
             <interceptor-ref name="authenticatedStack"/>
-            <result name="success" type="json"/>
+            <result type="json"/>
         </action>
 
         <!-- [COMMENT] - Update Ajax Action -->

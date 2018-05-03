@@ -61,10 +61,6 @@ public class Topo extends AbstractEntity {
     @JoinColumn(name = "region_id")
     private Region region;
 
-    @OneToOne
-    @JoinColumn(name = "borrowed_from")
-    private User borrowedFromUser;
-
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -91,7 +87,4 @@ public class Topo extends AbstractEntity {
 
     public Site getSite() { return site; }
     public void setSite(Site site) { this.site = site; }
-
-    public User getBorrowedFromUser() { return borrowedFromUser; }
-    public void setBorrowedFromUser(User borrowedFromUser) { this.borrowedFromUser = borrowedFromUser; }
 }

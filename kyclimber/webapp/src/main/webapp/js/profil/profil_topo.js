@@ -44,24 +44,30 @@ $(document).ready(function() {
 });
 
 function checkTopoAvailable(id) {
-    var available = $("#available" + id + " span").attr("available");
+    let available = $("#available" + id + " span").attr("available");
     return (available === "true");
 }
 function checkTopoLent(id){
-    var lent = $("#lent" + id + " span").attr("lent");
+    let lent = $("#lent" + id + " span").attr("lent");
     return (lent === "true");
 }
 function editTopo(id, userId) {
 
+    /** Hidden inputs **/
     $("#topoId").attr("value", id);
     $("#topoUserId").attr("value", userId);
-    $("#txtName").val($("#name" + id).text());
-    $("#txtDescription").val($("#description" + id).text());
-    $("#txtEdition").val($("#puslisher" + id).text());
-    $("#txtCover").val($("#cover" + id).attr("data-full"));
 
-    // To update
-    $("#topoSiteSelect").val($("#region" + id).attr("regionid"));
+    let title = $("#name" + id).text().trim();
+    let publisher = $("#puslisher" + id).text().trim();
+    let siteId = $("#site" + id).attr("siteid").trim();
+    let description = $("#description" + id).text().trim();
+    let cover = $("#cover" + id + " img").attr("src").trim();
+
+    $("#txtName").val(title);
+    $("#txtCover").val(cover);
+    $("#txtEdition").val(publisher);
+    $("#topoSiteSelect").val(siteId);
+    $("#txtDescription").val(description);
 
     if(checkTopoAvailable(id) === true)
         $("input:radio[name=topoAvailable][value=true]").prop("checked", true);
@@ -70,7 +76,7 @@ function editTopo(id, userId) {
     if(checkTopoLent(id) === true){
         $("input:radio[name=topoLent][value=true]").prop("checked", true);
         $("#divUserLent").show();
-        $("#userLentSelect").val($("#userLent").attr("lentUserId"));
+        $("#userLentSelect").val($("#userLent" + id).text().trim());
     }
     else {
         $("input:radio[name=editRadioLent][value=lentNo]").prop("checked", true);
@@ -96,8 +102,6 @@ function showTopoForm(clear, topoid) {
 
     if(topoid==="new") topoFormAction = "new";
     else topoFormAction = "update";
-
-    alert(topoFormAction);
 
     $("#topoForm").attr("topoid", topoid);
     $("#topoForm").show(1000);

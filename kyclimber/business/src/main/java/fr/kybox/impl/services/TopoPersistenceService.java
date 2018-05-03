@@ -173,14 +173,13 @@ public class TopoPersistenceService extends AbstractPersistenceService<Integer, 
         return resultList;
     }
 
-    /*
+
     /**
      * Search for a topo-type entities of the specified user.
      * If the entity instance is contained in the persistence context, it is returned from there.
      * @param user User entity
      * @return The found Topo entity instance or null if the entity does not exist.
      */
-    /*
     public List<Topo> findAllByUser(User user) {
 
         if(log.isDebugEnabled()) log.debug("METHOD : findAllByUser(" + user + ")");
@@ -205,5 +204,4 @@ public class TopoPersistenceService extends AbstractPersistenceService<Integer, 
 
         return resultList;
     }
-    */
 }

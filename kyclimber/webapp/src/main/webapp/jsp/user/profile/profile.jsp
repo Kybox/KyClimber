@@ -15,56 +15,56 @@
         </h3>
     </div>
     <div class="panel-body">
-        <ul class="nav nav-tabs">
-            <li class="active">
-                <a href="#infos" data-toggle="tab">
+        <ul id="profil-nav-ul" class="nav nav-tabs">
+            <li id="tabinfos" class="active">
+                <a href="#content-infos" data-toggle="tab">
                     <span class="glyphicon glyphicon-list-alt"></span>
                     Informations
                 </a>
             </li>
-            <li>
-                <a href="#pass" data-toggle="tab">
+            <li id="tabpass">
+                <a href="#content-pass" data-toggle="tab">
                     <span class="glyphicon glyphicon-lock"></span>
                     Mot de passe
                 </a>
             </li>
-            <li>
-                <a href="#pic" data-toggle="tab">
+            <li id="tabavatar">
+                <a href="#content-avatar" data-toggle="tab">
                     <span class="glyphicon glyphicon-picture"></span>
                     Avatar
                 </a>
             </li>
-            <li>
-                <a href="#topo" data-toggle="tab">
+            <li id="tabtopo">
+                <a href="#content-topo" data-toggle="tab">
                     <span class="glyphicon glyphicon-transfer"></span>
                     Topos
                 </a>
             </li>
-            <li>
-                <a href="#com" data-toggle="tab">
+            <li id="tabcomments">
+                <a href="#content-comments" data-toggle="tab">
                     <span class="glyphicon glyphicon-comment"></span>
                     Commentaires
                 </a>
             </li>
         </ul>
-        <div class="tab-content ">
-            <div class="tab-pane active" id="infos">
+        <div class="tab-content">
+            <div class="tab-pane active" id="content-infos">
                 <br>
                 <%@ include file="include/infos.jsp" %>
             </div>
-            <div class="tab-pane" id="pass">
+            <div class="tab-pane" id="content-pass">
                 <br>
                 <%@ include file="include/password.jsp" %>
             </div>
-            <div class="tab-pane" id="pic">
+            <div class="tab-pane" id="content-avatar">
                 <br>
                 <%@ include file="include/avatar.jsp" %>
             </div>
-            <div class="tab-pane" id="topo">
+            <div class="tab-pane" id="content-topo">
                 <br>
                 <%@ include file="include/topos.jsp" %>
             </div>
-            <div class="tab-pane" id="com">
+            <div class="tab-pane" id="content-comments">
                 <br>
                 <%@ include file="include/comments.jsp" %>
             </div>

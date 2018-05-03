@@ -34,33 +34,39 @@ public class TopoManagerAction extends ActionSupport implements SessionAware {
     @Inject private SitePersistenceService siteService;
 
     /** Attributes **/
+    private Topo topo;
+    private String actionType;
+    private Map<String, Object> session;
+
+    public Topo getTopo() {
+        return topo;
+    }
+
+    public void setTopo(Topo topo) {
+        this.topo = topo;
+    }
+
+
     private Integer topoId;
     private String topoName;
     private boolean topoLent;
     private String topoCover;
-    private String actionType;
+
     private Integer topoSiteId;
     private Integer topoUserId;
     private String topoPublisher;
     private boolean topoAvailable;
     private Integer topoUserLentId;
     private String topoDescription;
-    private Map<String, Object> session;
+    private Integer topoRegionId;
 
-    /** Getters **/
     public Integer getTopoId() { return topoId; }
     public boolean isTopoLent() { return topoLent; }
-    public String getTopoName() { return topoName; }
     public int getTopoSiteId() { return topoSiteId; }
-    public String getTopoCover() { return topoCover; }
-    public String getActionType() { return actionType; }
-    public Integer getTopoUserId() { return topoUserId; }
-    public String getTopoPublisher() { return topoPublisher; }
     public boolean isTopoAvailable() { return topoAvailable; }
     public Integer getTopoUserLentId() { return topoUserLentId; }
-    public String getTopoDescription() { return topoDescription; }
 
-    /** Setters **/
+
     public void setTopoId(Integer topoId) { this.topoId = topoId; }
     public void setTopoName(String topoName) { this.topoName = topoName; }
     public void setTopoLent(boolean topoLent) { this.topoLent = topoLent; }
@@ -72,6 +78,8 @@ public class TopoManagerAction extends ActionSupport implements SessionAware {
     public void setTopoAvailable(boolean topoAvailable) { this.topoAvailable = topoAvailable; }
     public void setTopoUserLentId(Integer topoUserLentId) { this.topoUserLentId = topoUserLentId; }
     public void setTopoDescription(String topoDescription) { this.topoDescription = topoDescription; }
+    public void setTopoRegionId(Integer topoRegionId) { this.topoRegionId = topoRegionId; }
+
 
     /**
      * Overrided default execute method
@@ -83,8 +91,6 @@ public class TopoManagerAction extends ActionSupport implements SessionAware {
 
         if(log.isDebugEnabled()) log.debug("METHOD : execute()");
 
-        Topo topo = null;
-
         switch (actionType) {
             case "new":
                 topo = new Topo();
@@ -95,6 +101,7 @@ public class TopoManagerAction extends ActionSupport implements SessionAware {
             case "update":
                 topo = topoService.findById(getTopoId());
                 topo = setTopoAttributs(topo);
+                setTopo(topo);
                 break;
         }
 
@@ -112,10 +119,10 @@ public class TopoManagerAction extends ActionSupport implements SessionAware {
 
         if(log.isDebugEnabled()) log.debug("METHOD : setTopoAttributs(" + topo + ")");
 
-        topo.setName(getTopoName());
-        topo.setDescription(getTopoDescription());
-        topo.setPublisher(getTopoPublisher());
-        topo.setCover(getTopoCover());
+        topo.setName(topoName);
+        topo.setDescription(topoDescription);
+        topo.setPublisher(topoPublisher);
+        topo.setCover(topoCover);
 
         Site site = siteService.findById(getTopoSiteId());
         topo.setSite(site);
