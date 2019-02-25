@@ -37,6 +37,8 @@ Un profil utilisateur est également proposé avec la possibilité de :
 
 ## Démarrage
 
+- Accès : https://kyclimber.kybox.fr/KyClimber
+
 Un profil utilisateur de tests (niveau admin) est déjà créé en base de données.  
 Identificant : lou@lou.fr  
 Mot de passe : lou
