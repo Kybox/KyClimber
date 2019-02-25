@@ -38,6 +38,7 @@
           <factory-entry name="Entities" value="9773bcb8-fd8d-4400-9aa3-2d499b20cb48" />
           <factory-entry name="kyclimber" value="e609cc69-f29c-484f-9ade-ca83e0dce7c1" />
         </datasource-mapping>
+        <naming-strategy-map />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
     </facet>
