@@ -36,15 +36,10 @@ Un profil utilisateur est également proposé avec la possibilité de :
 - modifier ou supprimer un commentaire
 
 ## Démarrage
-
+~~
 - Accès : https://kyclimber.kybox.fr/KyClimber
 
 Un profil utilisateur de tests (niveau admin) est déjà créé en base de données.  
 Identificant : lou@lou.fr  
 Mot de passe : lou
-
-## Contact (Yan)
-
-- E-mail : [nslr@riseup.net](mailto:nslr@riseup.net)
-- Twitter : [https://twitter.com/KyboxYan](https://twitter.com/KyboxYan)
-- Linkedin : [https://www.linkedin.com/in/kybox](https://www.linkedin.com/in/kybox)
+~~
