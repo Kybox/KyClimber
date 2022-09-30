@@ -36,7 +36,7 @@ Un profil utilisateur est également proposé avec la possibilité de :
 - modifier ou supprimer un commentaire
 
 ## Démarrage
-# UPDATE : L'accès online n'est plus disponible
+### UPDATE : L'accès online n'est plus disponible
 - Accès : https://kyclimber.kybox.fr/KyClimber
 
 Un profil utilisateur de tests (niveau admin) est déjà créé en base de données.  
